@@ -1,8 +1,7 @@
 // @flow
 
 import commandLineArgs from 'command-line-args';
-import { ParseWrapperService } from '@microbusiness/parse-server-common';
-import { initializeParse } from './Common';
+import Common from './Common';
 
 const optionDefinitions = [
   { name: 'username', type: String },
@@ -18,14 +17,9 @@ const options = commandLineArgs(optionDefinitions);
 
 const start = async () => {
   try {
-    initializeParse(options, false);
+    Common.initializeParse(options, false);
 
-    await ParseWrapperService.createNewUser({
-      username: options.username,
-      password: options.password,
-      emailAddress: options.email,
-      userType: options.type,
-    }).signUp();
+    await Common.createAccount(options.username, options.password, options.email, options.type);
   } catch (ex) {
     console.error(ex);
   }

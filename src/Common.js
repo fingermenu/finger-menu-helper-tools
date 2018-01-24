@@ -1,77 +1,74 @@
 // @flow
 
-import { List, Map } from 'immutable';
+import { List, Map, Range } from 'immutable';
 import Parse from 'parse/node';
-import { ParseWrapperService } from '@microbusiness/parse-server-common';
+import { ParseWrapperService, UserService } from '@microbusiness/parse-server-common';
 import { LanguageService, RestaurantService } from '@fingermenu/parse-server-common';
 
-export const initializeParse = async (options, login = true) => {
-  Parse.initialize(
-    options.applicationId ? options.applicationId : 'app_id',
-    options.javaScriptKey ? options.javaScriptKey : 'javascript_key',
-    options.masterKey ? options.masterKey : 'master_key',
-  );
+export default class Common {
+  static initializeParse = async (options, login = true) => {
+    Parse.initialize(
+      options.applicationId ? options.applicationId : 'app_id',
+      options.javaScriptKey ? options.javaScriptKey : 'javascript_key',
+      options.masterKey ? options.masterKey : 'master_key',
+    );
 
-  Parse.serverURL = options.parseServerUrl ? options.parseServerUrl : 'http://localhost:1337/parse';
+    Parse.serverURL = options.parseServerUrl ? options.parseServerUrl : 'http://localhost:1337/parse';
 
-  if (login) {
-    const user = await ParseWrapperService.logIn(options.username, options.password);
+    if (login) {
+      const user = await ParseWrapperService.logIn(options.username, options.password);
 
-    global.parseServerSessionToken = user.getSessionToken();
-  }
-};
+      global.parseServerSessionToken = user.getSessionToken();
+    }
+  };
 
-export const loadAllLanguages = async () => {
-  let languages = List();
-  const result = await new LanguageService().searchAll(Map({}), global.parseServerSessionToken);
+  static extractColumnsValuesFromRow = (columns, row) =>
+    columns.zip(Range(0, columns.count())).reduce((reduction, value) => reduction.set(value[0], row.skip(value[1]).first()), Map());
 
-  try {
-    result.event.subscribe((info) => {
-      languages = languages.push(info);
-    });
+  static getUser = username => UserService.getUser(username, global.parseServerSessionToken);
 
-    await result.promise;
-  } finally {
-    result.event.unsubscribeAll();
-  }
+  static createAccount = async (username, password, emailAddress, userType) =>
+    ParseWrapperService.createNewUser({
+      username,
+      password,
+      emailAddress,
+      userType,
+    }).signUp();
 
-  return languages;
-};
+  static loadAllLanguages = async () => {
+    let languages = List();
+    const result = await new LanguageService().searchAll(Map({}), global.parseServerSessionToken);
 
-export const loadAllRestaurants = async () => {
-  let restaurants = List();
-  const result = await new RestaurantService().searchAll(Map({}), global.parseServerSessionToken);
+    try {
+      result.event.subscribe((info) => {
+        languages = languages.push(info);
+      });
 
-  try {
-    result.event.subscribe((info) => {
-      restaurants = restaurants.push(info);
-    });
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
 
-    await result.promise;
-  } finally {
-    result.event.unsubscribeAll();
-  }
+    return languages;
+  };
 
-  return restaurants;
-};
+  static loadAllRestaurants = async (user, name) => {
+    let restaurants = List();
+    const result = await new RestaurantService().searchAll(
+      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
+      global.parseServerSessionToken,
+    );
 
-export const getRestaurant = async (name, language) => {
-  const criteria = Map({
-    language,
-    conditions: Map({
-      name,
-    }),
-  });
-  const restaurantService = new RestaurantService();
-  const restaurants = await restaurantService.search(criteria, global.parseServerSessionToken);
+    try {
+      result.event.subscribe((info) => {
+        restaurants = restaurants.push(info);
+      });
 
-  if (restaurants.isEmpty()) {
-    throw new Error(`No restaurant found with name: ${name}.`);
-  }
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
 
-  if (restaurants.count() > 1) {
-    throw new Error(`Multiple restaurant found with name: ${name}.`);
-  }
-
-  return restaurants.first();
-};
+    return restaurants;
+  };
+}

@@ -1,13 +1,13 @@
 // @flow
 
 import BluebirdPromise from 'bluebird';
-import Immutable, { Map } from 'immutable';
+import Immutable, { Map, OrderedSet } from 'immutable';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
 import { RestaurantService } from '@fingermenu/parse-server-common';
-import { initializeParse, loadAllLanguages, loadAllRestaurants } from './Common';
+import Common from './Common';
 
 const optionDefinitions = [
   { name: 'csvFilePath', type: String },
@@ -24,10 +24,9 @@ const options = commandLineArgs(optionDefinitions);
 
 const start = async () => {
   try {
-    initializeParse(options);
+    Common.initializeParse(options);
 
-    const languages = await loadAllLanguages();
-    const restaurants = await loadAllRestaurants();
+    const languages = await Common.loadAllLanguages();
     const restaurantService = new RestaurantService();
 
     const parser = csvParser(
@@ -40,38 +39,34 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 100); // Skipping the first item as it is the CSV header
+        const columns = OrderedSet.of('username', 'en_NZ_name', 'zh_name', 'jp_name', 'websiteUrl', 'imageUrl', 'pin', 'supportedLanguages');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(rowChunck.map(async (rawRow) => {
-            const row = Immutable.fromJS(rawRow);
-            const enNZName = row.first();
-            const zhName = row.skip(1).first();
-            const jpName = row.skip(2).first();
-            const websiteUrl = row.skip(3).first();
-            const imageUrl = row.skip(4).first();
-            const pin = row.skip(5).first();
-            const supportLanguages = Immutable.fromJS(row
-              .skip(6)
-              .first()
-              .split(','))
+            const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+            const user = await Common.getUser(values.get('username'));
+            const restaurants = await Common.loadAllRestaurants(user, values.get('en_NZ_name'));
+            const supportLanguages = Immutable.fromJS(values.get('supportedLanguages').split(','))
               .map(_ => _.trim())
               .filterNot(_ => _.length === 0);
-            const restaurant = restaurants.find(_ => _.getIn(['name', 'en_NZ']).localeCompare(enNZName) === 0);
 
             const info = Map({
-              name: Map({ en_NZ: enNZName, zh: zhName, jp: jpName }),
-              websiteUrl,
-              imageUrl,
-              pin,
+              ownedByUser: user,
+              name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+              websiteUrl: values.get('websiteUrl'),
+              imageUrl: values.get('imageUrl'),
+              pin: values.get('pin'),
               languageIds: languages
                 .filter(language => supportLanguages.find(_ => _.localeCompare(language.get('key'))))
                 .map(language => language.get('id')),
             });
 
-            if (restaurant) {
-              await restaurantService.update(restaurant.merge(info), global.parseServerSessionToken);
-            } else {
+            if (restaurants.isEmpty()) {
               await restaurantService.create(info, null, global.parseServerSessionToken);
+            } else if (restaurants.count() === 1) {
+              await restaurantService.update(restaurants.first().merge(info), global.parseServerSessionToken);
+            } else {
+              console.error(`Multiple restaurants found with username ${values.get('username')} and restaurant name: ${values.get('en_NZ_name')}`);
             }
           })));
       },

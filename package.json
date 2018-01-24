@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "create-account": "babel-node src/CreateAccount.js",
+    "import-accounts": "babel-node src/ImportAccounts.js",
     "import-languages": "babel-node src/ImportLanguages.js",
     "import-restaurants": "babel-node src/ImportRestaurants.js",
     "lint": "eslint --ext .jsx --ext .js src",
