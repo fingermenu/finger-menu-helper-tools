@@ -3,7 +3,7 @@
 import { List, Map, Range } from 'immutable';
 import Parse from 'parse/node';
 import { ParseWrapperService, UserService } from '@microbusiness/parse-server-common';
-import { LanguageService, RestaurantService, TableService } from '@fingermenu/parse-server-common';
+import { LanguageService, RestaurantService, TableService, TableStateService } from '@fingermenu/parse-server-common';
 
 export default class Common {
   static initializeParse = async (options, login = true) => {
@@ -50,6 +50,23 @@ export default class Common {
     }
 
     return languages;
+  };
+
+  static loadAllTableStates = async () => {
+    let tableStates = List();
+    const result = await new TableStateService().searchAll(Map({}), global.parseServerSessionToken);
+
+    try {
+      result.event.subscribe((info) => {
+        tableStates = tableStates.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return tableStates;
   };
 
   static loadAllRestaurants = async (user, { name } = {}) => {

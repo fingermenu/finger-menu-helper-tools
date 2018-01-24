@@ -9,6 +9,7 @@
     "import-languages": "babel-node src/ImportLanguages.js",
     "import-restaurants": "babel-node src/ImportRestaurants.js",
     "import-tables": "babel-node src/ImportTables.js",
+    "import-table-states": "babel-node src/ImportTableStates.js",
     "lint": "eslint --ext .jsx --ext .js src",
     "fixlint": "eslint --fix --ext .jsx --ext .js src",
     "test": "jest",
