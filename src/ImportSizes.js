@@ -1,7 +1,7 @@
 // @flow
 
 import BluebirdPromise from 'bluebird';
-import Immutable, { Map, OrderedSet } from 'immutable';
+import Immutable, { List, Map, OrderedSet } from 'immutable';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
@@ -47,6 +47,7 @@ const start = async () => {
             const sizes = await Common.loadAllSizes(user, { name: values.get('en_NZ_name') });
             const info = Map({
               ownedByUser: user,
+              maintainedByUsers: List.of(user),
               maintainedByUser: user,
               name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
             });
