@@ -6,7 +6,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
-import { TableService } from '@fingermenu/parse-server-common';
+import { TagService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
 const optionDefinitions = [
@@ -26,7 +26,7 @@ const start = async () => {
   try {
     Common.initializeParse(options);
 
-    const tableService = new TableService();
+    const tagService = new TagService();
 
     const parser = csvParser(
       { delimiter: options.delimiter ? options.delimiter : ',', trim: true, rowDelimiter: options.rowDelimiter ? options.rowDelimiter : '\r\n' },
@@ -38,27 +38,26 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'restaurantName', 'en_NZ_name', 'zh_name', 'jp_name');
+        const columns = OrderedSet.of('username', 'en_NZ_name', 'zh_name', 'jp_name', 'en_NZ_description', 'zh_description', 'jp_description');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(rowChunck.map(async (rawRow) => {
             const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
             const user = await Common.getUser(values.get('username'));
-            const restaurantId = (await Common.loadAllRestaurants(user, { name: values.get('restaurantName') })).first().get('id');
-            const tables = await Common.loadAllTables(user, restaurantId, { name: values.get('en_NZ_name') });
+            const tags = await Common.loadAllTags(user, { name: values.get('en_NZ_name') });
             const info = Map({
               ownedByUser: user,
               maintainedByUser: user,
-              restaurantId,
               name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+              description: Map({ en_NZ: values.get('en_NZ_description'), zh: values.get('zh_description'), jp: values.get('jp_description') }),
             });
 
-            if (tables.isEmpty()) {
-              await tableService.create(info, null, global.parseServerSessionToken);
-            } else if (tables.count() === 1) {
-              await tableService.update(tables.first().merge(info), global.parseServerSessionToken);
+            if (tags.isEmpty()) {
+              await tagService.create(info, null, global.parseServerSessionToken);
+            } else if (tags.count() === 1) {
+              await tagService.update(tags.first().merge(info), global.parseServerSessionToken);
             } else {
-              console.error(`Multiple tables found with username ${values.get('username')} and table name: ${values.get('en_NZ_name')}`);
+              console.error(`Multiple tags found with username ${values.get('username')} and tag name: ${values.get('en_NZ_name')}`);
             }
           })));
       },

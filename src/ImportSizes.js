@@ -6,7 +6,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
-import { TableService } from '@fingermenu/parse-server-common';
+import { SizeService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
 const optionDefinitions = [
@@ -26,7 +26,7 @@ const start = async () => {
   try {
     Common.initializeParse(options);
 
-    const tableService = new TableService();
+    const sizeService = new SizeService();
 
     const parser = csvParser(
       { delimiter: options.delimiter ? options.delimiter : ',', trim: true, rowDelimiter: options.rowDelimiter ? options.rowDelimiter : '\r\n' },
@@ -38,27 +38,25 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'restaurantName', 'en_NZ_name', 'zh_name', 'jp_name');
+        const columns = OrderedSet.of('username', 'en_NZ_name', 'zh_name', 'jp_name');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(rowChunck.map(async (rawRow) => {
             const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
             const user = await Common.getUser(values.get('username'));
-            const restaurantId = (await Common.loadAllRestaurants(user, { name: values.get('restaurantName') })).first().get('id');
-            const tables = await Common.loadAllTables(user, restaurantId, { name: values.get('en_NZ_name') });
+            const sizes = await Common.loadAllSizes(user, { name: values.get('en_NZ_name') });
             const info = Map({
               ownedByUser: user,
               maintainedByUser: user,
-              restaurantId,
               name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
             });
 
-            if (tables.isEmpty()) {
-              await tableService.create(info, null, global.parseServerSessionToken);
-            } else if (tables.count() === 1) {
-              await tableService.update(tables.first().merge(info), global.parseServerSessionToken);
+            if (sizes.isEmpty()) {
+              await sizeService.create(info, null, global.parseServerSessionToken);
+            } else if (sizes.count() === 1) {
+              await sizeService.update(sizes.first().merge(info), global.parseServerSessionToken);
             } else {
-              console.error(`Multiple tables found with username ${values.get('username')} and table name: ${values.get('en_NZ_name')}`);
+              console.error(`Multiple sizes found with username ${values.get('username')} and size name: ${values.get('en_NZ_name')}`);
             }
           })));
       },

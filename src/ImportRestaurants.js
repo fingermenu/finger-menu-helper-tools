@@ -51,6 +51,7 @@ const start = async () => {
               .filterNot(_ => _.length === 0);
             const info = Map({
               ownedByUser: user,
+              maintainedByUser: user,
               name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
               websiteUrl: values.get('websiteUrl'),
               imageUrl: values.get('imageUrl'),

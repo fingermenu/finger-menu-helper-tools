@@ -3,7 +3,7 @@
 import { List, Map, Range } from 'immutable';
 import Parse from 'parse/node';
 import { ParseWrapperService, UserService } from '@microbusiness/parse-server-common';
-import { LanguageService, RestaurantService, TableService, TableStateService } from '@fingermenu/parse-server-common';
+import { LanguageService, RestaurantService, TableService, TableStateService, TagService, SizeService } from '@fingermenu/parse-server-common';
 
 export default class Common {
   static initializeParse = async (options, login = true) => {
@@ -107,5 +107,45 @@ export default class Common {
     }
 
     return tables;
+  };
+
+  static loadAllTags = async (user, { name } = {}) => {
+    let tags = List();
+    const result = await new TagService().searchAll(
+      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
+      global.parseServerSessionToken,
+    );
+
+    try {
+      result.event.subscribe((info) => {
+        tags = tags.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return tags;
+  };
+
+  static loadAllSizes = async (user, { name } = {}) => {
+    let sizes = List();
+    const result = await new SizeService().searchAll(
+      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
+      global.parseServerSessionToken,
+    );
+
+    try {
+      result.event.subscribe((info) => {
+        sizes = sizes.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return sizes;
   };
 }
