@@ -38,18 +38,17 @@ const start = async () => {
           return;
         }
 
-        const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 100); // Skipping the first item as it is the CSV header
+        const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
         const columns = OrderedSet.of('username', 'en_NZ_name', 'zh_name', 'jp_name', 'websiteUrl', 'imageUrl', 'pin', 'supportedLanguages');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(rowChunck.map(async (rawRow) => {
             const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
             const user = await Common.getUser(values.get('username'));
-            const restaurants = await Common.loadAllRestaurants(user, values.get('en_NZ_name'));
+            const restaurants = await Common.loadAllRestaurants(user, { name: values.get('en_NZ_name') });
             const supportLanguages = Immutable.fromJS(values.get('supportedLanguages').split(','))
               .map(_ => _.trim())
               .filterNot(_ => _.length === 0);
-
             const info = Map({
               ownedByUser: user,
               name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),

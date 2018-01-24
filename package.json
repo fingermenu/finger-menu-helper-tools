@@ -8,6 +8,7 @@
     "import-accounts": "babel-node src/ImportAccounts.js",
     "import-languages": "babel-node src/ImportLanguages.js",
     "import-restaurants": "babel-node src/ImportRestaurants.js",
+    "import-tables": "babel-node src/ImportTables.js",
     "lint": "eslint --ext .jsx --ext .js src",
     "fixlint": "eslint --fix --ext .jsx --ext .js src",
     "test": "jest",
