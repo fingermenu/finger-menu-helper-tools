@@ -7,6 +7,7 @@ import {
   ChoiceItemService,
   ChoiceItemPriceService,
   MenuItemService,
+  MenuItemPriceService,
   LanguageService,
   RestaurantService,
   TableService,
@@ -182,7 +183,7 @@ export default class Common {
   static loadAllChoiceItemPrices = async (user, { choiceItemId } = {}) => {
     let choiceItemPrices = List();
     const result = await new ChoiceItemPriceService().searchAll(
-      Map({ conditions: Map({ ownedByUser: user, choiceItemId }) }),
+      Map({ conditions: Map({ addedByUser: user, choiceItemId }) }),
       global.parseServerSessionToken,
     );
 
@@ -217,5 +218,25 @@ export default class Common {
     }
 
     return menuItems;
+  };
+
+  static loadAllMenuItemPrices = async (user, { menuItemId } = {}) => {
+    let menuItemPrices = List();
+    const result = await new MenuItemPriceService().searchAll(
+      Map({ conditions: Map({ addedByUser: user, menuItemId }) }),
+      global.parseServerSessionToken,
+    );
+
+    try {
+      result.event.subscribe((info) => {
+        menuItemPrices = menuItemPrices.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return menuItemPrices;
   };
 }

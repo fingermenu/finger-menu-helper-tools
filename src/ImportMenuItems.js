@@ -75,7 +75,7 @@ const start = async () => {
             } else if (menuItems.count() === 1) {
               await menuItemService.update(menuItems.first().merge(info), global.parseServerSessionToken);
             } else {
-              console.error(`Multiple choice items found with username ${values.get('username')} and choice item name: ${values.get('en_NZ_name')}`);
+              console.error(`Multiple menu items found with username ${values.get('username')} and menu item name: ${values.get('en_NZ_name')}`);
             }
           })));
       },
