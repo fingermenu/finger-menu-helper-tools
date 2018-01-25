@@ -3,7 +3,15 @@
 import { List, Map, Range } from 'immutable';
 import Parse from 'parse/node';
 import { ParseWrapperService, UserService } from '@microbusiness/parse-server-common';
-import { LanguageService, RestaurantService, TableService, TableStateService, TagService, SizeService } from '@fingermenu/parse-server-common';
+import {
+  ChoiceItemService,
+  LanguageService,
+  RestaurantService,
+  TableService,
+  TableStateService,
+  TagService,
+  SizeService,
+} from '@fingermenu/parse-server-common';
 
 export default class Common {
   static initializeParse = async (options, login = true) => {
@@ -147,5 +155,25 @@ export default class Common {
     }
 
     return sizes;
+  };
+
+  static loadAllChoiceItems = async (user, { name } = {}) => {
+    let choiceItems = List();
+    const result = await new ChoiceItemService().searchAll(
+      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
+      global.parseServerSessionToken,
+    );
+
+    try {
+      result.event.subscribe((info) => {
+        choiceItems = choiceItems.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return choiceItems;
   };
 }
