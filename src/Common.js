@@ -5,6 +5,7 @@ import Parse from 'parse/node';
 import { ParseWrapperService, UserService } from '@microbusiness/parse-server-common';
 import {
   ChoiceItemService,
+  MenuItemService,
   LanguageService,
   RestaurantService,
   TableService,
@@ -175,5 +176,25 @@ export default class Common {
     }
 
     return choiceItems;
+  };
+
+  static loadAllMenuItems = async (user, { name } = {}) => {
+    let menuItems = List();
+    const result = await new MenuItemService().searchAll(
+      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
+      global.parseServerSessionToken,
+    );
+
+    try {
+      result.event.subscribe((info) => {
+        menuItems = menuItems.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return menuItems;
   };
 }
