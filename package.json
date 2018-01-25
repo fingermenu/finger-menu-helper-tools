@@ -14,6 +14,7 @@
     "import-sizes": "babel-node src/ImportSizes.js",
     "import-choice-items": "babel-node src/ImportChoiceItems.js",
     "import-menu-items": "babel-node src/ImportMenuItems.js",
+    "import-choice-item-prices": "babel-node src/ImportChoiceItemPrices.js",
     "lint": "eslint --ext .jsx --ext .js src",
     "fixlint": "eslint --fix --ext .jsx --ext .js src",
     "test": "jest",
