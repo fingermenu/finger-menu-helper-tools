@@ -224,7 +224,7 @@ export default class Common {
   static loadAllMenuItemPrices = async (user, { menuItemId } = {}) => {
     let menuItemPrices = List();
     const result = await new MenuItemPriceService().searchAll(
-      Map({ conditions: Map({ addedByUser: user, menuItemId, doesNotExist_removedByUser: true }) }),
+      Map({ include_menuItem: true, conditions: Map({ addedByUser: user, menuItemId, doesNotExist_removedByUser: true }) }),
       global.parseServerSessionToken,
     );
 

@@ -6,7 +6,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
-import { MenuService } from '@fingermenu/parse-server-common';
+import { MenuService, MenuItem } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
 const optionDefinitions = [
@@ -49,6 +49,7 @@ const start = async () => {
           'menuPageUrl',
           'imageUrl',
           'tags',
+          'menuItemNames',
         );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
@@ -60,6 +61,11 @@ const start = async () => {
             const tagsToFind = Immutable.fromJS(values.get('tags').split('|'))
               .map(_ => _.trim())
               .filterNot(_ => _.length === 0);
+            const menuItemPrices = (await Common.loadAllMenuItemPrices(user)).map(_ =>
+              _.set('menuItem', new MenuItem(_.get('menuItem')).getInfo()));
+            const menuItemsToFind = Immutable.fromJS(values.get('menuItemNames').split('|'))
+              .map(_ => _.trim())
+              .filterNot(_ => _.length === 0);
             const info = Map({
               ownedByUser: user,
               maintainedByUsers: List.of(user),
@@ -68,6 +74,9 @@ const start = async () => {
               menuPageUrl: values.get('menuPageUrl'),
               imageUrl: values.get('imageUrl'),
               tagIds: tags.filter(tag => tagsToFind.find(_ => _.localeCompare(tag.getIn(['name', 'en_NZ'])) === 0)).map(tag => tag.get('id')),
+              menuItemPriceIds: menuItemPrices
+                .filter(tag => menuItemsToFind.find(_ => _.localeCompare(tag.getIn(['menuItem', 'name', 'en_NZ'])) === 0))
+                .map(tag => tag.get('id')),
             });
 
             if (menus.isEmpty()) {
