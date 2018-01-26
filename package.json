@@ -27,8 +27,8 @@
   "homepage": "https://bitbucket.org/fingermenu/finger-menu-helper-tools#readme",
   "dependencies": {
     "@microbusiness/common-javascript": "^1.1.6",
-    "@microbusiness/parse-server-common": "^1.1.15",
-    "@fingermenu/parse-server-common": "^0.0.25",
+    "@microbusiness/parse-server-common": "^1.1.16",
+    "@fingermenu/parse-server-common": "^0.0.27",
     "bluebird": "^3.5.1",
     "command-line-args": "^5.0.1",
     "csv-parse": "^2.0.0",

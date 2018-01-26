@@ -1,7 +1,7 @@
 // @flow
 
 import BluebirdPromise from 'bluebird';
-import Immutable, { List, Map, OrderedSet } from 'immutable';
+import Immutable, { Map, OrderedSet } from 'immutable';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
@@ -61,20 +61,17 @@ const start = async () => {
 
             const info = Map({
               addedByUser: user,
-              maintainedByUsers: List.of(user),
               menuItemId,
               choiceItemPriceIds,
               sizeId: sizeToFind ? sizes.find(size => size.getIn(['name', 'en_NZ']).localeCompare(sizeToFind) === 0).get('id') : undefined,
               currentPrice: parseFloat(values.get('currentPrice')),
             });
 
-            if (menuItemPrices.isEmpty()) {
-              await menuItemPriceService.create(info, null, global.parseServerSessionToken);
-            } else if (menuItemPrices.count() === 1) {
-              await menuItemPriceService.update(menuItemPrices.first().merge(info), global.parseServerSessionToken);
-            } else {
-              console.error(`Multiple menu item prices found with username ${values.get('username')} and menu item name: ${values.get('menuItemName')}`);
+            if (!menuItemPrices.isEmpty()) {
+              await Promise.all(menuItemPrices.map(async _ => menuItemPriceService.update(_.set('removedByUser', user), global.parseServerSessionToken)).toArray());
             }
+
+            await menuItemPriceService.create(info, null, global.parseServerSessionToken);
           })));
       },
     );

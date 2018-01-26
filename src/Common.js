@@ -183,7 +183,7 @@ export default class Common {
   static loadAllChoiceItemPrices = async (user, { choiceItemId } = {}) => {
     let choiceItemPrices = List();
     const result = await new ChoiceItemPriceService().searchAll(
-      Map({ conditions: Map({ addedByUser: user, choiceItemId }) }),
+      Map({ conditions: Map({ addedByUser: user, choiceItemId, doesNotExist_removedByUser: true }) }),
       global.parseServerSessionToken,
     );
 
@@ -223,7 +223,7 @@ export default class Common {
   static loadAllMenuItemPrices = async (user, { menuItemId } = {}) => {
     let menuItemPrices = List();
     const result = await new MenuItemPriceService().searchAll(
-      Map({ conditions: Map({ addedByUser: user, menuItemId }) }),
+      Map({ conditions: Map({ addedByUser: user, menuItemId, doesNotExist_removedByUser: true }) }),
       global.parseServerSessionToken,
     );
 

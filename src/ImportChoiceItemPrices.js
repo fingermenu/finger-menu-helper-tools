@@ -1,7 +1,7 @@
 // @flow
 
 import BluebirdPromise from 'bluebird';
-import Immutable, { List, Map, OrderedSet } from 'immutable';
+import Immutable, { Map, OrderedSet } from 'immutable';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
@@ -37,7 +37,7 @@ const start = async () => {
           return;
         }
 
-        const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 1); // Skipping the first item as it is the CSV header
+        const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
         const columns = OrderedSet.of('username', 'choiceItemName', 'size', 'currentPrice');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
@@ -50,7 +50,6 @@ const start = async () => {
             const sizeToFind = values.get('size') && values.get('size').length > 0 ? values.get('size').trim() : null;
             const info = Map({
               addedByUser: user,
-              maintainedByUsers: List.of(user),
               choiceItemId,
               sizeId: sizeToFind ? sizes.find(size => size.getIn(['name', 'en_NZ']).localeCompare(sizeToFind) === 0).get('id') : undefined,
               currentPrice: parseFloat(values.get('currentPrice')),
