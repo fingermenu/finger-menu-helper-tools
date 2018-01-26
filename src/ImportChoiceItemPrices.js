@@ -37,7 +37,7 @@ const start = async () => {
           return;
         }
 
-        const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
+        const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 1); // Skipping the first item as it is the CSV header
         const columns = OrderedSet.of('username', 'choiceItemName', 'size', 'currentPrice');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
@@ -56,13 +56,13 @@ const start = async () => {
               currentPrice: parseFloat(values.get('currentPrice')),
             });
 
-            if (choiceItemPrices.isEmpty()) {
-              await choiceItemPriceService.create(info, null, global.parseServerSessionToken);
-            } else if (choiceItemPrices.count() === 1) {
-              await choiceItemPriceService.update(choiceItemPrices.first().merge(info), global.parseServerSessionToken);
-            } else {
-              console.error(`Multiple choice item prices found with username ${values.get('username')} and choice item name: ${values.get('choiceItemName')}`);
+            if (!choiceItemPrices.isEmpty()) {
+              await Promise.all(choiceItemPrices
+                .map(async _ => choiceItemPriceService.update(_.set('removedByUser', user), global.parseServerSessionToken))
+                .toArray());
             }
+
+            await choiceItemPriceService.create(info, null, global.parseServerSessionToken);
           })));
       },
     );
