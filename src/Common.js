@@ -8,6 +8,7 @@ import {
   ChoiceItemPriceService,
   MenuItemService,
   MenuItemPriceService,
+  MenuService,
   LanguageService,
   RestaurantService,
   TableService,
@@ -238,5 +239,25 @@ export default class Common {
     }
 
     return menuItemPrices;
+  };
+
+  static loadAllMenus = async (user, { name } = {}) => {
+    let menus = List();
+    const result = await new MenuService().searchAll(
+      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
+      global.parseServerSessionToken,
+    );
+
+    try {
+      result.event.subscribe((info) => {
+        menus = menus.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return menus;
   };
 }
