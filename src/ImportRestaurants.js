@@ -40,7 +40,17 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'en_NZ_name', 'zh_name', 'jp_name', 'websiteUrl', 'imageUrl', 'pin', 'supportedLanguages');
+        const columns = OrderedSet.of(
+          'username',
+          'en_NZ_name',
+          'zh_name',
+          'jp_name',
+          'websiteUrl',
+          'imageUrl',
+          'pin',
+          'supportedLanguages',
+          'menuNames',
+        );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(rowChunck.map(async (rawRow) => {
@@ -48,6 +58,10 @@ const start = async () => {
             const user = await Common.getUser(values.get('username'));
             const restaurants = await Common.loadAllRestaurants(user, { name: values.get('en_NZ_name') });
             const supportLanguages = Immutable.fromJS(values.get('supportedLanguages').split('|'))
+              .map(_ => _.trim())
+              .filterNot(_ => _.length === 0);
+            const menus = await Common.loadAllMenus(user);
+            const menusToFind = Immutable.fromJS(values.get('menuNames').split('|'))
               .map(_ => _.trim())
               .filterNot(_ => _.length === 0);
             const info = Map({
@@ -60,6 +74,9 @@ const start = async () => {
               languageIds: languages
                 .filter(language => supportLanguages.find(_ => _.localeCompare(language.get('key')) === 0))
                 .map(language => language.get('id')),
+              menuIds: menus
+                .filter(menu => menusToFind.find(_ => _.localeCompare(menu.getIn(['name', 'en_NZ'])) === 0))
+                .map(menu => menu.get('id')),
             });
 
             if (restaurants.isEmpty()) {
