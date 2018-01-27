@@ -75,6 +75,7 @@ const start = async () => {
               const acl = ParseWrapperService.createACL(user);
 
               acl.setPublicReadAccess(true);
+              acl.setRoleWriteAccess('administrators', true);
 
               await menuItemService.create(info, acl, global.parseServerSessionToken);
             } else if (menuItems.count() === 1) {

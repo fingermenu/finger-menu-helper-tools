@@ -58,6 +58,7 @@ const start = async () => {
               const acl = ParseWrapperService.createACL(user);
 
               acl.setPublicReadAccess(true);
+              acl.setRoleWriteAccess('administrators', true);
 
               await tableService.create(info, acl, global.parseServerSessionToken);
             } else if (tables.count() === 1) {

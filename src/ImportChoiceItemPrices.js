@@ -65,6 +65,7 @@ const start = async () => {
             const acl = ParseWrapperService.createACL(user);
 
             acl.setPublicReadAccess(true);
+            acl.setRoleWriteAccess('administrators', true);
 
             await choiceItemPriceService.create(info, acl, global.parseServerSessionToken);
           })));

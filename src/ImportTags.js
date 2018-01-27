@@ -57,6 +57,7 @@ const start = async () => {
               const acl = ParseWrapperService.createACL(user);
 
               acl.setPublicReadAccess(true);
+              acl.setRoleWriteAccess('administrators', true);
 
               await tagService.create(info, acl, global.parseServerSessionToken);
             } else if (tags.count() === 1) {

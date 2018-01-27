@@ -57,6 +57,7 @@ const start = async () => {
               const acl = ParseWrapperService.createACL(user);
 
               acl.setPublicReadAccess(true);
+              acl.setRoleWriteAccess('administrators', true);
 
               await sizeService.create(info, acl, global.parseServerSessionToken);
             } else if (sizes.count() === 1) {
