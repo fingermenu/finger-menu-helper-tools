@@ -4,6 +4,7 @@
   "description": "Trolley Smart Helper Tools",
   "main": "src/index.js",
   "scripts": {
+    "upload-files": "babel-node src/UploadFiles.js",
     "create-account": "babel-node src/CreateAccount.js",
     "import-accounts": "babel-node src/ImportAccounts.js",
     "import-languages": "babel-node src/ImportLanguages.js",
@@ -27,9 +28,9 @@
   "author": "Micro Business ltd<micro.business.ltd@gmail.com>",
   "homepage": "https://bitbucket.org/fingermenu/finger-menu-helper-tools#readme",
   "dependencies": {
-    "@fingermenu/parse-server-common": "0.0.28",
+    "@fingermenu/parse-server-common": "0.0.30",
     "@microbusiness/common-javascript": "^1.1.6",
-    "@microbusiness/parse-server-common": "^1.1.17",
+    "@microbusiness/parse-server-common": "^1.1.20",
     "bluebird": "^3.5.1",
     "command-line-args": "^5.0.1",
     "csv-parse": "^2.0.0",
