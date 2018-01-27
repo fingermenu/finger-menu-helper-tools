@@ -47,7 +47,7 @@ const start = async () => {
             const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
             const user = await Common.getUser(values.get('username'));
             const restaurants = await Common.loadAllRestaurants(user, { name: values.get('en_NZ_name') });
-            const supportLanguages = Immutable.fromJS(values.get('supportedLanguages').split(','))
+            const supportLanguages = Immutable.fromJS(values.get('supportedLanguages').split('|'))
               .map(_ => _.trim())
               .filterNot(_ => _.length === 0);
             const info = Map({

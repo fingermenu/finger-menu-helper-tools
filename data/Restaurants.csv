@@ -1,4 +1,4 @@
 Username,Name en_NZ,Name zh,Name jp,Website URL,Image Url,Pin,Supported Languages
-takumi@fingermenu.co.nz,Takumi,大师,タクミ,,,1111,"en_NZ, zh, jp"
-43cafe@fingermenu.co.nz,43° Cafe,43°咖啡厅,43°カフェ,http://43degreescafe.co.nz/,http://43degreescafe.co.nz/assets/images/cafe_logo.png,2222,"en_NZ, zh, jp"
-test@gmail.com,Takumi,大师,タクミ,,,1111,"en_NZ, zh, jp"
+takumi@fingermenu.co.nz,Takumi,大师,タクミ,,,1111,en_NZ| zh| jp
+43cafe@fingermenu.co.nz,43° Cafe,43°咖啡厅,43°カフェ,http://43degreescafe.co.nz/,http://43degreescafe.co.nz/assets/images/cafe_logo.png,2222,en_NZ| zh| jp
+test@gmail.com,Takumi,大师,タクミ,,,1111,en_NZ| zh| jp
