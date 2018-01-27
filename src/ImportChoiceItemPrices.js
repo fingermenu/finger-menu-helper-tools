@@ -25,7 +25,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const start = async () => {
   try {
-    Common.initializeParse(options);
+    await Common.initializeParse(options);
 
     const choiceItemPriceService = new ChoiceItemPriceService();
 

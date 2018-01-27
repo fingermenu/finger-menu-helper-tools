@@ -24,7 +24,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const start = async () => {
   try {
-    Common.initializeParse(options);
+    await Common.initializeParse(options);
 
     const tableStates = await Common.loadAllTableStates();
     const tableStateService = new TableStateService();

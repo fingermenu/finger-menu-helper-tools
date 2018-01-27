@@ -23,7 +23,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const start = async () => {
   try {
-    Common.initializeParse(options);
+    await Common.initializeParse(options);
 
     const parser = csvParser(
       { delimiter: options.delimiter ? options.delimiter : ',', trim: true, rowDelimiter: options.rowDelimiter ? options.rowDelimiter : '\n' },

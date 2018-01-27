@@ -24,7 +24,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const start = async () => {
   try {
-    Common.initializeParse(options);
+    await Common.initializeParse(options);
 
     const languages = await Common.loadAllLanguages();
     const languageService = new LanguageService();
