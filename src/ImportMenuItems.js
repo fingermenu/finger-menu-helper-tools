@@ -6,6 +6,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
+import { ParseWrapperService } from '@microbusiness/parse-server-common';
 import { MenuItemService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
@@ -71,7 +72,11 @@ const start = async () => {
             });
 
             if (menuItems.isEmpty()) {
-              await menuItemService.create(info, null, global.parseServerSessionToken);
+              const acl = ParseWrapperService.createACL(user);
+
+              acl.setPublicReadAccess(true);
+
+              await menuItemService.create(info, acl, global.parseServerSessionToken);
             } else if (menuItems.count() === 1) {
               await menuItemService.update(menuItems.first().merge(info), global.parseServerSessionToken);
             } else {

@@ -6,6 +6,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
+import { ParseWrapperService } from '@microbusiness/parse-server-common';
 import { ChoiceItemPriceService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
@@ -61,7 +62,11 @@ const start = async () => {
                 .toArray());
             }
 
-            await choiceItemPriceService.create(info, null, global.parseServerSessionToken);
+            const acl = ParseWrapperService.createACL(user);
+
+            acl.setPublicReadAccess(true);
+
+            await choiceItemPriceService.create(info, acl, global.parseServerSessionToken);
           })));
       },
     );

@@ -6,6 +6,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
+import { ParseWrapperService } from '@microbusiness/parse-server-common';
 import { TableService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
@@ -54,7 +55,11 @@ const start = async () => {
             });
 
             if (tables.isEmpty()) {
-              await tableService.create(info, null, global.parseServerSessionToken);
+              const acl = ParseWrapperService.createACL(user);
+
+              acl.setPublicReadAccess(true);
+
+              await tableService.create(info, acl, global.parseServerSessionToken);
             } else if (tables.count() === 1) {
               await tableService.update(tables.first().merge(info), global.parseServerSessionToken);
             } else {

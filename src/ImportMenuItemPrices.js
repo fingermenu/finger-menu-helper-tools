@@ -6,6 +6,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
+import { ParseWrapperService } from '@microbusiness/parse-server-common';
 import { MenuItemPriceService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
@@ -71,7 +72,11 @@ const start = async () => {
               await Promise.all(menuItemPrices.map(async _ => menuItemPriceService.update(_.set('removedByUser', user), global.parseServerSessionToken)).toArray());
             }
 
-            await menuItemPriceService.create(info, null, global.parseServerSessionToken);
+            const acl = ParseWrapperService.createACL(user);
+
+            acl.setPublicReadAccess(true);
+
+            await menuItemPriceService.create(info, acl, global.parseServerSessionToken);
           })));
       },
     );

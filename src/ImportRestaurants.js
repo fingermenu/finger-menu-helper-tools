@@ -6,6 +6,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
+import { ParseWrapperService } from '@microbusiness/parse-server-common';
 import { RestaurantService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
@@ -62,7 +63,11 @@ const start = async () => {
             });
 
             if (restaurants.isEmpty()) {
-              await restaurantService.create(info, null, global.parseServerSessionToken);
+              const acl = ParseWrapperService.createACL(user);
+
+              acl.setPublicReadAccess(true);
+
+              await restaurantService.create(info, acl, global.parseServerSessionToken);
             } else if (restaurants.count() === 1) {
               await restaurantService.update(restaurants.first().merge(info), global.parseServerSessionToken);
             } else {

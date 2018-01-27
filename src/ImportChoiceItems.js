@@ -6,6 +6,7 @@ import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
 import { ImmutableEx } from '@microbusiness/common-javascript';
+import { ParseWrapperService } from '@microbusiness/parse-server-common';
 import { ChoiceItemService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
@@ -71,7 +72,11 @@ const start = async () => {
             });
 
             if (choiceItems.isEmpty()) {
-              await choiceItemService.create(info, null, global.parseServerSessionToken);
+              const acl = ParseWrapperService.createACL(user);
+
+              acl.setPublicReadAccess(true);
+
+              await choiceItemService.create(info, acl, global.parseServerSessionToken);
             } else if (choiceItems.count() === 1) {
               await choiceItemService.update(choiceItems.first().merge(info), global.parseServerSessionToken);
             } else {
