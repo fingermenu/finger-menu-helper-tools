@@ -13,6 +13,7 @@ import {
   RestaurantService,
   TableService,
   TableStateService,
+  OrderStateService,
   TagService,
   SizeService,
 } from '@fingermenu/parse-server-common';
@@ -79,6 +80,23 @@ export default class Common {
     }
 
     return tableStates;
+  };
+
+  static loadAllOrderStates = async () => {
+    let orderStates = List();
+    const result = await new OrderStateService().searchAll(Map({}), global.parseServerSessionToken);
+
+    try {
+      result.event.subscribe((info) => {
+        orderStates = orderStates.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return orderStates;
   };
 
   static loadAllRestaurants = async (user, { name } = {}) => {
