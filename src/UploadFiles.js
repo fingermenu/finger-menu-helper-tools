@@ -23,18 +23,24 @@ const start = async () => {
     await Common.initializeParse(options, false);
 
     const files = fs.readdirSync(options.directory);
-    const splittedFiles = ImmutableEx.splitIntoChunks(Immutable.fromJS(files), 10);
+    const splittedFiles = ImmutableEx.splitIntoChunks(Immutable.fromJS(files), 1);
     let filesAndUrls = Map();
 
     await BluebirdPromise.each(splittedFiles.toArray(), fileChunck =>
       Promise.all(fileChunck.map(async (file) => {
         const filePath = options.directory + file;
 
-        console.log(`Started uploading: ${filePath}`);
+        try {
+          console.log(`Started uploading: ${filePath}...`);
 
-        filesAndUrls = filesAndUrls.set(filePath, (await ParseWrapperService.createFile(file, [...fs.readFileSync(filePath)]).save()).url());
+          filesAndUrls = filesAndUrls.set(filePath, (await ParseWrapperService.createFile(file, [...fs.readFileSync(filePath)]).save()).url());
 
-        console.log(`Finished uploading: ${filePath}`);
+          console.log(`Uploading ${filePath} finished successfully.`);
+        } catch (err) {
+          console.error(`Failed to upload ${filePath}. Error ${err.message}`);
+
+          throw err;
+        }
       })));
 
     fs.writeFileSync(options.outputFile, JSON.stringify(filesAndUrls.toJS(), null, 2));
