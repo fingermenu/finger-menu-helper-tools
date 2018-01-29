@@ -30,7 +30,11 @@ const start = async () => {
       Promise.all(fileChunck.map(async (file) => {
         const filePath = options.directory + file;
 
+        console.log(`Started uploading: ${filePath}`);
+
         filesAndUrls = filesAndUrls.set(filePath, (await ParseWrapperService.createFile(file, [...fs.readFileSync(filePath)]).save()).url());
+
+        console.log(`Finished uploading: ${filePath}`);
       })));
 
     fs.writeFileSync(options.outputFile, JSON.stringify(filesAndUrls.toJS(), null, 2));
