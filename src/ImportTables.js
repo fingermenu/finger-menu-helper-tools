@@ -27,6 +27,7 @@ const start = async () => {
   try {
     await Common.initializeParse(options);
 
+    const tableStates = await Common.loadAllTableStates();
     const tableService = new TableService();
 
     const parser = csvParser(
@@ -39,7 +40,7 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'restaurantName', 'en_NZ_name', 'zh_name', 'jp_name');
+        const columns = OrderedSet.of('username', 'restaurantName', 'en_NZ_name', 'zh_name', 'jp_name', 'tableState');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(rowChunck.map(async (rawRow) => {
@@ -52,6 +53,7 @@ const start = async () => {
               maintainedByUsers: List.of(user),
               restaurantId,
               name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+              tableStateId: tableStates.find(tableState => tableState.get('key').localeCompare(values.get('tableState')) === 0).get('id'),
             });
 
             if (tables.isEmpty()) {

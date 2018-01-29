@@ -1,43 +1,43 @@
-Username,Restaurant Name,Name en_NZ,Name zh,Name jp
-takumi@fingermenu.co.nz,Takumi,1,一,1
-takumi@fingermenu.co.nz,Takumi,2,二,2
-takumi@fingermenu.co.nz,Takumi,3,三,3
-takumi@fingermenu.co.nz,Takumi,4,四,4
-takumi@fingermenu.co.nz,Takumi,5,五,5
-takumi@fingermenu.co.nz,Takumi,6,6,6
-takumi@fingermenu.co.nz,Takumi,7,7,7
-takumi@fingermenu.co.nz,Takumi,8,8,8
-takumi@fingermenu.co.nz,Takumi,9,9,9
-takumi@fingermenu.co.nz,Takumi,10,10,10
-takumi@fingermenu.co.nz,Takumi,11,11,11
-takumi@fingermenu.co.nz,Takumi,12,12,12
-takumi@fingermenu.co.nz,Takumi,13,13,13
-takumi@fingermenu.co.nz,Takumi,14,14,14
-takumi@fingermenu.co.nz,Takumi,15,15,15
-takumi@fingermenu.co.nz,Takumi,16,16,16
-43cafe@fingermenu.co.nz,43° Cafe,1,一,1
-43cafe@fingermenu.co.nz,43° Cafe,2,二,2
-43cafe@fingermenu.co.nz,43° Cafe,3,三,3
-43cafe@fingermenu.co.nz,43° Cafe,4,四,4
-43cafe@fingermenu.co.nz,43° Cafe,5,五,5
-43cafe@fingermenu.co.nz,43° Cafe,6,6,6
-43cafe@fingermenu.co.nz,43° Cafe,7,7,7
-43cafe@fingermenu.co.nz,43° Cafe,8,8,8
-43cafe@fingermenu.co.nz,43° Cafe,9,9,9
-43cafe@fingermenu.co.nz,43° Cafe,10,10,10
-test@gmail.com,Takumi,1,一,1
-test@gmail.com,Takumi,2,二,2
-test@gmail.com,Takumi,3,三,3
-test@gmail.com,Takumi,4,四,4
-test@gmail.com,Takumi,5,五,5
-test@gmail.com,Takumi,6,6,6
-test@gmail.com,Takumi,7,7,7
-test@gmail.com,Takumi,8,8,8
-test@gmail.com,Takumi,9,9,9
-test@gmail.com,Takumi,10,10,10
-test@gmail.com,Takumi,11,11,11
-test@gmail.com,Takumi,12,12,12
-test@gmail.com,Takumi,13,13,13
-test@gmail.com,Takumi,14,14,14
-test@gmail.com,Takumi,15,15,15
-test@gmail.com,Takumi,16,16,16
+Username,Restaurant Name,Name en_NZ,Name zh,Name jp,Table State
+takumi@fingermenu.co.nz,Takumi,1,一,1,empty
+takumi@fingermenu.co.nz,Takumi,2,二,2,empty
+takumi@fingermenu.co.nz,Takumi,3,三,3,empty
+takumi@fingermenu.co.nz,Takumi,4,四,4,empty
+takumi@fingermenu.co.nz,Takumi,5,五,5,empty
+takumi@fingermenu.co.nz,Takumi,6,6,6,empty
+takumi@fingermenu.co.nz,Takumi,7,7,7,empty
+takumi@fingermenu.co.nz,Takumi,8,8,8,empty
+takumi@fingermenu.co.nz,Takumi,9,9,9,empty
+takumi@fingermenu.co.nz,Takumi,10,10,10,empty
+takumi@fingermenu.co.nz,Takumi,11,11,11,empty
+takumi@fingermenu.co.nz,Takumi,12,12,12,empty
+takumi@fingermenu.co.nz,Takumi,13,13,13,empty
+takumi@fingermenu.co.nz,Takumi,14,14,14,empty
+takumi@fingermenu.co.nz,Takumi,15,15,15,empty
+takumi@fingermenu.co.nz,Takumi,16,16,16,empty
+43cafe@fingermenu.co.nz,43° Cafe,1,一,1,empty
+43cafe@fingermenu.co.nz,43° Cafe,2,二,2,empty
+43cafe@fingermenu.co.nz,43° Cafe,3,三,3,empty
+43cafe@fingermenu.co.nz,43° Cafe,4,四,4,empty
+43cafe@fingermenu.co.nz,43° Cafe,5,五,5,empty
+43cafe@fingermenu.co.nz,43° Cafe,6,6,6,empty
+43cafe@fingermenu.co.nz,43° Cafe,7,7,7,empty
+43cafe@fingermenu.co.nz,43° Cafe,8,8,8,empty
+43cafe@fingermenu.co.nz,43° Cafe,9,9,9,empty
+43cafe@fingermenu.co.nz,43° Cafe,10,10,10,empty
+test@gmail.com,Takumi,1,一,1,empty
+test@gmail.com,Takumi,2,二,2,empty
+test@gmail.com,Takumi,3,三,3,empty
+test@gmail.com,Takumi,4,四,4,empty
+test@gmail.com,Takumi,5,五,5,empty
+test@gmail.com,Takumi,6,6,6,empty
+test@gmail.com,Takumi,7,7,7,empty
+test@gmail.com,Takumi,8,8,8,empty
+test@gmail.com,Takumi,9,9,9,empty
+test@gmail.com,Takumi,10,10,10,empty
+test@gmail.com,Takumi,11,11,11,empty
+test@gmail.com,Takumi,12,12,12,empty
+test@gmail.com,Takumi,13,13,13,empty
+test@gmail.com,Takumi,14,14,14,empty
+test@gmail.com,Takumi,15,15,15,empty
+test@gmail.com,Takumi,16,16,16,empty
