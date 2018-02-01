@@ -28,7 +28,7 @@
   "author": "Micro Business ltd<micro.business.ltd@gmail.com>",
   "homepage": "https://bitbucket.org/fingermenu/finger-menu-helper-tools#readme",
   "dependencies": {
-    "@fingermenu/parse-server-common": "0.0.34",
+    "@fingermenu/parse-server-common": "0.0.35",
     "@microbusiness/common-javascript": "^1.1.7",
     "@microbusiness/parse-server-common": "^1.1.22",
     "bluebird": "^3.5.1",
