@@ -57,8 +57,9 @@ const start = async () => {
               .filter(choiceItem => choiceItemsToFind.find(_ => _.localeCompare(choiceItem.getIn(['name', 'en_NZ'])) === 0))
               .map(choiceItem => choiceItem.get('id'));
             const choiceItemPrices = await Common.loadAllChoiceItemPrices(user);
-            const choiceItemPriceIds = choiceItemPrices.filter(choiceItemPrice =>
-              choiceItemIdsToFind.find(_ => _.localeCompare(choiceItemPrice.get('choiceItemId')) === 0));
+            const choiceItemPriceIds = choiceItemPrices
+              .filter(choiceItemPrice => choiceItemIdsToFind.find(_ => _.localeCompare(choiceItemPrice.get('choiceItemId')) === 0))
+              .map(_ => _.get('id'));
 
             const info = Map({
               addedByUser: user,
