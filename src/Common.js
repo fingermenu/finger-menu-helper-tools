@@ -39,17 +39,19 @@ export default class Common {
     return null;
   };
 
+  static logIn = async (username, password) => ParseWrapperService.logIn(username, password);
+
   static extractColumnsValuesFromRow = (columns, row) =>
     columns.zip(Range(0, columns.count())).reduce((reduction, value) => reduction.set(value[0], row.skip(value[1]).first()), Map());
 
   static getUser = username => UserService.getUser(username, global.parseServerSessionToken);
 
-  static createAccount = async (username, password, emailAddress, userType) =>
+  static createAccount = async (username, password, email, type) =>
     ParseWrapperService.createNewUser({
       username,
       password,
-      emailAddress,
-      userType,
+      emailAddress: email,
+      userType: type,
     }).signUp();
 
   static updateAccount = async (user, {

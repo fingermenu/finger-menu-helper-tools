@@ -41,7 +41,32 @@ const start = async () => {
           Promise.all(rowChunck.map(async (rawRow) => {
             const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
 
-            await Common.createAccount(values.get('username'), values.get('password'), values.get('email'), values.get('type'));
+            let user;
+
+            try {
+              user = await Common.getUser(values.get('username'));
+            } catch (ex) {
+              user = null;
+            }
+
+            if (user) {
+              /* The user exists, update user details... */
+              console.log(`Updating existing accout. Username: ${values.get('username')}`);
+
+              const loggedInUser = await Common.logIn(values.get('username'), values.get('password'));
+
+              await Common.updateAccount(loggedInUser, {
+                username: values.get('username'),
+                password: values.get('password'),
+                email: values.get('email'),
+                type: values.get('type'),
+              });
+            } else {
+              /* The user does not exist, create a new one... */
+              console.log(`Creating new accout. Username: ${values.get('username')}`);
+
+              await Common.createAccount(values.get('username'), values.get('password'), values.get('email'), values.get('type'));
+            }
           })));
       },
     );
