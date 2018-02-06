@@ -32,7 +32,11 @@ export default class Common {
       const user = await ParseWrapperService.logIn(options.username, options.password);
 
       global.parseServerSessionToken = user.getSessionToken();
+
+      return user;
     }
+
+    return null;
   };
 
   static extractColumnsValuesFromRow = (columns, row) =>
@@ -47,6 +51,20 @@ export default class Common {
       emailAddress,
       userType,
     }).signUp();
+
+  static updateAccount = async (user, {
+    username, password, email, type,
+  } = {}) =>
+    UserService.updateUserDetails(
+      {
+        username,
+        password,
+        emailAddress: email,
+        userType: type,
+      },
+      user,
+      user.getSessionToken(),
+    );
 
   static loadAllLanguages = async () => {
     let languages = List();
