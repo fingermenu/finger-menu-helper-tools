@@ -51,9 +51,7 @@ const start = async () => {
               /* The user exists, update user details... */
               console.log(`Updating existing accout. Username: ${values.get('username')}`);
 
-              const loggedInUser = await Common.logIn(values.get('username'), values.get('password'));
-
-              await Common.updateAccount(loggedInUser, {
+              await Common.updateAccount(user, {
                 username: values.get('username'),
                 password: values.get('password'),
                 email: values.get('email'),
