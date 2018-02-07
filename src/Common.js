@@ -19,7 +19,7 @@ import {
 } from '@fingermenu/parse-server-common';
 
 export default class Common {
-  static initializeParse = async (options, login = true) => {
+  static initializeParse = async (options) => {
     Parse.initialize(
       options.applicationId ? options.applicationId : 'app_id',
       options.javaScriptKey ? options.javaScriptKey : 'javascript_key',
@@ -27,16 +27,6 @@ export default class Common {
     );
 
     Parse.serverURL = options.parseServerUrl ? options.parseServerUrl : 'http://localhost:1337/parse';
-
-    if (login) {
-      const user = await ParseWrapperService.logIn(options.username, options.password);
-
-      global.parseServerSessionToken = user.getSessionToken();
-
-      return user;
-    }
-
-    return null;
   };
 
   static logIn = async (username, password) => ParseWrapperService.logIn(username, password);
@@ -44,7 +34,7 @@ export default class Common {
   static extractColumnsValuesFromRow = (columns, row) =>
     columns.zip(Range(0, columns.count())).reduce((reduction, value) => reduction.set(value[0], row.skip(value[1]).first()), Map());
 
-  static getUser = username => UserService.getUser(username, global.parseServerSessionToken);
+  static getUser = username => UserService.getUser(username, null, true);
 
   static createAccount = async (username, password, email, type) =>
     ParseWrapperService.createNewUser({
@@ -65,12 +55,13 @@ export default class Common {
         userType: type,
       },
       user,
-      user.getSessionToken(),
+      null,
+      true,
     );
 
   static loadAllLanguages = async () => {
     let languages = List();
-    const result = await new LanguageService().searchAll(Map({}), global.parseServerSessionToken);
+    const result = await new LanguageService().searchAll(Map({}), null, true);
 
     try {
       result.event.subscribe((info) => {
@@ -87,7 +78,7 @@ export default class Common {
 
   static loadAllTableStates = async () => {
     let tableStates = List();
-    const result = await new TableStateService().searchAll(Map({}), global.parseServerSessionToken);
+    const result = await new TableStateService().searchAll(Map({}), null, true);
 
     try {
       result.event.subscribe((info) => {
@@ -104,7 +95,7 @@ export default class Common {
 
   static loadAllOrderStates = async () => {
     let orderStates = List();
-    const result = await new OrderStateService().searchAll(Map({}), global.parseServerSessionToken);
+    const result = await new OrderStateService().searchAll(Map({}), null, true);
 
     try {
       result.event.subscribe((info) => {
@@ -121,10 +112,7 @@ export default class Common {
 
   static loadAllRestaurants = async (user, { name } = {}) => {
     let restaurants = List();
-    const result = await new RestaurantService().searchAll(
-      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
-      global.parseServerSessionToken,
-    );
+    const result = await new RestaurantService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
       result.event.subscribe((info) => {
@@ -143,7 +131,8 @@ export default class Common {
     let tables = List();
     const result = await new TableService().searchAll(
       Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, restaurantId, name }) }),
-      global.parseServerSessionToken,
+      null,
+      true,
     );
 
     try {
@@ -161,10 +150,7 @@ export default class Common {
 
   static loadAllTags = async (user, { name } = {}) => {
     let tags = List();
-    const result = await new TagService().searchAll(
-      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
-      global.parseServerSessionToken,
-    );
+    const result = await new TagService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
       result.event.subscribe((info) => {
@@ -181,10 +167,7 @@ export default class Common {
 
   static loadAllSizes = async (user, { name } = {}) => {
     let sizes = List();
-    const result = await new SizeService().searchAll(
-      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
-      global.parseServerSessionToken,
-    );
+    const result = await new SizeService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
       result.event.subscribe((info) => {
@@ -201,10 +184,7 @@ export default class Common {
 
   static loadAllChoiceItems = async (user, { name } = {}) => {
     let choiceItems = List();
-    const result = await new ChoiceItemService().searchAll(
-      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
-      global.parseServerSessionToken,
-    );
+    const result = await new ChoiceItemService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
       result.event.subscribe((info) => {
@@ -223,7 +203,8 @@ export default class Common {
     let choiceItemPrices = List();
     const result = await new ChoiceItemPriceService().searchAll(
       Map({ conditions: Map({ addedByUser: user, choiceItemId, doesNotExist_removedByUser: true }) }),
-      global.parseServerSessionToken,
+      null,
+      true,
     );
 
     try {
@@ -241,10 +222,7 @@ export default class Common {
 
   static loadAllMenuItems = async (user, { name } = {}) => {
     let menuItems = List();
-    const result = await new MenuItemService().searchAll(
-      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
-      global.parseServerSessionToken,
-    );
+    const result = await new MenuItemService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
       result.event.subscribe((info) => {
@@ -263,7 +241,8 @@ export default class Common {
     let menuItemPrices = List();
     const result = await new MenuItemPriceService().searchAll(
       Map({ include_menuItem: true, conditions: Map({ addedByUser: user, menuItemId, doesNotExist_removedByUser: true }) }),
-      global.parseServerSessionToken,
+      null,
+      true,
     );
 
     try {
@@ -281,10 +260,7 @@ export default class Common {
 
   static loadAllMenus = async (user, { name } = {}) => {
     let menus = List();
-    const result = await new MenuService().searchAll(
-      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }),
-      global.parseServerSessionToken,
-    );
+    const result = await new MenuService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
       result.event.subscribe((info) => {

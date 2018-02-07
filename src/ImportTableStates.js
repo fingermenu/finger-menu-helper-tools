@@ -17,8 +17,6 @@ const optionDefinitions = [
   { name: 'javaScriptKey', type: String },
   { name: 'masterKey', type: String },
   { name: 'parseServerUrl', type: String },
-  { name: 'username', type: String },
-  { name: 'password', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
 
@@ -51,9 +49,9 @@ const start = async () => {
             });
 
             if (tableState) {
-              await tableStateService.update(tableState.merge(info), global.parseServerSessionToken);
+              await tableStateService.update(tableState.merge(info), null, true);
             } else {
-              await tableStateService.create(info, null, global.parseServerSessionToken);
+              await tableStateService.create(info, null, null, true);
             }
           })));
       },

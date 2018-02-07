@@ -16,8 +16,6 @@ const optionDefinitions = [
   { name: 'javaScriptKey', type: String },
   { name: 'masterKey', type: String },
   { name: 'parseServerUrl', type: String },
-  { name: 'username', type: String },
-  { name: 'password', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
 

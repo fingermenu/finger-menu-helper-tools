@@ -18,8 +18,6 @@ const optionDefinitions = [
   { name: 'javaScriptKey', type: String },
   { name: 'masterKey', type: String },
   { name: 'parseServerUrl', type: String },
-  { name: 'username', type: String },
-  { name: 'password', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
 
@@ -77,9 +75,9 @@ const start = async () => {
               acl.setPublicReadAccess(true);
               acl.setRoleWriteAccess('administrators', true);
 
-              await choiceItemService.create(info, acl, global.parseServerSessionToken);
+              await choiceItemService.create(info, acl, null, true);
             } else if (choiceItems.count() === 1) {
-              await choiceItemService.update(choiceItems.first().merge(info), global.parseServerSessionToken);
+              await choiceItemService.update(choiceItems.first().merge(info), null, true);
             } else {
               console.error(`Multiple choice items found with username ${values.get('username')} and choice item name: ${values.get('en_NZ_name')}`);
             }

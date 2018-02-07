@@ -18,8 +18,6 @@ const optionDefinitions = [
   { name: 'javaScriptKey', type: String },
   { name: 'masterKey', type: String },
   { name: 'parseServerUrl', type: String },
-  { name: 'username', type: String },
-  { name: 'password', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
 
@@ -77,9 +75,9 @@ const start = async () => {
               acl.setPublicReadAccess(true);
               acl.setRoleWriteAccess('administrators', true);
 
-              await menuItemService.create(info, acl, global.parseServerSessionToken);
+              await menuItemService.create(info, acl, null, true);
             } else if (menuItems.count() === 1) {
-              await menuItemService.update(menuItems.first().merge(info), global.parseServerSessionToken);
+              await menuItemService.update(menuItems.first().merge(info), null, true);
             } else {
               console.error(`Multiple menu items found with username ${values.get('username')} and menu item name: ${values.get('en_NZ_name')}`);
             }

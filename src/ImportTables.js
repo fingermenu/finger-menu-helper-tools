@@ -18,8 +18,6 @@ const optionDefinitions = [
   { name: 'javaScriptKey', type: String },
   { name: 'masterKey', type: String },
   { name: 'parseServerUrl', type: String },
-  { name: 'username', type: String },
-  { name: 'password', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
 
@@ -62,9 +60,9 @@ const start = async () => {
               acl.setPublicReadAccess(true);
               acl.setRoleWriteAccess('administrators', true);
 
-              await tableService.create(info, acl, global.parseServerSessionToken);
+              await tableService.create(info, acl, null, true);
             } else if (tables.count() === 1) {
-              await tableService.update(tables.first().merge(info), global.parseServerSessionToken);
+              await tableService.update(tables.first().merge(info), null, true);
             } else {
               console.error(`Multiple tables found with username ${values.get('username')} and table name: ${values.get('en_NZ_name')}`);
             }

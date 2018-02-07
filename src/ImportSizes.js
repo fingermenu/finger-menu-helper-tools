@@ -18,8 +18,6 @@ const optionDefinitions = [
   { name: 'javaScriptKey', type: String },
   { name: 'masterKey', type: String },
   { name: 'parseServerUrl', type: String },
-  { name: 'username', type: String },
-  { name: 'password', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
 
@@ -59,9 +57,9 @@ const start = async () => {
               acl.setPublicReadAccess(true);
               acl.setRoleWriteAccess('administrators', true);
 
-              await sizeService.create(info, acl, global.parseServerSessionToken);
+              await sizeService.create(info, acl, null, true);
             } else if (sizes.count() === 1) {
-              await sizeService.update(sizes.first().merge(info), global.parseServerSessionToken);
+              await sizeService.update(sizes.first().merge(info), null, true);
             } else {
               console.error(`Multiple sizes found with username ${values.get('username')} and size name: ${values.get('en_NZ_name')}`);
             }

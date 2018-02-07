@@ -20,7 +20,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const start = async () => {
   try {
-    await Common.initializeParse(options, false);
+    await Common.initializeParse(options);
 
     const files = fs.readdirSync(options.directory);
     const splittedFiles = ImmutableEx.splitIntoChunks(Immutable.fromJS(files), 1);

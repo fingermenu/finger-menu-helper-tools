@@ -18,8 +18,6 @@ const optionDefinitions = [
   { name: 'javaScriptKey', type: String },
   { name: 'masterKey', type: String },
   { name: 'parseServerUrl', type: String },
-  { name: 'username', type: String },
-  { name: 'password', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
 
@@ -70,7 +68,7 @@ const start = async () => {
             });
 
             if (!menuItemPrices.isEmpty()) {
-              await Promise.all(menuItemPrices.map(async _ => menuItemPriceService.update(_.set('removedByUser', user), global.parseServerSessionToken)).toArray());
+              await Promise.all(menuItemPrices.map(async _ => menuItemPriceService.update(_.set('removedByUser', user), null, true)).toArray());
             }
 
             const acl = ParseWrapperService.createACL(user);
@@ -78,7 +76,7 @@ const start = async () => {
             acl.setPublicReadAccess(true);
             acl.setRoleWriteAccess('administrators', true);
 
-            await menuItemPriceService.create(info, acl, global.parseServerSessionToken);
+            await menuItemPriceService.create(info, acl, null, true);
           })));
       },
     );

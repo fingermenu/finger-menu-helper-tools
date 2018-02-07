@@ -18,8 +18,6 @@ const optionDefinitions = [
   { name: 'javaScriptKey', type: String },
   { name: 'masterKey', type: String },
   { name: 'parseServerUrl', type: String },
-  { name: 'username', type: String },
-  { name: 'password', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
 
@@ -59,9 +57,9 @@ const start = async () => {
               acl.setPublicReadAccess(true);
               acl.setRoleWriteAccess('administrators', true);
 
-              await tagService.create(info, acl, global.parseServerSessionToken);
+              await tagService.create(info, acl, null, true);
             } else if (tags.count() === 1) {
-              await tagService.update(tags.first().merge(info), global.parseServerSessionToken);
+              await tagService.update(tags.first().merge(info), null, true);
             } else {
               console.error(`Multiple tags found with username ${values.get('username')} and tag name: ${values.get('en_NZ_name')}`);
             }

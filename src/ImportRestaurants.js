@@ -18,8 +18,6 @@ const optionDefinitions = [
   { name: 'javaScriptKey', type: String },
   { name: 'masterKey', type: String },
   { name: 'parseServerUrl', type: String },
-  { name: 'username', type: String },
-  { name: 'password', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
 
@@ -85,9 +83,9 @@ const start = async () => {
               acl.setPublicReadAccess(true);
               acl.setRoleWriteAccess('administrators', true);
 
-              await restaurantService.create(info, acl, global.parseServerSessionToken);
+              await restaurantService.create(info, acl, null, true);
             } else if (restaurants.count() === 1) {
-              await restaurantService.update(restaurants.first().merge(info), global.parseServerSessionToken);
+              await restaurantService.update(restaurants.first().merge(info), null, true);
             } else {
               console.error(`Multiple restaurants found with username ${values.get('username')} and restaurant name: ${values.get('en_NZ_name')}`);
             }

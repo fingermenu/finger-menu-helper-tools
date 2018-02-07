@@ -17,7 +17,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const start = async () => {
   try {
-    await Common.initializeParse(options, false);
+    await Common.initializeParse(options);
 
     await Common.createAccount(options.username, options.password, options.email, options.type);
   } catch (ex) {

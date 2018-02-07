@@ -5,7 +5,6 @@ import Common from './Common';
 
 const optionDefinitions = [
   { name: 'username', type: String },
-  { name: 'password', type: String },
   { name: 'newUsername', type: String },
   { name: 'newPassword', type: String },
   { name: 'newEmail', type: String },
@@ -19,7 +18,8 @@ const options = commandLineArgs(optionDefinitions);
 
 const start = async () => {
   try {
-    const user = await Common.initializeParse(options, true);
+    await Common.initializeParse(options);
+    const user = await Common.getUser(options.username);
 
     await Common.updateAccount(user, {
       username: options.newUsername,
