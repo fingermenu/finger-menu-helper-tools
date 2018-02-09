@@ -25,7 +25,6 @@ const start = async () => {
   try {
     await Common.initializeParse(options);
 
-    const languages = await Common.loadAllLanguages();
     const restaurantService = new RestaurantService();
 
     const parser = csvParser(
@@ -44,10 +43,12 @@ const start = async () => {
           'zh_name',
           'jp_name',
           'websiteUrl',
-          'imageUrl',
           'pin',
-          'supportedLanguages',
           'menuNames',
+          'primaryLandingPageBackgroundImageUrl',
+          'secondaryLandingPageBackgroundImageUrl',
+          'primaryTopBannerImageUrl',
+          'secondaryTopBannerImageUrl',
         );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
@@ -55,9 +56,6 @@ const start = async () => {
             const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
             const user = await Common.getUser(values.get('username'));
             const restaurants = await Common.loadAllRestaurants(user, { name: values.get('en_NZ_name') });
-            const supportLanguages = Immutable.fromJS(values.get('supportedLanguages').split('|'))
-              .map(_ => _.trim())
-              .filterNot(_ => _.length === 0);
             const menus = await Common.loadAllMenus(user);
             const menusToFind = Immutable.fromJS(values.get('menuNames').split('|'))
               .map(_ => _.trim())
@@ -67,15 +65,21 @@ const start = async () => {
               maintainedByUsers: List.of(user),
               name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
               websiteUrl: values.get('websiteUrl'),
-              imageUrl: values.get('imageUrl'),
               pin: values.get('pin'),
-              languageIds: languages
-                .filter(language => supportLanguages.find(_ => _.localeCompare(language.get('key')) === 0))
-                .map(language => language.get('id')),
               menuIds: menus
                 .filter(menu => menusToFind.find(_ => _.localeCompare(menu.getIn(['name', 'en_NZ'])) === 0))
                 .map(menu => menu.get('id')),
             });
+            const images = ImmutableEx.removeUndefinedProps(Map({
+              primaryLandingPageBackgroundImageUrl: values.get('primaryLandingPageBackgroundImageUrl')
+                ? values.get('primaryLandingPageBackgroundImageUrl')
+                : undefined,
+              secondaryLandingPageBackgroundImageUrl: values.get('secondaryLandingPageBackgroundImageUrl')
+                ? values.get('secondaryLandingPageBackgroundImageUrl')
+                : undefined,
+              primaryTopBannerImageUrl: values.get('primaryTopBannerImageUrl') ? values.get('primaryTopBannerImageUrl') : undefined,
+              secondaryTopBannerImageUrl: values.get('secondaryTopBannerImageUrl') ? values.get('secondaryTopBannerImageUrl') : undefined,
+            }));
 
             if (restaurants.isEmpty()) {
               const acl = ParseWrapperService.createACL(user);
@@ -83,9 +87,16 @@ const start = async () => {
               acl.setPublicReadAccess(true);
               acl.setRoleWriteAccess('administrators', true);
 
-              await restaurantService.create(info, acl, null, true);
+              await restaurantService.create(info.set('configurations', Map({ images })), acl, null, true);
             } else if (restaurants.count() === 1) {
-              await restaurantService.update(restaurants.first().merge(info), null, true);
+              await restaurantService.update(
+                restaurants
+                  .first()
+                  .merge(info)
+                  .setIn(['configurations', 'images'], images),
+                null,
+                true,
+              );
             } else {
               console.error(`Multiple restaurants found with username ${values.get('username')} and restaurant name: ${values.get('en_NZ_name')}`);
             }
