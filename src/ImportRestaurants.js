@@ -49,6 +49,7 @@ const start = async () => {
           'secondaryLandingPageBackgroundImageUrl',
           'primaryTopBannerImageUrl',
           'secondaryTopBannerImageUrl',
+          'printerAddress',
         );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
@@ -81,19 +82,38 @@ const start = async () => {
               secondaryTopBannerImageUrl: values.get('secondaryTopBannerImageUrl') ? values.get('secondaryTopBannerImageUrl') : undefined,
             }));
 
+            const printers = ImmutableEx.removeUndefinedProps(values.get('printerAddress')
+              ? List.of(Map({
+                hostname: values
+                  .get('printerAddress')
+                  .split(':')[0]
+                  .trim(),
+                port: parseInt(
+                  values
+                    .get('printerAddress')
+                    .split(':')[1]
+                    .trim(),
+                  10,
+                ),
+                type: 'Receipt',
+                name: 'Receipt Printer',
+              }))
+              : List());
+
             if (restaurants.isEmpty()) {
               const acl = ParseWrapperService.createACL(user);
 
               acl.setPublicReadAccess(true);
               acl.setRoleWriteAccess('administrators', true);
 
-              await restaurantService.create(info.set('configurations', Map({ images })), acl, null, true);
+              await restaurantService.create(info.set('configurations', Map({ images, printers })), acl, null, true);
             } else if (restaurants.count() === 1) {
               await restaurantService.update(
                 restaurants
                   .first()
                   .merge(info)
-                  .setIn(['configurations', 'images'], images),
+                  .setIn(['configurations', 'images'], images)
+                  .setIn(['configurations', 'printers'], printers),
                 null,
                 true,
               );
