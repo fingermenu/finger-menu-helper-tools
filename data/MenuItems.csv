@@ -1,7 +1,22 @@
 Username,Name en_NZ,Name zh,Name jp,Description en_NZ,Description zh,Description  jp,Choice item page URL,imageUrl,Tags
-takumi@fingermenu.co.nz,Steak,牛扒,ステーキ,Steak,牛扒,ステーキ,,,Kid|Lunch
-takumi@fingermenu.co.nz,Pizza,比萨,ポテトウェッジ,Potato wedges,比萨,ピザ,,,Tag 1
-43cafe@fingermenu.co.nz,Steak,牛扒,ステーキ,Steak,牛扒,ステーキ,,,Kid|Lunch
-43cafe@fingermenu.co.nz,Pizza,比萨,ポテトウェッジ,Potato wedges,比萨,ピザ,,,Tag 1
-test@gmail.com,Steak,牛扒,ステーキ,Steak,牛扒,ステーキ,,,Kid|Lunch
-test@gmail.com,Pizza,比萨,ポテトウェッジ,Potato wedges,比萨,ピザ,,,Tag 2
+takumi@fingermenu.co.nz,Spicy prawn,,エビチリ,Spicy prawn,,エビチリ,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/292824d07a44856db78169335510a1ce_Spicy-prawn.jpg,
+takumi@fingermenu.co.nz,Pan fried salmon,,パンフライサーモン,Pan fried salmon,,パンフライサーモン,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/7982d4611eb41e391a84e7af9564e26b_Pan-fried-salmon.jpg,
+takumi@fingermenu.co.nz,Beef cano,,ローストビーフ丼,Beef cano,,ローストビーフ丼,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/54e6ad312022086981b05c0b3b521746_Beef-cano.jpg,
+takumi@fingermenu.co.nz,Omelet on chicken rice,,オムライス,Omelet on chicken rice,,オムライス,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/ae9436e7e6a9c3faf3f849e96d4eeafa_Omelet-on-chicken-rice.jpg,
+takumi@fingermenu.co.nz,3Chicken wings,,手羽先唐揚げ,3Chicken wings,,手羽先唐揚げ,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/1b5938aba92906959639b1a3255a974d_Chicken-wings.jpg,
+takumi@fingermenu.co.nz,6Chicken wings,,手羽先唐揚げ,6Chicken wings,,手羽先唐揚げ,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/1b5938aba92906959639b1a3255a974d_Chicken-wings.jpg,
+takumi@fingermenu.co.nz,Edamame spring roll	,,枝豆春巻き,Edamame spring roll,,枝豆春巻き,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/344fcc78eb0e58b9f115abecd0e44cf7_Edamame-spring-roll.jpg,
+takumi@fingermenu.co.nz,Cheese ball,,チーズボール,Cheese ball,,チーズボール,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/ba72258a8ba68b7a1680138d6697795e_Cheese-ball.jpg,
+takumi@fingermenu.co.nz,Agedashi tofu,,揚げ出し,Agedashi tofu,,揚げ出し,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/7aa2ea75c34d85bfc035c8168e72b455_Agedashi-tofu.jpg,
+takumi@fingermenu.co.nz,Edamame beans,,枝豆,Edamame beans,,枝豆,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/9f3ebfdbe44251bc50272fbf376666e1_Edamame-beans.jpg,
+takumi@fingermenu.co.nz,Edamame beans （Galic）,,枝豆,Edamame beans （Garlic）,,枝豆,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/9f3ebfdbe44251bc50272fbf376666e1_Edamame-beans.jpg,
+takumi@fingermenu.co.nz,Caesar salad,,シーザーサラダ,Caesar salad,,シーザーサラダ,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/d5afee1bfcc93e38ff64581e98bd4c93_Caesar-salad.jpg,
+takumi@fingermenu.co.nz,Tempura-sushi roll,,,Tempura-sushi roll,,,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/4085a8afc9dddb8a7e23270ab347aded_Tempura-sushi-roll.jpg,
+takumi@fingermenu.co.nz,Takoyaki ball,,,Takoyaki ball,,,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/6c5085bcca3e1fa2c9808850f88a9156_Takoyaki-ball.jpg,
+takumi@fingermenu.co.nz,Prawn spring roll,,エビ春巻き,Prawn spring roll,,エビ春巻き,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/2dfdb24dfb4b0f5df6f76583b2d12036_Prawn-spring-roll.jpg,
+takumi@fingermenu.co.nz,Sweet chill salmon Egg rolls,,サーモン入りだし巻,Sweet chilli salmon Egg rolls,,サーモン入りだし巻,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/f4803c54c350ce9838d0f294a29ddcbc_Sweet-chill-salmon-Egg-rolls.jpg,
+takumi@fingermenu.co.nz,Dumplings[6pics],,,Dumplings[6pics],,,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/8e05a5d6d1a5b8b5371cbf5dc8677d8d_Dumplings.jpg,
+takumi@fingermenu.co.nz,Boiled dumpling[6pics],,,Boiled dumpling[6pcs],,,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/8e05a5d6d1a5b8b5371cbf5dc8677d8d_Dumplings.jpg,
+takumi@fingermenu.co.nz,Seaweed salad,,ゴマわかめ,Seaweed salad,,ゴマわかめ,,,
+takumi@fingermenu.co.nz,Tofu salad,,豆腐サラダ,Tofu salad,,豆腐サラダ,,http://fingermenu-backend.herokuapp.com/parse/files/FingerMenu/b7e80398cf7bb56f56af56c18fd3248a_Tofu-salad.jpg,
+takumi@fingermenu.co.nz,Fried Rice,,チャーハン,Fried Rice,,チャーハン,,,
