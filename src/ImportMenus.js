@@ -52,45 +52,62 @@ const start = async () => {
         );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
-          Promise.all(rowChunck.map(async (rawRow) => {
-            const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
-            const user = await Common.getUser(values.get('username'));
-            const menus = await Common.loadAllMenus(user, { name: values.get('en_NZ_name') });
-            const tags = await Common.loadAllTags(user);
-            const tagsToFind = Immutable.fromJS(values.get('tags').split('|'))
-              .map(_ => _.trim())
-              .filterNot(_ => _.length === 0);
-            const menuItemPrices = (await Common.loadAllMenuItemPrices(user)).map(_ =>
-              _.set('menuItem', new MenuItem(_.get('menuItem')).getInfo()));
-            const menuItemsToFind = Immutable.fromJS(values.get('menuItemNames').split('|'))
-              .map(_ => _.trim())
-              .filterNot(_ => _.length === 0);
-            const info = Map({
-              ownedByUser: user,
-              maintainedByUsers: List.of(user),
-              name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
-              description: Map({ en_NZ: values.get('en_NZ_description'), zh: values.get('zh_description'), jp: values.get('jp_description') }),
-              menuPageUrl: values.get('menuPageUrl'),
-              imageUrl: values.get('imageUrl'),
-              tagIds: tags.filter(tag => tagsToFind.find(_ => _.localeCompare(tag.getIn(['name', 'en_NZ'])) === 0)).map(tag => tag.get('id')),
-              menuItemPriceIds: menuItemPrices
+          Promise.all(
+            rowChunck.map(async rawRow => {
+              const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+              const user = await Common.getUser(values.get('username'));
+              const menus = await Common.loadAllMenus(user, { name: values.get('en_NZ_name') });
+              const tags = await Common.loadAllTags(user);
+              const tagsToFind = Immutable.fromJS(values.get('tags').split('|'))
+                .map(_ => _.trim())
+                .filterNot(_ => _.length === 0);
+              const menuItemPrices = (await Common.loadAllMenuItemPrices(user)).map(_ =>
+                _.set('menuItem', new MenuItem(_.get('menuItem')).getInfo()),
+              );
+              const menuItemsToFind = Immutable.fromJS(values.get('menuItemNames').split('|'))
+                .map(_ => _.trim())
+                .filterNot(_ => _.length === 0);
+              const menuItemPriceIds = menuItemPrices
                 .filter(tag => menuItemsToFind.find(_ => _.localeCompare(tag.getIn(['menuItem', 'name', 'en_NZ'])) === 0))
-                .map(tag => tag.get('id')),
-            });
+                .map(tag => tag.get('id'));
+              const menuItemPriceSortOrderIndices = menuItemPriceIds
+                .map(menuItemPriceId =>
+                  Map({
+                    menuItemPriceId,
+                    index: menuItemsToFind.indexOf(
+                      menuItemPrices.find(menu => menu.get('id').localeCompare(menuItemPriceId) === 0).getIn(['menuItem', 'name', 'en_NZ']),
+                    ),
+                  }),
+                )
+                .reduce((reduction, value) => reduction.set(value.get('menuItemPriceId'), value.get('index')), Map());
 
-            if (menus.isEmpty()) {
-              const acl = ParseWrapperService.createACL(user);
+              const info = Map({
+                ownedByUser: user,
+                maintainedByUsers: List.of(user),
+                name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+                description: Map({ en_NZ: values.get('en_NZ_description'), zh: values.get('zh_description'), jp: values.get('jp_description') }),
+                menuPageUrl: values.get('menuPageUrl'),
+                imageUrl: values.get('imageUrl'),
+                tagIds: tags.filter(tag => tagsToFind.find(_ => _.localeCompare(tag.getIn(['name', 'en_NZ'])) === 0)).map(tag => tag.get('id')),
+                menuItemPriceIds,
+                menuItemPriceSortOrderIndices,
+              });
 
-              acl.setPublicReadAccess(true);
-              acl.setRoleWriteAccess('administrators', true);
+              if (menus.isEmpty()) {
+                const acl = ParseWrapperService.createACL(user);
 
-              await menuService.create(info, acl, null, true);
-            } else if (menus.count() === 1) {
-              await menuService.update(menus.first().merge(info), null, true);
-            } else {
-              console.error(`Multiple menus found with username ${values.get('username')} and menu name: ${values.get('en_NZ_name')}`);
-            }
-          })));
+                acl.setPublicReadAccess(true);
+                acl.setRoleWriteAccess('administrators', true);
+
+                await menuService.create(info, acl, null, true);
+              } else if (menus.count() === 1) {
+                await menuService.update(menus.first().merge(info), null, true);
+              } else {
+                console.error(`Multiple menus found with username ${values.get('username')} and menu name: ${values.get('en_NZ_name')}`);
+              }
+            }),
+          ),
+        );
       },
     );
 
