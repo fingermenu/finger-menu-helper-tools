@@ -75,7 +75,7 @@ const start = async () => {
                   Map({
                     menuItemPriceId,
                     index: menuItemsToFind.indexOf(
-                      menuItemPrices.find(menu => menu.get('id').localeCompare(menuItemPriceId) === 0).getIn(['menuItem', 'name', 'en_NZ']),
+                      menuItemPrices.find(menuItem => menuItem.get('id').localeCompare(menuItemPriceId) === 0).getIn(['menuItem', 'name', 'en_NZ']),
                     ),
                   }),
                 )

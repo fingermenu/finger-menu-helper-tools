@@ -19,7 +19,7 @@ import {
 } from '@fingermenu/parse-server-common';
 
 export default class Common {
-  static initializeParse = async (options) => {
+  static initializeParse = async options => {
     Parse.initialize(
       options.applicationId ? options.applicationId : 'app_id',
       options.javaScriptKey ? options.javaScriptKey : 'javascript_key',
@@ -44,9 +44,7 @@ export default class Common {
       userType: type,
     }).signUp();
 
-  static updateAccount = async (user, {
-    username, password, email, type,
-  } = {}) =>
+  static updateAccount = async (user, { username, password, email, type } = {}) =>
     UserService.updateUserDetails(
       {
         username,
@@ -64,7 +62,7 @@ export default class Common {
     const result = await new LanguageService().searchAll(Map({}), null, true);
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         languages = languages.push(info);
       });
 
@@ -81,7 +79,7 @@ export default class Common {
     const result = await new TableStateService().searchAll(Map({}), null, true);
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         tableStates = tableStates.push(info);
       });
 
@@ -98,7 +96,7 @@ export default class Common {
     const result = await new OrderStateService().searchAll(Map({}), null, true);
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         orderStates = orderStates.push(info);
       });
 
@@ -115,7 +113,7 @@ export default class Common {
     const result = await new RestaurantService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         restaurants = restaurants.push(info);
       });
 
@@ -136,7 +134,7 @@ export default class Common {
     );
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         tables = tables.push(info);
       });
 
@@ -153,7 +151,7 @@ export default class Common {
     const result = await new TagService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         tags = tags.push(info);
       });
 
@@ -170,7 +168,7 @@ export default class Common {
     const result = await new SizeService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         sizes = sizes.push(info);
       });
 
@@ -187,7 +185,7 @@ export default class Common {
     const result = await new ChoiceItemService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         choiceItems = choiceItems.push(info);
       });
 
@@ -202,13 +200,13 @@ export default class Common {
   static loadAllChoiceItemPrices = async (user, { choiceItemId } = {}) => {
     let choiceItemPrices = List();
     const result = await new ChoiceItemPriceService().searchAll(
-      Map({ conditions: Map({ addedByUser: user, choiceItemId, doesNotExist_removedByUser: true }) }),
+      Map({ include_choiceItem: true, conditions: Map({ addedByUser: user, choiceItemId, doesNotExist_removedByUser: true }) }),
       null,
       true,
     );
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         choiceItemPrices = choiceItemPrices.push(info);
       });
 
@@ -225,7 +223,7 @@ export default class Common {
     const result = await new MenuItemService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         menuItems = menuItems.push(info);
       });
 
@@ -246,7 +244,7 @@ export default class Common {
     );
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         menuItemPrices = menuItemPrices.push(info);
       });
 
@@ -263,7 +261,7 @@ export default class Common {
     const result = await new MenuService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
 
     try {
-      result.event.subscribe((info) => {
+      result.event.subscribe(info => {
         menus = menus.push(info);
       });
 
