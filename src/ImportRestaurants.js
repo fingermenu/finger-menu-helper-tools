@@ -53,74 +53,94 @@ const start = async () => {
         );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
-          Promise.all(rowChunck.map(async (rawRow) => {
-            const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
-            const user = await Common.getUser(values.get('username'));
-            const restaurants = await Common.loadAllRestaurants(user, { name: values.get('en_NZ_name') });
-            const menus = await Common.loadAllMenus(user);
-            const menusToFind = Immutable.fromJS(values.get('menuNames').split('|'))
-              .map(_ => _.trim())
-              .filterNot(_ => _.length === 0);
-            const info = Map({
-              ownedByUser: user,
-              maintainedByUsers: List.of(user),
-              name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
-              websiteUrl: values.get('websiteUrl'),
-              pin: values.get('pin'),
-              menuIds: menus
+          Promise.all(
+            rowChunck.map(async rawRow => {
+              const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+              const user = await Common.getUser(values.get('username'));
+              const restaurants = await Common.loadAllRestaurants(user, { name: values.get('en_NZ_name') });
+              const menus = await Common.loadAllMenus(user);
+              const menusToFind = Immutable.fromJS(values.get('menuNames').split('|'))
+                .map(_ => _.trim())
+                .filterNot(_ => _.length === 0);
+              const menuIds = menus
                 .filter(menu => menusToFind.find(_ => _.localeCompare(menu.getIn(['name', 'en_NZ'])) === 0))
-                .map(menu => menu.get('id')),
-            });
-            const images = ImmutableEx.removeUndefinedProps(Map({
-              primaryLandingPageBackgroundImageUrl: values.get('primaryLandingPageBackgroundImageUrl')
-                ? values.get('primaryLandingPageBackgroundImageUrl')
-                : undefined,
-              secondaryLandingPageBackgroundImageUrl: values.get('secondaryLandingPageBackgroundImageUrl')
-                ? values.get('secondaryLandingPageBackgroundImageUrl')
-                : undefined,
-              primaryTopBannerImageUrl: values.get('primaryTopBannerImageUrl') ? values.get('primaryTopBannerImageUrl') : undefined,
-              secondaryTopBannerImageUrl: values.get('secondaryTopBannerImageUrl') ? values.get('secondaryTopBannerImageUrl') : undefined,
-            }));
+                .map(menu => menu.get('id'));
+              const menuSortOrderIndices = menuIds
+                .map(menuId =>
+                  Map({
+                    menuId,
+                    index: menusToFind.indexOf(menus.find(menu => menu.get('id').localeCompare(menuId) === 0).getIn(['name', 'en_NZ'])),
+                  }),
+                )
+                .reduce((reduction, value) => reduction.set(value.get('menuId'), value.get('index')), Map());
 
-            const printers = ImmutableEx.removeUndefinedProps(values.get('printerAddress')
-              ? List.of(Map({
-                hostname: values
-                  .get('printerAddress')
-                  .split(':')[0]
-                  .trim(),
-                port: parseInt(
-                  values
-                    .get('printerAddress')
-                    .split(':')[1]
-                    .trim(),
-                  10,
-                ),
-                type: 'Receipt',
-                name: 'Receipt Printer',
-              }))
-              : List());
-
-            if (restaurants.isEmpty()) {
-              const acl = ParseWrapperService.createACL(user);
-
-              acl.setPublicReadAccess(true);
-              acl.setRoleWriteAccess('administrators', true);
-
-              await restaurantService.create(info.set('configurations', Map({ images, printers })), acl, null, true);
-            } else if (restaurants.count() === 1) {
-              await restaurantService.update(
-                restaurants
-                  .first()
-                  .merge(info)
-                  .setIn(['configurations', 'images'], images)
-                  .setIn(['configurations', 'printers'], printers),
-                null,
-                true,
+              const info = Map({
+                ownedByUser: user,
+                maintainedByUsers: List.of(user),
+                name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+                websiteUrl: values.get('websiteUrl'),
+                pin: values.get('pin'),
+                menuIds,
+                menuSortOrderIndices,
+              });
+              const images = ImmutableEx.removeUndefinedProps(
+                Map({
+                  primaryLandingPageBackgroundImageUrl: values.get('primaryLandingPageBackgroundImageUrl')
+                    ? values.get('primaryLandingPageBackgroundImageUrl')
+                    : undefined,
+                  secondaryLandingPageBackgroundImageUrl: values.get('secondaryLandingPageBackgroundImageUrl')
+                    ? values.get('secondaryLandingPageBackgroundImageUrl')
+                    : undefined,
+                  primaryTopBannerImageUrl: values.get('primaryTopBannerImageUrl') ? values.get('primaryTopBannerImageUrl') : undefined,
+                  secondaryTopBannerImageUrl: values.get('secondaryTopBannerImageUrl') ? values.get('secondaryTopBannerImageUrl') : undefined,
+                }),
               );
-            } else {
-              console.error(`Multiple restaurants found with username ${values.get('username')} and restaurant name: ${values.get('en_NZ_name')}`);
-            }
-          })));
+
+              const printers = ImmutableEx.removeUndefinedProps(
+                values.get('printerAddress')
+                  ? List.of(
+                    Map({
+                      hostname: values
+                        .get('printerAddress')
+                        .split(':')[0]
+                        .trim(),
+                      port: parseInt(
+                        values
+                          .get('printerAddress')
+                          .split(':')[1]
+                          .trim(),
+                        10,
+                      ),
+                      type: 'Receipt',
+                      name: 'Receipt Printer',
+                    }),
+                  )
+                  : List(),
+              );
+
+              if (restaurants.isEmpty()) {
+                const acl = ParseWrapperService.createACL(user);
+
+                acl.setPublicReadAccess(true);
+                acl.setRoleWriteAccess('administrators', true);
+
+                await restaurantService.create(info.set('configurations', Map({ images, printers })), acl, null, true);
+              } else if (restaurants.count() === 1) {
+                await restaurantService.update(
+                  restaurants
+                    .first()
+                    .merge(info)
+                    .setIn(['configurations', 'images'], images)
+                    .setIn(['configurations', 'printers'], printers),
+                  null,
+                  true,
+                );
+              } else {
+                console.error(`Multiple restaurants found with username ${values.get('username')} and restaurant name: ${values.get('en_NZ_name')}`);
+              }
+            }),
+          ),
+        );
       },
     );
 
