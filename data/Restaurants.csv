@@ -1,4 +1,16 @@
-Username,Name en_NZ,Name zh,Name jp,Website URL,Pin,Menu Names,Primary LandingPageBackgroundImageUrl,Secondary LandingPageBackgroundImageUrl,Primary TopBannerImageUrl,Secondary TopBannerImageUrl,Printer Address
-takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Entrée|Special|Main,,,,,MORTEZA:5555
-43cafe@fingermenu.co.nz,43° Cafe,43°咖啡厅,43°カフェ,http://43degreescafe.co.nz/,2222,Menu 3|Menu 4,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,192.168.0.2 :5555
-test@gmail.com,Takumi,大师,タクミ,,1111,Menu 4,,,,,192.168.0.2 :5555
+Username,Name en_NZ,Name zh,Name jp,Website URL,Pin,Menu Names,Primary LandingPageBackgroundImageUrl,Secondary LandingPageBackgroundImageUrl,Primary TopBannerImageUrl,Secondary TopBannerImageUrl,Printer Address,Kitchen Order Template
+takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Entrée|Special|Main,,,,,MORTEZA:5555,"{CR}{LF}
+{CR}{LF}
+                   T A K U M I                   {CR}{LF}
+             Japanese Restaurant & Bar           {CR}{LF}
+{CR}{LF}
+{CR}{LF}
+  {OrderDateTime}                 Table # {TableName}   {CR}{LF}
+
+{CR}{LF}
+{CR}{LF}
+{OrderList}
+{CR}{LF}
+"
+43cafe@fingermenu.co.nz,43° Cafe,43°咖啡厅,43°カフェ,http://43degreescafe.co.nz/,2222,Menu 3|Menu 4,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,192.168.0.2 :5555,
+test@gmail.com,Takumi,大师,タクミ,,1111,Menu 4,,,,,192.168.0.2 :5555,

@@ -50,6 +50,7 @@ const start = async () => {
           'primaryTopBannerImageUrl',
           'secondaryTopBannerImageUrl',
           'printerAddress',
+          'kitchenOrderTemplate',
         );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
@@ -118,20 +119,32 @@ const start = async () => {
                   : List(),
               );
 
+              const documentTemplates = ImmutableEx.removeUndefinedProps(
+                values.get('kitchenOrderTemplate')
+                  ? List.of(
+                    Map({
+                      name: 'KitchenOrder',
+                      template: values.get('kitchenOrderTemplate'),
+                    }),
+                  )
+                  : List(),
+              );
+
               if (restaurants.isEmpty()) {
                 const acl = ParseWrapperService.createACL(user);
 
                 acl.setPublicReadAccess(true);
                 acl.setRoleWriteAccess('administrators', true);
 
-                await restaurantService.create(info.set('configurations', Map({ images, printers })), acl, null, true);
+                await restaurantService.create(info.set('configurations', Map({ images, printers, documentTemplates })), acl, null, true);
               } else if (restaurants.count() === 1) {
                 await restaurantService.update(
                   restaurants
                     .first()
                     .merge(info)
                     .setIn(['configurations', 'images'], images)
-                    .setIn(['configurations', 'printers'], printers),
+                    .setIn(['configurations', 'printers'], printers)
+                    .setIn(['configurations', 'documentTemplates'], documentTemplates),
                   null,
                   true,
                 );
