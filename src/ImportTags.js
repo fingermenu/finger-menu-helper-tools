@@ -40,30 +40,34 @@ const start = async () => {
         const columns = OrderedSet.of('username', 'en_NZ_name', 'zh_name', 'jp_name', 'en_NZ_description', 'zh_description', 'jp_description');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
-          Promise.all(rowChunck.map(async (rawRow) => {
-            const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
-            const user = await Common.getUser(values.get('username'));
-            const tags = await Common.loadAllTags(user, { name: values.get('en_NZ_name') });
-            const info = Map({
-              ownedByUser: user,
-              maintainedByUsers: List.of(user),
-              name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
-              description: Map({ en_NZ: values.get('en_NZ_description'), zh: values.get('zh_description'), jp: values.get('jp_description') }),
-            });
+          Promise.all(
+            rowChunck.map(async rawRow => {
+              const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+              const user = await Common.getUser(values.get('username'));
+              const tags = await Common.loadAllTags(user, { name: values.get('en_NZ_name') });
+              const info = Map({
+                ownedByUser: user,
+                maintainedByUsers: List.of(user),
+                name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+                description: Map({ en_NZ: values.get('en_NZ_description'), zh: values.get('zh_description'), jp: values.get('jp_description') }),
+              });
 
-            if (tags.isEmpty()) {
-              const acl = ParseWrapperService.createACL(user);
+              if (tags.isEmpty()) {
+                const acl = ParseWrapperService.createACL(user);
 
-              acl.setPublicReadAccess(true);
-              acl.setRoleWriteAccess('administrators', true);
+                acl.setPublicReadAccess(true);
+                acl.setRoleReadAccess('administrators', true);
+                acl.setRoleWriteAccess('administrators', true);
 
-              await tagService.create(info, acl, null, true);
-            } else if (tags.count() === 1) {
-              await tagService.update(tags.first().merge(info), null, true);
-            } else {
-              console.error(`Multiple tags found with username ${values.get('username')} and tag name: ${values.get('en_NZ_name')}`);
-            }
-          })));
+                await tagService.create(info, acl, null, true);
+              } else if (tags.count() === 1) {
+                await tagService.update(tags.first().merge(info), null, true);
+              } else {
+                console.error(`Multiple tags found with username ${values.get('username')} and tag name: ${values.get('en_NZ_name')}`);
+              }
+            }),
+          ),
+        );
       },
     );
 

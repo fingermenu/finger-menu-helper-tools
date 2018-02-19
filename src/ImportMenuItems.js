@@ -51,37 +51,41 @@ const start = async () => {
         );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
-          Promise.all(rowChunck.map(async (rawRow) => {
-            const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
-            const user = await Common.getUser(values.get('username'));
-            const menuItems = await Common.loadAllMenuItems(user, { name: values.get('en_NZ_name') });
-            const tags = await Common.loadAllTags(user);
-            const tagsToFind = Immutable.fromJS(values.get('tags').split('|'))
-              .map(_ => _.trim())
-              .filterNot(_ => _.length === 0);
-            const info = Map({
-              ownedByUser: user,
-              maintainedByUsers: List.of(user),
-              name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
-              description: Map({ en_NZ: values.get('en_NZ_description'), zh: values.get('zh_description'), jp: values.get('jp_description') }),
-              menuItemPageUrl: values.get('menuItemPageUrl'),
-              imageUrl: values.get('imageUrl'),
-              tagIds: tags.filter(tag => tagsToFind.find(_ => _.localeCompare(tag.getIn(['name', 'en_NZ'])) === 0)).map(tag => tag.get('id')),
-            });
+          Promise.all(
+            rowChunck.map(async rawRow => {
+              const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+              const user = await Common.getUser(values.get('username'));
+              const menuItems = await Common.loadAllMenuItems(user, { name: values.get('en_NZ_name') });
+              const tags = await Common.loadAllTags(user);
+              const tagsToFind = Immutable.fromJS(values.get('tags').split('|'))
+                .map(_ => _.trim())
+                .filterNot(_ => _.length === 0);
+              const info = Map({
+                ownedByUser: user,
+                maintainedByUsers: List.of(user),
+                name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+                description: Map({ en_NZ: values.get('en_NZ_description'), zh: values.get('zh_description'), jp: values.get('jp_description') }),
+                menuItemPageUrl: values.get('menuItemPageUrl'),
+                imageUrl: values.get('imageUrl'),
+                tagIds: tags.filter(tag => tagsToFind.find(_ => _.localeCompare(tag.getIn(['name', 'en_NZ'])) === 0)).map(tag => tag.get('id')),
+              });
 
-            if (menuItems.isEmpty()) {
-              const acl = ParseWrapperService.createACL(user);
+              if (menuItems.isEmpty()) {
+                const acl = ParseWrapperService.createACL(user);
 
-              acl.setPublicReadAccess(true);
-              acl.setRoleWriteAccess('administrators', true);
+                acl.setPublicReadAccess(true);
+                acl.setRoleReadAccess('administrators', true);
+                acl.setRoleWriteAccess('administrators', true);
 
-              await menuItemService.create(info, acl, null, true);
-            } else if (menuItems.count() === 1) {
-              await menuItemService.update(menuItems.first().merge(info), null, true);
-            } else {
-              console.error(`Multiple menu items found with username ${values.get('username')} and menu item name: ${values.get('en_NZ_name')}`);
-            }
-          })));
+                await menuItemService.create(info, acl, null, true);
+              } else if (menuItems.count() === 1) {
+                await menuItemService.update(menuItems.first().merge(info), null, true);
+              } else {
+                console.error(`Multiple menu items found with username ${values.get('username')} and menu item name: ${values.get('en_NZ_name')}`);
+              }
+            }),
+          ),
+        );
       },
     );
 

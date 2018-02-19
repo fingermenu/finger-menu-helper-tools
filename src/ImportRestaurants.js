@@ -134,6 +134,7 @@ const start = async () => {
                 const acl = ParseWrapperService.createACL(user);
 
                 acl.setPublicReadAccess(true);
+                acl.setRoleReadAccess('administrators', true);
                 acl.setRoleWriteAccess('administrators', true);
 
                 await restaurantService.create(info.set('configurations', Map({ images, printers, documentTemplates })), acl, null, true);

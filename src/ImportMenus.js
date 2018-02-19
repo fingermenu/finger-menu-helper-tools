@@ -97,6 +97,7 @@ const start = async () => {
                 const acl = ParseWrapperService.createACL(user);
 
                 acl.setPublicReadAccess(true);
+                acl.setRoleReadAccess('administrators', true);
                 acl.setRoleWriteAccess('administrators', true);
 
                 await menuService.create(info, acl, null, true);
