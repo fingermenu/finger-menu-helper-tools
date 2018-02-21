@@ -124,7 +124,7 @@ const start = async () => {
                   ? List.of(
                     Map({
                       name: 'KitchenOrder',
-                      template: values.get('kitchenOrderTemplate'),
+                      template: values.get('kitchenOrderTemplate').replace(/\r?\n|\r/g, ''),
                     }),
                   )
                   : List(),
