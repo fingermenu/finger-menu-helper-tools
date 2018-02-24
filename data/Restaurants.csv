@@ -1,5 +1,5 @@
 Username,Name en_NZ,Name zh,Name jp,Website URL,Pin,Menu Names,Primary LandingPageBackgroundImageUrl,Secondary LandingPageBackgroundImageUrl,Primary TopBannerImageUrl,Secondary TopBannerImageUrl,Printer Address,Kitchen Order Template
-takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Entrée|Special|Main,,,,,MORTEZA:5555,"{CR}{LF}
+takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,SIDE|TAKUMI SPECIAL|DINNER|LUNCH|Bento Boxes,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Fcover.jpg?alt=media&token=0a3f9bc2-1d2d-48c4-9f32-8b2207c1c76b,,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Ftop.jpg?alt=media&token=1df03e7d-16f0-44a7-998a-9be610d2fd0d,,mortezaalizadeh.no-ip.biz:9100,"{CR}{LF}
 {CR}{LF}
                    T A K U M I                   {CR}{LF}
              Japanese Restaurant & Bar           {CR}{LF}
@@ -12,5 +12,5 @@ takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Entrée|Special|Main,,,,,M
 {OrderList}
 {CR}{LF}
 "
-43cafe@fingermenu.co.nz,43° Cafe,43°咖啡厅,43°カフェ,http://43degreescafe.co.nz/,2222,Menu 3|Menu 4,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,192.168.0.2 :5555,
-test@gmail.com,Takumi,大师,タクミ,,1111,Menu 4,,,,,192.168.0.2 :5555,
+43cafe@fingermenu.co.nz,43° Cafe,43°咖啡厅,43°カフェ,http://43degreescafe.co.nz/,2222,Menu 3|Menu 4,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,http://43degreescafe.co.nz/assets/images/cafe_logo.png,mortezaalizadeh.no-ip.biz:9100,
+test@gmail.com,Takumi,大师,タクミ,,1111,Menu 4,,,,,mortezaalizadeh.no-ip.biz:9100,
