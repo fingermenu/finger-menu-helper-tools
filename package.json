@@ -1,6 +1,6 @@
 {
   "name": "@fingermenu/helper-tools",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Trolley Smart Helper Tools",
   "main": "src/index.js",
   "scripts": {
@@ -29,19 +29,20 @@
   "author": "Micro Business ltd<micro.business.ltd@gmail.com>",
   "homepage": "https://bitbucket.org/fingermenu/finger-menu-helper-tools#readme",
   "dependencies": {
-    "@fingermenu/parse-server-common": "0.0.47",
-    "@microbusiness/common-javascript": "^1.1.13",
-    "@microbusiness/parse-server-common": "^1.1.33",
+    "@fingermenu/parse-server-common": "0.1.0",
+    "@microbusiness/common-javascript": "^1.1.14",
+    "@microbusiness/parse-server-common": "^1.1.34",
     "bluebird": "^3.5.1",
     "command-line-args": "^5.0.2",
     "csv-parse": "^2.0.4",
     "csv-write-stream": "^2.0.0",
+    "dataloader": "^1.4.0",
     "fs-extra": "^5.0.0",
     "immutable": "^4.0.0-rc.4",
     "mime": "^2.2.0",
     "moment": "^2.21.0",
     "monet": "^0.8.10",
-    "parse": "^1.11.0",
+    "parse": "^1.11.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
   },
@@ -55,15 +56,14 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-import": "^2.9.0",
-    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-jest": "^21.14.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.66.0",
+    "flow-bin": "^0.67.1",
     "husky": "^0.14.3",
     "jest": "^22.4.2",
     "lint-staged": "^7.0.0",
-    "prettier": "^1.11.1",
-    "uuid": "^3.2.1"
+    "prettier": "^1.11.1"
   },
   "jest": {
     "rootDir": "./src"
