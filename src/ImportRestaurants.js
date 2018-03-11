@@ -51,6 +51,7 @@ const start = async () => {
           'secondaryTopBannerImageUrl',
           'printerAddress',
           'kitchenOrderTemplate',
+          'numberOfPrintCopiesForKitchen',
         );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
@@ -97,6 +98,10 @@ const start = async () => {
                 }),
               );
 
+              const numberOfPrintCopiesForKitchen = values.get('numberOfPrintCopiesForKitchen')
+                ? parseInt(values.get('numberOfPrintCopiesForKitchen'), 10)
+                : 1;
+
               const printers = ImmutableEx.removeUndefinedProps(
                 values.get('printerAddress')
                   ? List.of(
@@ -137,7 +142,12 @@ const start = async () => {
                 acl.setRoleReadAccess('administrators', true);
                 acl.setRoleWriteAccess('administrators', true);
 
-                await restaurantService.create(info.set('configurations', Map({ images, printers, documentTemplates })), acl, null, true);
+                await restaurantService.create(
+                  info.set('configurations', Map({ images, printers, documentTemplates, numberOfPrintCopiesForKitchen })),
+                  acl,
+                  null,
+                  true,
+                );
               } else if (restaurants.count() === 1) {
                 await restaurantService.update(
                   restaurants
@@ -145,7 +155,8 @@ const start = async () => {
                     .merge(info)
                     .setIn(['configurations', 'images'], images)
                     .setIn(['configurations', 'printers'], printers)
-                    .setIn(['configurations', 'documentTemplates'], documentTemplates),
+                    .setIn(['configurations', 'documentTemplates'], documentTemplates)
+                    .setIn(['configurations', 'numberOfPrintCopiesForKitchen'], numberOfPrintCopiesForKitchen),
                   null,
                   true,
                 );
