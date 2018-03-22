@@ -1,60 +1,60 @@
 Username,Menu Item Name,Choice Item Name,Size,Current Price
-takumi@fingermenu.co.nz,4 Chicken Wings,,,12.00
-takumi@fingermenu.co.nz,6 Chicken Wings,,,17.00
-takumi@fingermenu.co.nz,Edamame Spring Roll,,,7.00
-takumi@fingermenu.co.nz,Cheese Balls,,,7.00
-takumi@fingermenu.co.nz,Agedashi Tofu (Vegan),,,8.00
-takumi@fingermenu.co.nz,Edamame Beans (Vegan),,,7.00
-takumi@fingermenu.co.nz,Edamame Beans (Vegan) (Garlic),,,7.00
-takumi@fingermenu.co.nz,Caesar Salad,,,12.00
-takumi@fingermenu.co.nz,Takoyaki Balls,,,8.00
-takumi@fingermenu.co.nz,Prawn Spring Roll,,,9.00
-takumi@fingermenu.co.nz,Sweet-chill-salmon-Egg-rolls,,,10.00
-takumi@fingermenu.co.nz,Tempura-Sushi-Vegetarian,,,9.00
-takumi@fingermenu.co.nz,Tempura-Sushi-Salmon,,,10.00
-takumi@fingermenu.co.nz,Tempura-Sushi-White Fish,,,10.00
-takumi@fingermenu.co.nz,Takumi Style Salad,,,9.00
-takumi@fingermenu.co.nz,Salmon Salad,,,13.00
-takumi@fingermenu.co.nz,Boiled Dumplings [6pcs],,,9.00
-takumi@fingermenu.co.nz,Seaweed Salad,,,7.00
-takumi@fingermenu.co.nz,Tofu Salad,,,9.00
-takumi@fingermenu.co.nz,Fried Rice,,,11.00
-takumi@fingermenu.co.nz,Main-Medium-Sashimi [24pcs],,,31.00
-takumi@fingermenu.co.nz,Entrée-Small-Sashimi [12pcs],,,11.00
-takumi@fingermenu.co.nz,White Fish Assortment,,,16.00
-takumi@fingermenu.co.nz,Salmon Sashimi [10pcs],,,20.00
-takumi@fingermenu.co.nz,Beef Tataki,,,19.00
-takumi@fingermenu.co.nz,Yuzu Chicken ,,,20.00
-takumi@fingermenu.co.nz,Chicken Tempura,,,23.00
-takumi@fingermenu.co.nz,Entrée-Vegetable Tempura,,,11.00
-takumi@fingermenu.co.nz,Main-Vegetable Tempura,,,20.00
-takumi@fingermenu.co.nz,Sushi Sashimi Combo,,,34.00
-takumi@fingermenu.co.nz,Salmon Roll,,,16.00
-takumi@fingermenu.co.nz,California Roll,,,14.00
-takumi@fingermenu.co.nz,Teriyaki Chicken Roll,,,15.00
-takumi@fingermenu.co.nz,Salmon & Prawn Tempura Roll,,,17.00
-takumi@fingermenu.co.nz,Samon Nigiri Lover	 ,,,18.50
-takumi@fingermenu.co.nz,Seafood Nigiri Combo	,,,10.50
-takumi@fingermenu.co.nz,Salmon Nigiri ,,,6.00
-takumi@fingermenu.co.nz,Broiled Salmon Nigiri,,,7.00
-takumi@fingermenu.co.nz,Egg Nigiri ,,,5.00
-takumi@fingermenu.co.nz,White Fish Nigiri,,,6.00
-takumi@fingermenu.co.nz,Prawn Nigiri,,,5.00
-takumi@fingermenu.co.nz,Beef Tataki Nigiri,,,8.00
-takumi@fingermenu.co.nz,Venison Tataki,,,28.00
-takumi@fingermenu.co.nz,Tuna & Scallop Meunière,,,28.00
-takumi@fingermenu.co.nz,Burger Steak,,,20.00
-takumi@fingermenu.co.nz,5 Spice Prawn,,,25.00
-takumi@fingermenu.co.nz,Soft Shell Crab [4pcs],,,16.00
-takumi@fingermenu.co.nz,Soft Shell Crab [6pcs],,,22.00
-takumi@fingermenu.co.nz,Pan Fried Salmon,,,25.00
-takumi@fingermenu.co.nz,Beef Cano,,,20.00
-takumi@fingermenu.co.nz,Entrée-Prawn Tempura [3pcs],,,16.00
-takumi@fingermenu.co.nz,Entrée-Prawn Tempura [5pcs],,,25.00
-takumi@fingermenu.co.nz,Pork Spare Rib,,,22.00
-takumi@fingermenu.co.nz,Teriyaki Chicken,,,22.00
-takumi@fingermenu.co.nz,Slow Cooked Pork Belly,,,21.00
-takumi@fingermenu.co.nz,Yakitori Assortment,,,21.00
+takumi@fingermenu.co.nz,4 Chicken Wings,Rice|Miso|Rice & Miso,,12.00
+takumi@fingermenu.co.nz,6 Chicken Wings,Rice|Miso|Rice & Miso,,17.00
+takumi@fingermenu.co.nz,Edamame Spring Roll,Rice|Miso|Rice & Miso,,7.00
+takumi@fingermenu.co.nz,Cheese Balls,Rice|Miso|Rice & Miso,,7.00
+takumi@fingermenu.co.nz,Agedashi Tofu (Vegan),Rice|Miso|Rice & Miso,,8.00
+takumi@fingermenu.co.nz,Edamame Beans (Vegan),Rice|Miso|Rice & Miso,,7.00
+takumi@fingermenu.co.nz,Edamame Beans (Vegan) (Garlic),Rice|Miso|Rice & Miso,,7.00
+takumi@fingermenu.co.nz,Caesar Salad,Rice|Miso|Rice & Miso,,12.00
+takumi@fingermenu.co.nz,Takoyaki Balls,Rice|Miso|Rice & Miso,,8.00
+takumi@fingermenu.co.nz,Prawn Spring Rolls,Rice|Miso|Rice & Miso,,9.00
+takumi@fingermenu.co.nz,Sweet-Chili-Salmon-Egg-Roll,Rice|Miso|Rice & Miso,,10.00
+takumi@fingermenu.co.nz,Tempura-Sushi-Vegetarian,Rice|Miso|Rice & Miso,,9.00
+takumi@fingermenu.co.nz,Tempura-Sushi-Salmon,Rice|Miso|Rice & Miso,,10.00
+takumi@fingermenu.co.nz,Tempura-Sushi-White Fish,Rice|Miso|Rice & Miso,,10.00
+takumi@fingermenu.co.nz,Takumi Style Salad,Rice|Miso|Rice & Miso,,9.00
+takumi@fingermenu.co.nz,Salmon Salad,Rice|Miso|Rice & Miso,,13.00
+takumi@fingermenu.co.nz,Boiled Dumplings [6pcs],Rice|Miso|Rice & Miso,,9.00
+takumi@fingermenu.co.nz,Seaweed Salad,Rice|Miso|Rice & Miso,,7.00
+takumi@fingermenu.co.nz,Tofu Salad,Rice|Miso|Rice & Miso,,9.00
+takumi@fingermenu.co.nz,Fried Rice,Rice|Miso|Rice & Miso,,11.00
+takumi@fingermenu.co.nz,Main Sashimi [24pcs],Rice|Miso|Rice & Miso,,31.00
+takumi@fingermenu.co.nz,Entrée Sashimi [12pcs],Rice|Miso|Rice & Miso,,11.00
+takumi@fingermenu.co.nz,White Fish Assortment,Rice|Miso|Rice & Miso,,16.00
+takumi@fingermenu.co.nz,Salmon Sashimi [10pcs],Rice|Miso|Rice & Miso,,20.00
+takumi@fingermenu.co.nz,Beef Tataki,Rice|Miso|Rice & Miso,,19.00
+takumi@fingermenu.co.nz,Yuzu Chicken ,Rice|Miso|Rice & Miso,,20.00
+takumi@fingermenu.co.nz,Chicken Tempura,Rice|Miso|Rice & Miso,,23.00
+takumi@fingermenu.co.nz,Entrée-Vegetable Tempura,Rice|Miso|Rice & Miso,,11.00
+takumi@fingermenu.co.nz,Main-Vegetable Tempura,Rice|Miso|Rice & Miso,,20.00
+takumi@fingermenu.co.nz,Sushi Sashimi Combo,Rice|Miso|Rice & Miso,,34.00
+takumi@fingermenu.co.nz,Salmon Roll,Rice|Miso|Rice & Miso,,16.00
+takumi@fingermenu.co.nz,California Roll,Rice|Miso|Rice & Miso,,14.00
+takumi@fingermenu.co.nz,Teriyaki Chicken Roll,Rice|Miso|Rice & Miso,,15.00
+takumi@fingermenu.co.nz,Salmon & Prawn Tempura Roll,Rice|Miso|Rice & Miso,,17.00
+takumi@fingermenu.co.nz,Salmon Nigiri Lover,Rice|Miso|Rice & Miso,,18.50
+takumi@fingermenu.co.nz,Seafood Nigiri Combo	,Rice|Miso|Rice & Miso,,10.50
+takumi@fingermenu.co.nz,Salmon Nigiri ,Rice|Miso|Rice & Miso,,6.00
+takumi@fingermenu.co.nz,Broiled Salmon Nigiri,Rice|Miso|Rice & Miso,,7.00
+takumi@fingermenu.co.nz,Egg Nigiri ,Rice|Miso|Rice & Miso,,5.00
+takumi@fingermenu.co.nz,White Fish Nigiri,Rice|Miso|Rice & Miso,,6.00
+takumi@fingermenu.co.nz,Prawn Nigiri,Rice|Miso|Rice & Miso,,5.00
+takumi@fingermenu.co.nz,Beef Tataki Nigiri,Rice|Miso|Rice & Miso,,8.00
+takumi@fingermenu.co.nz,Venison Tataki,Rice|Miso|Rice & Miso,,28.00
+takumi@fingermenu.co.nz,Tuna & Scallop Meunière,Rice|Miso|Rice & Miso,,28.00
+takumi@fingermenu.co.nz,Burger Steak,Rice|Miso|Rice & Miso,,20.00
+takumi@fingermenu.co.nz,5 Spice Prawn,Rice|Miso|Rice & Miso,,25.00
+takumi@fingermenu.co.nz,Soft Shell Crab [4pcs],Rice|Miso|Rice & Miso,,16.00
+takumi@fingermenu.co.nz,Soft Shell Crab [6pcs],Rice|Miso|Rice & Miso,,22.00
+takumi@fingermenu.co.nz,Pan Fried Salmon,Rice|Miso|Rice & Miso,,25.00
+takumi@fingermenu.co.nz,Beef Cano,Rice|Miso|Rice & Miso,,20.00
+takumi@fingermenu.co.nz,Entrée-Prawn Tempura [3pcs],Rice|Miso|Rice & Miso,,16.00
+takumi@fingermenu.co.nz,Entrée-Prawn Tempura [5pcs],Rice|Miso|Rice & Miso,,25.00
+takumi@fingermenu.co.nz,Pork Spare Rib,Rice|Miso|Rice & Miso,,22.00
+takumi@fingermenu.co.nz,Teriyaki Chicken (pan grilled),Rice|Miso|Rice & Miso,,22.00
+takumi@fingermenu.co.nz,Slow Cooked Pork Belly,Rice|Miso|Rice & Miso,,21.00
+takumi@fingermenu.co.nz,Yakitori Assortment,Rice|Miso|Rice & Miso,,21.00
 takumi@fingermenu.co.nz,Teriyaki Beef,Rice|Miso|Rice & Miso,,13.00
 takumi@fingermenu.co.nz,Japanese Style Grilled Yuzu Chicken,Rice|Miso|Rice & Miso,,15.00
 takumi@fingermenu.co.nz,Teriyaki Chicken,Rice|Miso|Rice & Miso,,12.00
@@ -69,3 +69,29 @@ takumi@fingermenu.co.nz,Japanese Style Omelette Rice with Tomato Sauce,Rice|Miso
 takumi@fingermenu.co.nz,Deluxe Bento Box,Rice|Miso|Rice & Miso,,25.00
 takumi@fingermenu.co.nz,Yuzu Grilled Chicken Box,Rice|Miso|Rice & Miso,,18.00
 takumi@fingermenu.co.nz,Vegetarian Box,Rice|Miso|Rice & Miso,,15.00
+info@43degreescafe.co.nz,Avo-Mato. (V),,,19.00
+info@43degreescafe.co.nz,Tortilla,,,19.00
+info@43degreescafe.co.nz,Banana Split Brioche French Toast,,,18.00
+info@43degreescafe.co.nz,Waffles A,,,22.00
+info@43degreescafe.co.nz,Waffles B,,,20.00
+info@43degreescafe.co.nz,Potato Hash,,,15.00
+info@43degreescafe.co.nz,Potato Hash with Bacon,,,19.00
+info@43degreescafe.co.nz,Eggs Benedict - Mushroom,,,17.00
+info@43degreescafe.co.nz,Eggs Benedict - Bacon,,,19.00
+info@43degreescafe.co.nz,Eggs Benedict - Salmon,,,21.00
+info@43degreescafe.co.nz,GRANOLA - Berry Compote & Yoghurt,,,10.00
+info@43degreescafe.co.nz,GRANOLA - Seasonal Fruits,,,14.00
+info@43degreescafe.co.nz,Toasted Bagels - Cream Cheese Jam Or Pesto,,,6.50
+info@43degreescafe.co.nz,Toasted Bagels - With Bacon & Sliced Tomato,,,13.00
+info@43degreescafe.co.nz,Toasted Bagels - Salmon & Cream Cheese,,,15.00
+info@43degreescafe.co.nz,Eggs Your Way - Soft Poached,,,12.00
+info@43degreescafe.co.nz,Eggs Your Way - Scrambled,,,12.00
+info@43degreescafe.co.nz,Eggs Your Way - Fried,,,12.00
+info@43degreescafe.co.nz,Hot Chips - with sea salt,,,6.50
+info@43degreescafe.co.nz,Bowl of Onion Rings,,,8.00
+info@43degreescafe.co.nz,Dumplings,,,12.00
+info@43degreescafe.co.nz,Bao,,,12.00
+info@43degreescafe.co.nz,Chicken Salad,,,20.00
+info@43degreescafe.co.nz,B.L.A.T.,,,18.00
+info@43degreescafe.co.nz,Big Beef Burger,,,20.00
+info@43degreescafe.co.nz,Chicken Burger,,,20.00

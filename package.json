@@ -29,7 +29,7 @@
   "author": "Micro Business ltd<micro.business.ltd@gmail.com>",
   "homepage": "https://bitbucket.org/fingermenultd/finger-menu-helper-tools#readme",
   "dependencies": {
-    "@fingermenu/parse-server-common": "0.4.1",
+    "@fingermenu/parse-server-common": "0.4.2",
     "@microbusiness/common-javascript": "^1.2.1",
     "@microbusiness/parse-server-common": "^1.2.0",
     "bluebird": "^3.5.1",
@@ -52,7 +52,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^4.18.2",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-import": "^2.9.0",
