@@ -52,6 +52,7 @@ const start = async () => {
           'printerAddress',
           'kitchenOrderTemplate',
           'numberOfPrintCopiesForKitchen',
+          'logoImageUrl',
         );
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
@@ -95,6 +96,7 @@ const start = async () => {
                     : undefined,
                   primaryTopBannerImageUrl: values.get('primaryTopBannerImageUrl') ? values.get('primaryTopBannerImageUrl') : undefined,
                   secondaryTopBannerImageUrl: values.get('secondaryTopBannerImageUrl') ? values.get('secondaryTopBannerImageUrl') : undefined,
+                  logoImageUrl: values.get('logoImageUrl') ? values.get('logoImageUrl') : undefined,
                 }),
               );
 
