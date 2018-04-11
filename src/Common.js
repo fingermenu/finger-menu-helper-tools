@@ -15,6 +15,7 @@ import {
   TableStateService,
   OrderStateService,
   TagService,
+  ServingTimeService,
   SizeService,
 } from '@fingermenu/parse-server-common';
 
@@ -161,6 +162,23 @@ export default class Common {
     }
 
     return tags;
+  };
+
+  static loadAllServingTimes = async (user = {}, { tagId } = {}) => {
+    let servingTimes = List();
+    const result = await new ServingTimeService().searchAll(Map({ conditions: Map({ ownedByUser: user, tagId }) }), null, true);
+
+    try {
+      result.event.subscribe(info => {
+        servingTimes = servingTimes.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return servingTimes;
   };
 
   static loadAllSizes = async (user, { name } = {}) => {
