@@ -59,7 +59,6 @@ const start = async () => {
               }
 
               const servingTimes = await Common.loadAllServingTimes(user, { tagId: tag.first().get('id') });
-
               const info = Map({
                 ownedByUser: user,
                 maintainedByUsers: List.of(user),
