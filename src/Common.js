@@ -6,6 +6,7 @@ import { ParseWrapperService, UserService } from '@microbusiness/parse-server-co
 import {
   ChoiceItemService,
   ChoiceItemPriceService,
+  DietaryOptionService,
   MenuItemService,
   MenuItemPriceService,
   MenuService,
@@ -162,6 +163,23 @@ export default class Common {
     }
 
     return tags;
+  };
+
+  static loadAllDietaryOptions = async (user = {}, { tagId } = {}) => {
+    let dietaryOptions = List();
+    const result = await new DietaryOptionService().searchAll(Map({ conditions: Map({ ownedByUser: user, tagId }) }), null, true);
+
+    try {
+      result.event.subscribe(info => {
+        dietaryOptions = dietaryOptions.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return dietaryOptions;
   };
 
   static loadAllServingTimes = async (user = {}, { tagId } = {}) => {

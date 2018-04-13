@@ -37,7 +37,7 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'menuItemName', 'choiceItemNames', 'size', 'currentPrice');
+        const columns = OrderedSet.of('username', 'menuItemName', 'choiceItemNames', 'size', 'currentPrice', 'tags');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
@@ -74,6 +74,10 @@ const start = async () => {
                   }),
                 )
                 .reduce((reduction, value) => reduction.set(value.get('choiceItemPriceId'), value.get('index')), Map());
+              const tags = await Common.loadAllTags(user);
+              const tagsToFind = Immutable.fromJS(values.get('tags').split('|'))
+                .map(_ => _.trim())
+                .filterNot(_ => _.length === 0);
 
               const info = Map({
                 addedByUser: user,
@@ -82,6 +86,7 @@ const start = async () => {
                 sizeId: sizeToFind ? sizes.find(size => size.getIn(['name', 'en_NZ']).localeCompare(sizeToFind) === 0).get('id') : undefined,
                 currentPrice: parseFloat(values.get('currentPrice')),
                 choiceItemPriceSortOrderIndices,
+                tagIds: tags.filter(tag => tagsToFind.find(_ => _.localeCompare(tag.getIn(['name', 'en_NZ'])) === 0)).map(tag => tag.get('id')),
               });
 
               if (!menuItemPrices.isEmpty()) {
