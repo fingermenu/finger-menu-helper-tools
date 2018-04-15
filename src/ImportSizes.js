@@ -37,19 +37,32 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'en_NZ_name', 'zh_name', 'jp_name');
+        const columns = OrderedSet.of('username', 'tagName');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
             rowChunck.map(async rawRow => {
               const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
               const user = await Common.getUser(values.get('username'));
-              const sizes = await Common.loadAllSizes(user, { name: values.get('en_NZ_name') });
+              const tag = await Common.loadAllTags(user, { name: values.get('tagName') });
+
+              if (tag.isEmpty()) {
+                console.error('No tag found with name: ' + values.get('tagName'));
+
+                return;
+              }
+
+              if (tag.count() > 1) {
+                console.error('Multiple tags found with name: ' + values.get('tagName'));
+
+                return;
+              }
+
+              const sizes = await Common.loadAllSizes(user, { tagId: tag.first().get('id') });
               const info = Map({
                 ownedByUser: user,
                 maintainedByUsers: List.of(user),
-                maintainedByUser: user,
-                name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+                tagId: tag.first().get('id'),
               });
 
               if (sizes.isEmpty()) {
@@ -60,10 +73,8 @@ const start = async () => {
                 acl.setRoleWriteAccess('administrators', true);
 
                 await sizeService.create(info, acl, null, true);
-              } else if (sizes.count() === 1) {
-                await sizeService.update(sizes.first().merge(info), null, true);
-              } else {
-                console.error(`Multiple sizes found with username ${values.get('username')} and size name: ${values.get('en_NZ_name')}`);
+              } else if (sizes.count() > 1) {
+                console.error(`Multiple dietary options time found with username ${values.get('username')} and tag name: ${values.get('tagName')}`);
               }
             }),
           ),

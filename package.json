@@ -1,6 +1,6 @@
 {
   "name": "@fingermenu/helper-tools",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Trolley Smart Helper Tools",
   "main": "src/index.js",
   "scripts": {
@@ -31,7 +31,7 @@
   "author": "Micro Business ltd<micro.business.ltd@gmail.com>",
   "homepage": "https://bitbucket.org/microbusinessltd/finger-menu-helper-tools#readme",
   "dependencies": {
-    "@fingermenu/parse-server-common": "0.7.5",
+    "@fingermenu/parse-server-common": "0.8.0",
     "@microbusiness/common-javascript": "^1.2.1",
     "@microbusiness/parse-server-common": "^1.3.1",
     "bluebird": "^3.5.1",
@@ -42,7 +42,7 @@
     "fs-extra": "^5.0.0",
     "immutable": "^4.0.0-rc.4",
     "mime": "^2.3.1",
-    "moment": "^2.22.0",
+    "moment": "^2.22.1",
     "monet": "^0.8.10",
     "parse": "^1.11.1",
     "request": "^2.85.0",
@@ -56,7 +56,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-flowtype": "^2.46.1",
+    "eslint-plugin-flowtype": "^2.46.2",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jest": "^21.15.0",
     "eslint-plugin-jsx-a11y": "6.0.3",

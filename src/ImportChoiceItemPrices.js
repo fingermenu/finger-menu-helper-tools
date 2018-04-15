@@ -37,7 +37,7 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'choiceItemName', 'size', 'currentPrice', 'tags');
+        const columns = OrderedSet.of('username', 'choiceItemName', 'currentPrice', 'tags');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
@@ -46,8 +46,6 @@ const start = async () => {
               const user = await Common.getUser(values.get('username'));
               const choiceItemId = (await Common.loadAllChoiceItems(user, { name: values.get('choiceItemName') })).first().get('id');
               const choiceItemPrices = await Common.loadAllChoiceItemPrices(user, { choiceItemId });
-              const sizes = await Common.loadAllSizes(user);
-              const sizeToFind = values.get('size') && values.get('size').length > 0 ? values.get('size').trim() : null;
               const tags = await Common.loadAllTags(user);
               const tagsToFind = Immutable.fromJS(values.get('tags').split('|'))
                 .map(_ => _.trim())
@@ -55,7 +53,6 @@ const start = async () => {
               const info = Map({
                 addedByUser: user,
                 choiceItemId,
-                sizeId: sizeToFind ? sizes.find(size => size.getIn(['name', 'en_NZ']).localeCompare(sizeToFind) === 0).get('id') : undefined,
                 currentPrice: parseFloat(values.get('currentPrice')),
                 tagIds: tags.filter(tag => tagsToFind.find(_ => _.localeCompare(tag.getIn(['name', 'en_NZ'])) === 0)).map(tag => tag.get('id')),
               });

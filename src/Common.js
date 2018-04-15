@@ -182,6 +182,23 @@ export default class Common {
     return dietaryOptions;
   };
 
+  static loadAllSizes = async (user = {}, { tagId } = {}) => {
+    let sizes = List();
+    const result = await new SizeService().searchAll(Map({ conditions: Map({ ownedByUser: user, tagId }) }), null, true);
+
+    try {
+      result.event.subscribe(info => {
+        sizes = sizes.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return sizes;
+  };
+
   static loadAllServingTimes = async (user = {}, { tagId } = {}) => {
     let servingTimes = List();
     const result = await new ServingTimeService().searchAll(Map({ conditions: Map({ ownedByUser: user, tagId }) }), null, true);
@@ -197,23 +214,6 @@ export default class Common {
     }
 
     return servingTimes;
-  };
-
-  static loadAllSizes = async (user, { name } = {}) => {
-    let sizes = List();
-    const result = await new SizeService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
-
-    try {
-      result.event.subscribe(info => {
-        sizes = sizes.push(info);
-      });
-
-      await result.promise;
-    } finally {
-      result.event.unsubscribeAll();
-    }
-
-    return sizes;
   };
 
   static loadAllChoiceItems = async (user, { name } = {}) => {
