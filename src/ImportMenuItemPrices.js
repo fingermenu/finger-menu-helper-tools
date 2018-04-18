@@ -37,7 +37,7 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'menuItemName', 'choiceItemNames', 'currentPrice', 'tags');
+        const columns = OrderedSet.of('username', 'menuItemName', 'choiceItemDescriptions', 'currentPrice', 'tags');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
@@ -47,11 +47,11 @@ const start = async () => {
               const menuItemId = (await Common.loadAllMenuItems(user, { name: values.get('menuItemName') })).first().get('id');
               const menuItemPrices = await Common.loadAllMenuItemPrices(user, { menuItemId });
               const choiceItems = await Common.loadAllChoiceItems(user);
-              const choiceItemsToFind = Immutable.fromJS(values.get('choiceItemNames').split('|'))
+              const choiceItemsToFind = Immutable.fromJS(values.get('choiceItemDescriptions').split('|'))
                 .map(_ => _.trim())
                 .filterNot(_ => _.length === 0);
               const choiceItemIdsToFind = choiceItems
-                .filter(choiceItem => choiceItemsToFind.find(_ => _.localeCompare(choiceItem.getIn(['name', 'en_NZ'])) === 0))
+                .filter(choiceItem => choiceItemsToFind.find(_ => _.localeCompare(choiceItem.getIn(['description', 'en_NZ'])) === 0))
                 .map(choiceItem => choiceItem.get('id'));
               const choiceItemPrices = (await Common.loadAllChoiceItemPrices(user)).map(_ =>
                 _.set('choiceItem', new ChoiceItem(_.get('choiceItem')).getInfo()),
@@ -67,7 +67,7 @@ const start = async () => {
                     index: choiceItemsToFind.indexOf(
                       choiceItemPrices
                         .find(choiceItem => choiceItem.get('id').localeCompare(choiceItemPriceId) === 0)
-                        .getIn(['choiceItem', 'name', 'en_NZ']),
+                        .getIn(['choiceItem', 'description', 'en_NZ']),
                     ),
                   }),
                 )

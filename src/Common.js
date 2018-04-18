@@ -216,9 +216,13 @@ export default class Common {
     return servingTimes;
   };
 
-  static loadAllChoiceItems = async (user, { name } = {}) => {
+  static loadAllChoiceItems = async (user, { name, description } = {}) => {
     let choiceItems = List();
-    const result = await new ChoiceItemService().searchAll(Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name }) }), null, true);
+    const result = await new ChoiceItemService().searchAll(
+      Map({ language: 'en_NZ', conditions: Map({ ownedByUser: user, name, description }) }),
+      null,
+      true,
+    );
 
     try {
       result.event.subscribe(info => {

@@ -55,7 +55,7 @@ const start = async () => {
             rowChunck.map(async rawRow => {
               const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
               const user = await Common.getUser(values.get('username'));
-              const choiceItems = await Common.loadAllChoiceItems(user, { name: values.get('en_NZ_name') });
+              const choiceItems = await Common.loadAllChoiceItems(user, { description: values.get('en_NZ_description') });
               const tags = await Common.loadAllTags(user);
               const tagsToFind = Immutable.fromJS(values.get('tags').split('|'))
                 .map(_ => _.trim())
@@ -82,7 +82,9 @@ const start = async () => {
                 await choiceItemService.update(choiceItems.first().merge(info), null, true);
               } else {
                 console.error(
-                  `Multiple choice items found with username ${values.get('username')} and choice item name: ${values.get('en_NZ_name')}`,
+                  `Multiple choice items found with username ${values.get('username')} and choice item description: ${values.get(
+                    'en_NZ_description',
+                  )}`,
                 );
               }
             }),
