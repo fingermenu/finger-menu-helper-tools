@@ -7,6 +7,7 @@ import {
   ChoiceItemService,
   ChoiceItemPriceService,
   DietaryOptionService,
+  DishTypeService,
   MenuItemService,
   MenuItemPriceService,
   MenuService,
@@ -214,6 +215,23 @@ export default class Common {
     }
 
     return servingTimes;
+  };
+
+  static loadAllDishTypes = async (user = {}, { tagId } = {}) => {
+    let dishTypes = List();
+    const result = await new DishTypeService().searchAll(Map({ conditions: Map({ ownedByUser: user, tagId }) }), null, true);
+
+    try {
+      result.event.subscribe(info => {
+        dishTypes = dishTypes.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return dishTypes;
   };
 
   static loadAllChoiceItems = async (user, { name, description } = {}) => {
