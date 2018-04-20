@@ -1,5 +1,5 @@
-Username,Name en_NZ,Name zh,Name jp,Website URL,Pin,Menu Names,Primary LandingPageBackgroundImageUrl,Secondary LandingPageBackgroundImageUrl,Primary TopBannerImageUrl,Secondary TopBannerImageUrl,Printer Address,Kitchen Order Template,Number of Print Copies for Kitchen
-takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,SIDE|TAKUMI SPECIAL|DINNER|LUNCH|Bento Boxes,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Fcover.jpg?alt=media&token=0a3f9bc2-1d2d-48c4-9f32-8b2207c1c76b,,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Ftop.jpg?alt=media&token=1df03e7d-16f0-44a7-998a-9be610d2fd0d,,192.168.1.201:9100,"{CR}{LF}
+Username,Name en_NZ,Name zh,Name jp,Website URL,Pin,Menu Names,Primary LandingPageBackgroundImageUrl,Secondary LandingPageBackgroundImageUrl,Primary TopBannerImageUrl,Secondary TopBannerImageUrl,Printer Address,Kitchen Order Template,Number of Print Copies for Kitchen,Logo Image Url
+takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,SIDE|TAKUMI SPECIAL|DINNER|LUNCH|Bento Boxes|Drinks,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Fcover.jpg?alt=media&token=0a3f9bc2-1d2d-48c4-9f32-8b2207c1c76b,,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Ftop.jpg?alt=media&token=1df03e7d-16f0-44a7-998a-9be610d2fd0d,,192.168.1.201:9100,"{CR}{LF}
 {CR}{LF}
                    T A K U M I                   {CR}{LF}
              Japanese Restaurant & Bar           {CR}{LF}
@@ -11,8 +11,8 @@ takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,SIDE|TAKUMI SPECIAL|DINNER
 {CR}{LF}
 {OrderList}
 {CR}{LF}
-",2
-info@43degreescafe.co.nz,43degrees,43度咖啡,,,1111,Business Lunch Special|Weekly Menu,,,http://43degreescafe.co.nz/assets/images/cafe_logo.png,,,"{CR}{LF}
+",2,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Flogo.png?alt=media&token=8276c172-5f83-43b1-9a3f-f734138325f9
+info@43degreescafe.co.nz,43degrees,43度咖啡,,,1111,Weekly Menu|Business Lunch Special,,,http://43degreescafe.co.nz/assets/images/cafe_logo.png,,192.168.1.21:9100,"{CR}{LF}
 {CR}{LF}
                    43 degrees                   {CR}{LF}
                 Cafee & Restaurant           {CR}{LF}
@@ -24,4 +24,4 @@ info@43degreescafe.co.nz,43degrees,43度咖啡,,,1111,Business Lunch Special|Wee
 {CR}{LF}
 {OrderList}
 {CR}{LF}
-",1
+",2,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/cb65751e817915c9c34fe3c56d31aee5_cafe_logo.png
