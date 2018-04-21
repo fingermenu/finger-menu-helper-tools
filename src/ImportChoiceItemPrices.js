@@ -43,7 +43,6 @@ const start = async () => {
           .filterNot(rawRow => rawRow.every(row => row.trim().length === 0))
           .map(rawRow => Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow)).get('username'))
           .toSet();
-
         const results = await Promise.all(
           usernames
             .map(async username => {

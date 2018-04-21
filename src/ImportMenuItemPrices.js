@@ -66,7 +66,6 @@ const start = async () => {
             })
             .toArray(),
         );
-
         const oneOffData = results.reduce((reduction, result) => reduction.set(result.get('username'), result.delete('username')), Map());
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
