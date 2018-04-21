@@ -1,4 +1,4 @@
-Username,Menu Item Name,Choice Item Name,Current Price,Tags,Default Choice Item Name,Must Choose Size,Must Choose Dietary Option,Min Number of Side Dishes,Max Number of Side Dishes
+Username,Menu Item Name,Choice Item Descriptions,Current Price,Tags,Default Choice Item Descriptions,Must Choose Size,Must Choose Dietary Option,Min Number of Side Dishes,Max Number of Side Dishes
 takumi@fingermenu.co.nz,4 Chicken Wings,Rice|Miso|Rice & Miso,12.00,,,F,F,0,0
 takumi@fingermenu.co.nz,6 Chicken Wings,Rice|Miso|Rice & Miso,17.00,,,F,F,0,0
 takumi@fingermenu.co.nz,Edamame Spring Roll,Rice|Miso|Rice & Miso,7.00,,,F,F,0,0
