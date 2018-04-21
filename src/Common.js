@@ -1,6 +1,6 @@
 // @flow
 
-import { List, Map, Range } from 'immutable';
+import Immutable, { List, Map, Range } from 'immutable';
 import Parse from 'parse/node';
 import { ParseWrapperService, UserService } from '@microbusiness/parse-server-common';
 import {
@@ -329,5 +329,23 @@ export default class Common {
     }
 
     return menus;
+  };
+
+  static loadOneOffData = async (data, columns, oneOffDataFunc) => {
+    const usernames = data
+      .filterNot(rawRow => rawRow.every(row => row.trim().length === 0))
+      .map(rawRow => Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow)).get('username'))
+      .toSet();
+    const results = await Promise.all(
+      usernames
+        .map(async username => {
+          const user = await Common.getUser(username);
+
+          return Map({ username, user }).merge(oneOffDataFunc ? await oneOffDataFunc() : Map());
+        })
+        .toArray(),
+    );
+
+    return results.reduce((reduction, result) => reduction.set(result.get('username'), result.delete('username')), Map());
   };
 }

@@ -50,21 +50,11 @@ const start = async () => {
           'imageUrl',
           'tags',
         );
-        const usernames = dataWithoutHeader
-          .filterNot(rawRow => rawRow.every(row => row.trim().length === 0))
-          .map(rawRow => Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow)).get('username'))
-          .toSet();
-        const results = await Promise.all(
-          usernames
-            .map(async username => {
-              const user = await Common.getUser(username);
-              const tags = await Common.loadAllTags(user);
+        const oneOffData = await Common.loadOneOffData(dataWithoutHeader, columns, async user => {
+          const tags = await Common.loadAllTags(user);
 
-              return Map({ username, user, tags });
-            })
-            .toArray(),
-        );
-        const oneOffData = results.reduce((reduction, result) => reduction.set(result.get('username'), result.delete('username')), Map());
+          return Map({ tags });
+        });
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(

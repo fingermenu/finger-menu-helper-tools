@@ -55,23 +55,12 @@ const start = async () => {
           'numberOfPrintCopiesForKitchen',
           'logoImageUrl',
         );
+        const oneOffData = await Common.loadOneOffData(dataWithoutHeader, columns, async user => {
+          const tags = await Common.loadAllTags(user);
+          const menus = await Common.loadAllMenus(user);
 
-        const usernames = dataWithoutHeader
-          .filterNot(rawRow => rawRow.every(row => row.trim().length === 0))
-          .map(rawRow => Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow)).get('username'))
-          .toSet();
-
-        const results = await Promise.all(
-          usernames
-            .map(async username => {
-              const user = await Common.getUser(username);
-              const menus = await Common.loadAllMenus(user);
-
-              return Map({ username, user, menus });
-            })
-            .toArray(),
-        );
-        const oneOffData = results.reduce((reduction, result) => reduction.set(result.get('username'), result.delete('username')), Map());
+          return Map({ tags, menus });
+        });
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
