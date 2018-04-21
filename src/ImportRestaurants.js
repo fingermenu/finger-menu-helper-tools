@@ -36,7 +36,8 @@ const start = async () => {
           return;
         }
 
-        const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
+        const dataWithoutHeader = Immutable.fromJS(data).skip(1);
+        const splittedRows = ImmutableEx.splitIntoChunks(dataWithoutHeader, 10); // Skipping the first item as it is the CSV header
         const columns = OrderedSet.of(
           'username',
           'en_NZ_name',
@@ -55,6 +56,23 @@ const start = async () => {
           'logoImageUrl',
         );
 
+        const usernames = dataWithoutHeader
+          .filterNot(rawRow => rawRow.every(row => row.trim().length === 0))
+          .map(rawRow => Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow)).get('username'))
+          .toSet();
+
+        const results = await Promise.all(
+          usernames
+            .map(async username => {
+              const user = await Common.getUser(username);
+              const menus = await Common.loadAllMenus(user);
+
+              return Map({ username, user, menus });
+            })
+            .toArray(),
+        );
+        const oneOffData = results.reduce((reduction, result) => reduction.set(result.get('username'), result.delete('username')), Map());
+
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
             rowChunck.map(async rawRow => {
@@ -63,9 +81,9 @@ const start = async () => {
               }
 
               const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
-              const user = await Common.getUser(values.get('username'));
+              const user = oneOffData.getIn([values.get('username'), 'user']);
               const restaurants = await Common.loadAllRestaurants(user, { name: values.get('en_NZ_name') });
-              const menus = await Common.loadAllMenus(user);
+              const menus = oneOffData.getIn([values.get('username'), 'menus']);
               const menusToFind = Immutable.fromJS(values.get('menuNames').split('|'))
                 .map(_ => _.trim())
                 .filterNot(_ => _.length === 0);
