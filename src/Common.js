@@ -1,7 +1,6 @@
 // @flow
 
-import Immutable, { List, Map, Range } from 'immutable';
-import Parse from 'parse/node';
+import { ImmutableEx } from '@microbusiness/common-javascript';
 import { ParseWrapperService, UserService } from '@microbusiness/parse-server-common';
 import {
   ChoiceItemService,
@@ -20,6 +19,8 @@ import {
   ServingTimeService,
   SizeService,
 } from '@fingermenu/parse-server-common';
+import Immutable, { List, Map, Range } from 'immutable';
+import Parse from 'parse/node';
 
 export default class Common {
   static initializeParse = async options => {
@@ -347,5 +348,19 @@ export default class Common {
     );
 
     return results.reduce((reduction, result) => reduction.set(result.get('username'), result.delete('username')), Map());
+  };
+
+  static getMultiLanguagesFieldValue = (fieldName, values) => {
+    const en_NZ_Value = values.get(`en_NZ_${fieldName}`);
+    const zh_Value = values.get(`zh_${fieldName}`);
+    const jp_Value = values.get(`jp_${fieldName}`);
+
+    return ImmutableEx.removeNullAndUndefinedProps(
+      Map({
+        en_NZ: en_NZ_Value ? en_NZ_Value : undefined,
+        zh: zh_Value ? zh_Value : undefined,
+        jp: jp_Value ? jp_Value : undefined,
+      }),
+    );
   };
 }

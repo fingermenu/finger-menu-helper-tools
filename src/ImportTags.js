@@ -1,13 +1,13 @@
 // @flow
 
+import { ImmutableEx } from '@microbusiness/common-javascript';
+import { ParseWrapperService } from '@microbusiness/parse-server-common';
+import { TagService } from '@fingermenu/parse-server-common';
 import BluebirdPromise from 'bluebird';
 import Immutable, { List, Map, OrderedSet } from 'immutable';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
-import { ImmutableEx } from '@microbusiness/common-javascript';
-import { ParseWrapperService } from '@microbusiness/parse-server-common';
-import { TagService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
 const optionDefinitions = [
@@ -67,8 +67,8 @@ const start = async () => {
               const info = Map({
                 ownedByUser: user,
                 maintainedByUsers: List.of(user),
-                name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
-                description: Map({ en_NZ: values.get('en_NZ_description'), zh: values.get('zh_description'), jp: values.get('jp_description') }),
+                name: Common.getMultiLanguagesFieldValue('name', values),
+                description: Common.getMultiLanguagesFieldValue('description', values),
               });
 
               if (tags.isEmpty()) {

@@ -1,11 +1,11 @@
 // @flow
 
+import { ImmutableEx } from '@microbusiness/common-javascript';
 import BluebirdPromise from 'bluebird';
 import Immutable, { OrderedSet } from 'immutable';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
-import { ImmutableEx } from '@microbusiness/common-javascript';
 import Common from './Common';
 
 const optionDefinitions = [

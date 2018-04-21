@@ -1,12 +1,12 @@
 // @flow
 
+import { ImmutableEx } from '@microbusiness/common-javascript';
+import { TableStateService } from '@fingermenu/parse-server-common';
 import BluebirdPromise from 'bluebird';
 import Immutable, { Map, OrderedSet } from 'immutable';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
-import { ImmutableEx } from '@microbusiness/common-javascript';
-import { TableStateService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
 const optionDefinitions = [
@@ -50,7 +50,7 @@ const start = async () => {
               const tableState = tableStates.find(_ => _.get('key').localeCompare(values.get('key')) === 0);
               const info = Map({
                 key: values.get('key'),
-                name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+                name: Common.getMultiLanguagesFieldValue('name', values),
               });
 
               if (tableState) {

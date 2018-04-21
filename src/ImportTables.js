@@ -1,13 +1,13 @@
 // @flow
 
+import { ImmutableEx } from '@microbusiness/common-javascript';
+import { ParseWrapperService } from '@microbusiness/parse-server-common';
+import { TableService } from '@fingermenu/parse-server-common';
 import BluebirdPromise from 'bluebird';
 import Immutable, { List, Map, OrderedSet } from 'immutable';
 import commandLineArgs from 'command-line-args';
 import fs from 'fs';
 import csvParser from 'csv-parse';
-import { ImmutableEx } from '@microbusiness/common-javascript';
-import { ParseWrapperService } from '@microbusiness/parse-server-common';
-import { TableService } from '@fingermenu/parse-server-common';
 import Common from './Common';
 
 const optionDefinitions = [
@@ -57,7 +57,7 @@ const start = async () => {
                 ownedByUser: user,
                 maintainedByUsers: List.of(user),
                 restaurantId,
-                name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+                name: Common.getMultiLanguagesFieldValue('name', values),
                 tableStateId: tableStates.find(tableState => tableState.get('key').localeCompare(values.get('tableState')) === 0).get('id'),
                 sortOrderIndex: parseInt(values.get('sortOrderIndex'), 10),
               });

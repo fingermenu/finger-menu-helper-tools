@@ -1,4 +1,4 @@
-Username,Choice Item Name,Current Price,Tags
+Username,Choice Item Description,Current Price,Tags
 takumi@fingermenu.co.nz,Rice,2.50,
 takumi@fingermenu.co.nz,Miso,2.50,
 takumi@fingermenu.co.nz,Rice & Miso,4.00,
@@ -8,6 +8,16 @@ takumi@fingermenu.co.nz,Vegetarian,0,Vegetarian
 takumi@fingermenu.co.nz,No onions,0,No onions
 takumi@fingermenu.co.nz,Asahi (Large),10.00,Large
 takumi@fingermenu.co.nz,Asahi (Regular),9.00,Regular
+takumi@fingermenu.co.nz,Sapporo (Large),10.00,Large
+takumi@fingermenu.co.nz,Sapporo (Regular),9.00,Regular
+takumi@fingermenu.co.nz,Kubota Senjyu - Cold (Large),26.00,Large
+takumi@fingermenu.co.nz,Kubota Senjyu - Cold (Regular),13.00,Regular
+takumi@fingermenu.co.nz,Karatamba - Cold (Large),25.00,Large
+takumi@fingermenu.co.nz,Karatambe - Cold (Regular),12.00,Regular
+takumi@fingermenu.co.nz,Ozeki - Hot (Large),19.00,Large
+takumi@fingermenu.co.nz,Ozeki - Hot (Regular),11.00,Regular
+,,,
+,,,
 ,,,
 info@43degreescafe.co.nz,Highland Fresh Salmon,7.00,
 info@43degreescafe.co.nz,Bacon,5.00,
