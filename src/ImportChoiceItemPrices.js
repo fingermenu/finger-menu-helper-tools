@@ -39,7 +39,6 @@ const start = async () => {
         const dataWithoutHeader = Immutable.fromJS(data).skip(1);
         const splittedRows = ImmutableEx.splitIntoChunks(dataWithoutHeader, 10); // Skipping the first item as it is the CSV header
         const columns = OrderedSet.of('username', 'choiceItemDescription', 'currentPrice', 'tags');
-
         const usernames = dataWithoutHeader
           .filterNot(rawRow => rawRow.every(row => row.trim().length === 0))
           .map(rawRow => Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow)).get('username'))
@@ -55,7 +54,6 @@ const start = async () => {
             })
             .toArray(),
         );
-
         const oneOffData = results.reduce((reduction, result) => reduction.set(result.get('username'), result.delete('username')), Map());
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
