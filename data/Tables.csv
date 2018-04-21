@@ -1,9 +1,9 @@
 Username,Restaurant Name,Name en_NZ,Name zh,Name jp,Table State,Sorting Order
-takumi@fingermenu.co.nz,Takumi,1,一,1,empty,1
-takumi@fingermenu.co.nz,Takumi,2,二,2,empty,2
-takumi@fingermenu.co.nz,Takumi,3,三,3,empty,3
-takumi@fingermenu.co.nz,Takumi,4,四,4,empty,4
-takumi@fingermenu.co.nz,Takumi,5,五,5,empty,5
+takumi@fingermenu.co.nz,Takumi,1,一,,empty,1
+takumi@fingermenu.co.nz,Takumi,2,二,,empty,2
+takumi@fingermenu.co.nz,Takumi,3,三,,empty,3
+takumi@fingermenu.co.nz,Takumi,4,四,,empty,4
+takumi@fingermenu.co.nz,Takumi,5,五,,empty,5
 takumi@fingermenu.co.nz,Takumi,6,,,empty,6
 takumi@fingermenu.co.nz,Takumi,7,,,empty,7
 takumi@fingermenu.co.nz,Takumi,8,,,empty,8
