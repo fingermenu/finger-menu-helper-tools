@@ -62,8 +62,9 @@ const start = async () => {
               const user = await Common.getUser(username);
               const choiceItems = await Common.loadAllChoiceItems(user);
               const choiceItemPrices = await Common.loadAllChoiceItemPrices(user);
+              const tags = await Common.loadAllTags(user);
 
-              return Map({ username, user, choiceItems, choiceItemPrices });
+              return Map({ username, user, choiceItems, choiceItemPrices, tags });
             })
             .toArray(),
         );
@@ -118,7 +119,7 @@ const start = async () => {
                   }),
                 )
                 .reduce((reduction, value) => reduction.set(value.get('choiceItemPriceId'), value.get('index')), Map());
-              const tags = await Common.loadAllTags(user);
+              const tags = oneOffData.getIn([values.get('username'), 'tags']);
               const tagsToFind = Immutable.fromJS(values.get('tags').split('|'))
                 .map(_ => _.trim())
                 .filterNot(_ => _.length === 0);
