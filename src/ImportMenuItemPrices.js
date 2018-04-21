@@ -36,7 +36,8 @@ const start = async () => {
           return;
         }
 
-        const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
+        const dataWithoutHeader = Immutable.fromJS(data).skip(1);
+        const splittedRows = ImmutableEx.splitIntoChunks(dataWithoutHeader, 10); // Skipping the first item as it is the CSV header
         const columns = OrderedSet.of(
           'username',
           'menuItemName',
@@ -50,19 +51,38 @@ const start = async () => {
           'maxNumberOfSideDishes',
         );
 
+        const usernames = dataWithoutHeader
+          .filterNot(rawRow => rawRow.every(row => row.trim().length === 0))
+          .map(rawRow => Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow)).get('username'))
+          .toSet();
+
+        const results = await Promise.all(
+          usernames
+            .map(async username => {
+              const user = await Common.getUser(username);
+              const choiceItems = await Common.loadAllChoiceItems(user);
+              const choiceItemPrices = await Common.loadAllChoiceItemPrices(user);
+
+              return Map({ username, user, choiceItems, choiceItemPrices });
+            })
+            .toArray(),
+        );
+
+        const oneOffData = results.reduce((reduction, result) => reduction.set(result.get('username'), result.delete('username')), Map());
+
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
             rowChunck.map(async rawRow => {
-              if (!rawRow || rawRow.isEmpty() || (rawRow.count() === 1 && rawRow.first().trim().length === 0)) {
+              if (!rawRow || rawRow.isEmpty() || rawRow.every(row => row.trim().length === 0)) {
                 return;
               }
 
               const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
-              const user = await Common.getUser(values.get('username'));
+              const user = oneOffData.getIn([values.get('username'), 'user']);
               const menuItemId = (await Common.loadAllMenuItems(user, { name: values.get('menuItemName') })).first().get('id');
               const menuItemPrices = await Common.loadAllMenuItemPrices(user, { menuItemId });
-              const choiceItems = await Common.loadAllChoiceItems(user);
-              const allChoiceItemPrices = await Common.loadAllChoiceItemPrices(user);
+              const choiceItems = oneOffData.getIn([values.get('username'), 'choiceItems']);
+              const allChoiceItemPrices = oneOffData.getIn([values.get('username'), 'choiceItemPrices']);
 
               const choiceItemsToFind = Immutable.fromJS(values.get('choiceItemDescriptions').split('|'))
                 .map(_ => _.trim())

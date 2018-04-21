@@ -38,7 +38,7 @@ const start = async () => {
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
             rowChunck.map(async rawRow => {
-              if (!rawRow || rawRow.isEmpty() || (rawRow.count() === 1 && rawRow.first().trim().length === 0)) {
+              if (!rawRow || rawRow.isEmpty() || rawRow.every(row => row.trim().length === 0)) {
                 return;
               }
 
