@@ -36,34 +36,41 @@ const start = async () => {
         const columns = OrderedSet.of('username', 'password', 'email', 'type');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
-          Promise.all(rowChunck.map(async (rawRow) => {
-            const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+          Promise.all(
+            rowChunck.map(async rawRow => {
+              if (!rawRow || rawRow.isEmpty() || (rawRow.count() === 1 && rawRow.first().trim().length === 0)) {
+                return;
+              }
 
-            let user;
+              const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
 
-            try {
-              user = await Common.getUser(values.get('username'));
-            } catch (ex) {
-              user = null;
-            }
+              let user;
 
-            if (user) {
-              /* The user exists, update user details... */
-              console.log(`Updating existing accout. Username: ${values.get('username')}`);
+              try {
+                user = await Common.getUser(values.get('username'));
+              } catch (ex) {
+                user = null;
+              }
 
-              await Common.updateAccount(user, {
-                username: values.get('username'),
-                password: values.get('password'),
-                email: values.get('email'),
-                type: values.get('type'),
-              });
-            } else {
-              /* The user does not exist, create a new one... */
-              console.log(`Creating new accout. Username: ${values.get('username')}`);
+              if (user) {
+                /* The user exists, update user details... */
+                console.log(`Updating existing accout. Username: ${values.get('username')}`);
 
-              await Common.createAccount(values.get('username'), values.get('password'), values.get('email'), values.get('type'));
-            }
-          })));
+                await Common.updateAccount(user, {
+                  username: values.get('username'),
+                  password: values.get('password'),
+                  email: values.get('email'),
+                  type: values.get('type'),
+                });
+              } else {
+                /* The user does not exist, create a new one... */
+                console.log(`Creating new accout. Username: ${values.get('username')}`);
+
+                await Common.createAccount(values.get('username'), values.get('password'), values.get('email'), values.get('type'));
+              }
+            }),
+          ),
+        );
       },
     );
 

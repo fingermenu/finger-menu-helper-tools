@@ -58,6 +58,10 @@ const start = async () => {
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
             rowChunck.map(async rawRow => {
+              if (!rawRow || rawRow.isEmpty() || (rawRow.count() === 1 && rawRow.first().trim().length === 0)) {
+                return;
+              }
+
               const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
               const user = await Common.getUser(values.get('username'));
               const restaurants = await Common.loadAllRestaurants(user, { name: values.get('en_NZ_name') });

@@ -40,20 +40,27 @@ const start = async () => {
         const columns = OrderedSet.of('key', 'en_NZ_name', 'zh_name', 'jp_name');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
-          Promise.all(rowChunck.map(async (rawRow) => {
-            const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
-            const tableState = tableStates.find(_ => _.get('key').localeCompare(values.get('key')) === 0);
-            const info = Map({
-              key: values.get('key'),
-              name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
-            });
+          Promise.all(
+            rowChunck.map(async rawRow => {
+              if (!rawRow || rawRow.isEmpty() || (rawRow.count() === 1 && rawRow.first().trim().length === 0)) {
+                return;
+              }
 
-            if (tableState) {
-              await tableStateService.update(tableState.merge(info), null, true);
-            } else {
-              await tableStateService.create(info, null, null, true);
-            }
-          })));
+              const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+              const tableState = tableStates.find(_ => _.get('key').localeCompare(values.get('key')) === 0);
+              const info = Map({
+                key: values.get('key'),
+                name: Map({ en_NZ: values.get('en_NZ_name'), zh: values.get('zh_name'), jp: values.get('jp_name') }),
+              });
+
+              if (tableState) {
+                await tableStateService.update(tableState.merge(info), null, true);
+              } else {
+                await tableStateService.create(info, null, null, true);
+              }
+            }),
+          ),
+        );
       },
     );
 

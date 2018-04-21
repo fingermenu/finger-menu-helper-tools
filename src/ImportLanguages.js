@@ -40,17 +40,24 @@ const start = async () => {
         const columns = OrderedSet.of('key', 'name', 'imageUrl');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
-          Promise.all(rowChunck.map(async (rawRow) => {
-            const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
-            const language = languages.find(_ => _.get('key').localeCompare(values.get('key')) === 0);
-            const info = Map({ key: values.get('key'), name: values.get('name'), imageUrl: values.get('imageUrl') });
+          Promise.all(
+            rowChunck.map(async rawRow => {
+              if (!rawRow || rawRow.isEmpty() || (rawRow.count() === 1 && rawRow.first().trim().length === 0)) {
+                return;
+              }
 
-            if (language) {
-              await languageService.update(language.merge(info), null, true);
-            } else {
-              await languageService.create(info, null, null, true);
-            }
-          })));
+              const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+              const language = languages.find(_ => _.get('key').localeCompare(values.get('key')) === 0);
+              const info = Map({ key: values.get('key'), name: values.get('name'), imageUrl: values.get('imageUrl') });
+
+              if (language) {
+                await languageService.update(language.merge(info), null, true);
+              } else {
+                await languageService.create(info, null, null, true);
+              }
+            }),
+          ),
+        );
       },
     );
 
