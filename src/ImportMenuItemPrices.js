@@ -78,7 +78,7 @@ const start = async () => {
               const choiceItemIdsToFind = choiceItems
                 .filter(choiceItem => choiceItemsToFind.find(_ => _.localeCompare(choiceItem.getIn(['description', 'en_NZ'])) === 0))
                 .map(choiceItem => choiceItem.get('id'));
-              const choiceItemPrices = choiceItemPrices.map(_ => _.set('choiceItem', new ChoiceItem(_.get('choiceItem')).getInfo()));
+              const choiceItemPrices = allChoiceItemPrices.map(_ => _.set('choiceItem', new ChoiceItem(_.get('choiceItem')).getInfo()));
               const choiceItemPriceIds = choiceItemPrices
                 .filter(choiceItemPrice => choiceItemIdsToFind.find(_ => _.localeCompare(choiceItemPrice.get('choiceItemId')) === 0))
                 .map(_ => _.get('id'));
