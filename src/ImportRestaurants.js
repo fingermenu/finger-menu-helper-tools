@@ -52,6 +52,7 @@ const start = async () => {
           'secondaryTopBannerImageUrl',
           'printerAddress',
           'kitchenOrderTemplate',
+          'customerReceiptTemplate',
           'numberOfPrintCopiesForKitchen',
           'logoImageUrl',
         );
@@ -137,16 +138,25 @@ const start = async () => {
                   : List(),
               );
 
-              const documentTemplates = ImmutableEx.removeUndefinedProps(
-                values.get('kitchenOrderTemplate')
-                  ? List.of(
-                    Map({
-                      name: 'KitchenOrder',
-                      template: values.get('kitchenOrderTemplate').replace(/\r?\n|\r/g, ''),
-                    }),
-                  )
-                  : List(),
-              );
+              let documentTemplates = List();
+
+              if (values.get('kitchenOrderTemplate')) {
+                documentTemplates = documentTemplates.push(
+                  Map({
+                    name: 'KitchenOrder',
+                    template: values.get('kitchenOrderTemplate').replace(/\r?\n|\r/g, ''),
+                  }),
+                );
+              }
+
+              if (values.get('customerReceiptTemplate')) {
+                documentTemplates = documentTemplates.push(
+                  Map({
+                    name: 'CustomerReceipt',
+                    template: values.get('customerReceiptTemplate').replace(/\r?\n|\r/g, ''),
+                  }),
+                );
+              }
 
               if (restaurants.isEmpty()) {
                 const acl = ParseWrapperService.createACL(user);
