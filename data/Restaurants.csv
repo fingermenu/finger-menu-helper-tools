@@ -14,10 +14,10 @@ takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Drinks|SIDE|TAKUMI SPECIAL
 ","{CR}{LF}
 {CR}{LF}
                    T A K U M I                   {CR}{LF}
-             Japanese Restaurant & Bar           {CR}{LF}Receipt{CR}{LF}
+             Japanese Restaurant & Bar           {CR}{LF}
 {CR}{LF}
 {CR}{LF}
-  {OrderDateTime}                 Table # {TableName}   {CR}{LF}
+  {PaidAtDateTime}                 Table # {TableName}   {CR}{LF}
 
 {CR}{LF}
 {CR}{LF}
@@ -39,10 +39,10 @@ info@43degreescafe.co.nz,43degrees,,,,1111,Weekly Menu|Business Lunch Special,,,
 ","{CR}{LF}
 {CR}{LF}
                    43 degrees                   {CR}{LF}
-                Cafee & Restaurant           {CR}{LF}Receipt{CR}{LF}
+                Cafee & Restaurant           {CR}{LF}
 {CR}{LF}
 {CR}{LF}
-  {OrderDateTime}                 Table # {TableName}   {CR}{LF}
+  {PaidAtDateTime}                 Table # {TableName}   {CR}{LF}
 
 {CR}{LF}
 {CR}{LF}

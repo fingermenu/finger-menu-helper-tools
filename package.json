@@ -32,7 +32,7 @@
   "author": "Micro Business ltd<micro.business.ltd@gmail.com>",
   "homepage": "https://bitbucket.org/microbusinessltd/finger-menu-helper-tools#readme",
   "dependencies": {
-    "@fingermenu/parse-server-common": "0.11.0",
+    "@fingermenu/parse-server-common": "0.12.0",
     "@microbusiness/common-javascript": "^1.3.0",
     "@microbusiness/parse-server-common": "^1.3.2",
     "bluebird": "^3.5.1",
@@ -62,10 +62,10 @@
     "eslint-plugin-jest": "^21.15.1",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.70.0",
+    "flow-bin": "^0.71.0",
     "husky": "^0.14.3",
     "jest": "^23.0.0-alpha.0",
-    "lint-staged": "^7.0.4",
+    "lint-staged": "^7.0.5",
     "prettier": "^1.12.1"
   },
   "jest": {
