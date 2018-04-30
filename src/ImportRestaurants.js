@@ -55,6 +55,7 @@ const start = async () => {
           'customerReceiptTemplate',
           'numberOfPrintCopiesForKitchen',
           'logoImageUrl',
+          'gstPercentage',
         );
         const oneOffData = await Common.loadOneOffData(dataWithoutHeader, columns, async user => {
           const tags = await Common.loadAllTags(user);
@@ -115,6 +116,7 @@ const start = async () => {
               const numberOfPrintCopiesForKitchen = values.get('numberOfPrintCopiesForKitchen')
                 ? parseInt(values.get('numberOfPrintCopiesForKitchen'), 10)
                 : 1;
+              const gstPercentage = values.get('gstPercentage') ? parseFloat(values.get('gstPercentage')) : null;
 
               const printers = ImmutableEx.removeUndefinedProps(
                 values.get('printerAddress')
@@ -166,7 +168,7 @@ const start = async () => {
                 acl.setRoleWriteAccess('administrators', true);
 
                 await restaurantService.create(
-                  info.set('configurations', Map({ images, printers, documentTemplates, numberOfPrintCopiesForKitchen })),
+                  info.set('configurations', Map({ images, printers, documentTemplates, numberOfPrintCopiesForKitchen, gstPercentage })),
                   acl,
                   null,
                   true,
@@ -179,7 +181,8 @@ const start = async () => {
                     .setIn(['configurations', 'images'], images)
                     .setIn(['configurations', 'printers'], printers)
                     .setIn(['configurations', 'documentTemplates'], documentTemplates)
-                    .setIn(['configurations', 'numberOfPrintCopiesForKitchen'], numberOfPrintCopiesForKitchen),
+                    .setIn(['configurations', 'numberOfPrintCopiesForKitchen'], numberOfPrintCopiesForKitchen)
+                    .setIn(['configurations', 'gstPercentage'], gstPercentage),
                   null,
                   true,
                 );
