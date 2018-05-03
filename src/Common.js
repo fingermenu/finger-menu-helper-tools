@@ -14,7 +14,6 @@ import {
   RestaurantService,
   TableService,
   TableStateService,
-  OrderStateService,
   TagService,
   ServingTimeService,
   SizeService,
@@ -93,23 +92,6 @@ export default class Common {
     }
 
     return tableStates;
-  };
-
-  static loadAllOrderStates = async () => {
-    let orderStates = List();
-    const result = await new OrderStateService().searchAll(Map({}), null, true);
-
-    try {
-      result.event.subscribe(info => {
-        orderStates = orderStates.push(info);
-      });
-
-      await result.promise;
-    } finally {
-      result.event.unsubscribeAll();
-    }
-
-    return orderStates;
   };
 
   static loadAllRestaurants = async (user, { name } = {}) => {
@@ -256,10 +238,13 @@ export default class Common {
     return choiceItems;
   };
 
-  static loadAllChoiceItemPrices = async (user, { choiceItemId } = {}) => {
+  static loadAllChoiceItemPrices = async (user, { choiceItemId } = {}, include_choiceItem = true, doesNotExist_removedByUser = true) => {
     let choiceItemPrices = List();
     const result = await new ChoiceItemPriceService().searchAll(
-      Map({ include_choiceItem: true, conditions: Map({ addedByUser: user, choiceItemId, doesNotExist_removedByUser: true }) }),
+      Map({
+        include_choiceItem,
+        conditions: Map({ addedByUser: user, choiceItemId, doesNotExist_removedByUser }),
+      }),
       null,
       true,
     );
@@ -294,10 +279,10 @@ export default class Common {
     return menuItems;
   };
 
-  static loadAllMenuItemPrices = async (user, { menuItemId } = {}) => {
+  static loadAllMenuItemPrices = async (user, { menuItemId } = {}, include_menuItem = true, doesNotExist_removedByUser = true) => {
     let menuItemPrices = List();
     const result = await new MenuItemPriceService().searchAll(
-      Map({ include_menuItem: true, conditions: Map({ addedByUser: user, menuItemId, doesNotExist_removedByUser: true }) }),
+      Map({ include_menuItem, conditions: Map({ addedByUser: user, menuItemId, doesNotExist_removedByUser }) }),
       null,
       true,
     );

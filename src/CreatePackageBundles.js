@@ -2,7 +2,13 @@
 
 import { ImmutableEx } from '@microbusiness/common-javascript';
 import commandLineArgs from 'command-line-args';
+import { Map } from 'immutable';
 import BluebirdPromise from 'bluebird';
+import fse from 'fs-extra';
+import os from 'os';
+import uniqueFilename from 'unique-filename';
+import AdmZip from 'adm-zip';
+import md5File from 'md5-file';
 import Common from './Common';
 
 const optionDefinitions = [
@@ -12,6 +18,31 @@ const optionDefinitions = [
   { name: 'parseServerUrl', type: String },
 ];
 const options = commandLineArgs(optionDefinitions);
+
+const removeNotRequiredDataAndSort = list =>
+  list
+    .sort((item1, item2) => {
+      const createdAt1 = item1.get('createdAt');
+      const createdAt2 = item2.get('createdAt');
+
+      if (createdAt1 > createdAt2) {
+        return 1;
+      }
+
+      if (createdAt1 < createdAt2) {
+        return -1;
+      }
+
+      return 0;
+    })
+    .map(_ =>
+      _.delete('createdAt')
+        .delete('updatedAt')
+        .delete('ownedByUserId')
+        .delete('ownedByUser')
+        .delete('maintainedByUsers')
+        .delete('maintainedByUserIds'),
+    );
 
 const start = async () => {
   try {
@@ -23,7 +54,66 @@ const start = async () => {
       Promise.all(
         restaurants
           .map(async restaurant => {
-            console.log(restaurant.toJS());
+            const user = restaurant.get('ownedByUser');
+            const languages = await Common.loadAllLanguages();
+            const tableStates = await Common.loadAllTableStates();
+            const tags = await Common.loadAllTags(user);
+            const servingTimes = await Common.loadAllServingTimes(user);
+            const dietaryOptions = await Common.loadAllDietaryOptions(user);
+            const dishTypes = await Common.loadAllDishTypes(user);
+            const sizes = await Common.loadAllSizes(user);
+            const choiceItems = await Common.loadAllChoiceItems(user);
+            const choiceItemPrices = await Common.loadAllChoiceItemPrices(user, {}, false);
+            const menuItems = await Common.loadAllMenuItems(user);
+            const menuItemPrices = await Common.loadAllMenuItemPrices(user, {}, false);
+            const menus = await Common.loadAllMenus(user);
+            const tables = await Common.loadAllTables(user);
+            const packageFile = Map({
+              languages,
+              tableStates,
+              tags: removeNotRequiredDataAndSort(tags),
+              servingTimes: removeNotRequiredDataAndSort(servingTimes),
+              dietaryOptions: removeNotRequiredDataAndSort(dietaryOptions),
+              dishTypes: removeNotRequiredDataAndSort(dishTypes),
+              sizes: removeNotRequiredDataAndSort(sizes),
+              choiceItems: removeNotRequiredDataAndSort(choiceItems),
+              choiceItemPrices: removeNotRequiredDataAndSort(choiceItemPrices),
+              menuItems: removeNotRequiredDataAndSort(menuItems),
+              menuItemPrices: removeNotRequiredDataAndSort(menuItemPrices),
+              menus: removeNotRequiredDataAndSort(menus),
+              tables: removeNotRequiredDataAndSort(tables),
+            });
+            const tempDirectory = uniqueFilename(os.tmpdir());
+            const jsonFilename = tempDirectory + '/data.json';
+            const zipFilename = tempDirectory + '/data.zip';
+
+            await fse.ensureDir(tempDirectory);
+
+            console.log('Writing restaurant: ' + restaurant.getIn(['name', 'en_NZ']) + ' to file: ' + jsonFilename);
+            await fse.writeJson(jsonFilename, packageFile.toJS());
+            console.log('Finished writing restaurant: ' + restaurant.getIn(['name', 'en_NZ']) + ' to file: ' + jsonFilename);
+
+            console.log(
+              'Compressing restaurant: ' + restaurant.getIn(['name', 'en_NZ']) + ' file: ' + jsonFilename + ' . Zip file name: ' + zipFilename,
+            );
+
+            const zip = new AdmZip();
+
+            zip.addLocalFile(jsonFilename);
+            zip.writeZip(zipFilename);
+
+            const checksum = md5File.sync(zipFilename);
+
+            console.log(
+              'Finished compressing restaurant: ' +
+                restaurant.getIn(['name', 'en_NZ']) +
+                ' file: ' +
+                jsonFilename +
+                ' . Zip file name: ' +
+                zipFilename +
+                ' . Checksum: ' +
+                checksum,
+            );
           })
           .toArray(),
       ),
