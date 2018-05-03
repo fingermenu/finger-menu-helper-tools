@@ -30,7 +30,7 @@ export default class Common {
       options.masterKey ? options.masterKey : 'master_key',
     );
 
-    Parse.serverURL = options.parseServerUrl ? options.parseServerUrl : 'http://localhost:1337/parse';
+    Parse.serverURL = options.parseServerUrl ? options.parseServerUrl : 'http://localhost:12345/parse';
   };
 
   static logIn = async (username, password) => ParseWrapperService.logIn(username, password);
