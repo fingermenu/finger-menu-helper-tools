@@ -1,9 +1,12 @@
 // @flow
 
 import { ImmutableEx } from '@microbusiness/common-javascript';
+import { ParseWrapperService } from '@microbusiness/parse-server-common';
+import { PackageBundleService } from '@fingermenu/parse-server-common';
 import commandLineArgs from 'command-line-args';
 import { Map } from 'immutable';
 import BluebirdPromise from 'bluebird';
+import fs from 'fs';
 import fse from 'fs-extra';
 import os from 'os';
 import uniqueFilename from 'unique-filename';
@@ -48,6 +51,8 @@ const start = async () => {
   try {
     await Common.initializeParse(options);
 
+    const packageBundleService = new PackageBundleService();
+
     const splittedRestaurants = ImmutableEx.splitIntoChunks(await Common.loadAllRestaurants(), 1);
 
     await BluebirdPromise.each(splittedRestaurants.toArray(), restaurants =>
@@ -68,6 +73,7 @@ const start = async () => {
             const menuItemPrices = await Common.loadAllMenuItemPrices(user, {}, false);
             const menus = await Common.loadAllMenus(user);
             const tables = await Common.loadAllTables(user);
+            const packageBundle = await Common.loadRestaurantPackageBundle(restaurant.get('id'));
             const packageFile = Map({
               languages,
               tableStates,
@@ -93,6 +99,14 @@ const start = async () => {
             await fse.writeJson(jsonFilename, packageFile.toJS());
             console.log('Finished writing restaurant: ' + restaurant.getIn(['name', 'en_NZ']) + ' to file: ' + jsonFilename);
 
+            const checksum = md5File.sync(jsonFilename);
+
+            if (packageBundle && packageBundle.get('checksum').localeCompare(checksum) === 0) {
+              console.log('No change in restaurant: ' + restaurant.getIn(['name', 'en_NZ']) + '. No need to create a new package bundle.');
+
+              return;
+            }
+
             console.log(
               'Compressing restaurant: ' + restaurant.getIn(['name', 'en_NZ']) + ' file: ' + jsonFilename + ' . Zip file name: ' + zipFilename,
             );
@@ -101,8 +115,6 @@ const start = async () => {
 
             zip.addLocalFile(jsonFilename);
             zip.writeZip(zipFilename);
-
-            const checksum = md5File.sync(zipFilename);
 
             console.log(
               'Finished compressing restaurant: ' +
@@ -114,6 +126,17 @@ const start = async () => {
                 ' . Checksum: ' +
                 checksum,
             );
+
+            const url = (await ParseWrapperService.createFile('data.zip', [...fs.readFileSync(zipFilename)]).save()).url();
+            const acl = ParseWrapperService.createACL(user);
+
+            acl.setPublicReadAccess(true);
+            acl.setRoleReadAccess('administrators', true);
+            acl.setRoleWriteAccess('administrators', true);
+
+            await packageBundleService.create(Map({ url, checksum, restaurantId: restaurant.get('id') }), acl, null, true);
+
+            console.log('New package bundle created for restaurant: ' + restaurant.getIn(['name', 'en_NZ']) + '.');
           })
           .toArray(),
       ),

@@ -10,6 +10,7 @@ import {
   MenuItemService,
   MenuItemPriceService,
   MenuService,
+  PackageBundleService,
   LanguageService,
   RestaurantService,
   TableService,
@@ -59,6 +60,12 @@ export default class Common {
       null,
       true,
     );
+
+  static loadRestaurantPackageBundle = async restaurantId => {
+    const result = await new PackageBundleService().search(Map({ topMost: true, conditions: Map({ restaurantId }) }));
+
+    return result.isEmpty() ? null : result.first();
+  };
 
   static loadAllLanguages = async () => {
     let languages = List();
