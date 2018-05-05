@@ -22,6 +22,15 @@ const optionDefinitions = [
 ];
 const options = commandLineArgs(optionDefinitions);
 
+const removeNotRequiredDataFromAnEntry = entry =>
+  entry
+    .delete('createdAt')
+    .delete('updatedAt')
+    .delete('ownedByUserId')
+    .delete('ownedByUser')
+    .delete('maintainedByUsers')
+    .delete('maintainedByUserIds');
+
 const removeNotRequiredDataAndSort = list =>
   list
     .sort((item1, item2) => {
@@ -38,14 +47,7 @@ const removeNotRequiredDataAndSort = list =>
 
       return 0;
     })
-    .map(_ =>
-      _.delete('createdAt')
-        .delete('updatedAt')
-        .delete('ownedByUserId')
-        .delete('ownedByUser')
-        .delete('maintainedByUsers')
-        .delete('maintainedByUserIds'),
-    );
+    .map(removeNotRequiredDataFromAnEntry);
 
 const start = async () => {
   try {
@@ -88,6 +90,7 @@ const start = async () => {
               menuItemPrices: removeNotRequiredDataAndSort(menuItemPrices),
               menus: removeNotRequiredDataAndSort(menus),
               tables: removeNotRequiredDataAndSort(tables),
+              restaurant: removeNotRequiredDataFromAnEntry(restaurant),
             });
             const tempDirectory = uniqueFilename(os.tmpdir());
             const jsonFilename = tempDirectory + '/data.json';
