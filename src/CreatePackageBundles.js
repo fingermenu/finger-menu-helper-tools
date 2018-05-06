@@ -29,7 +29,12 @@ const removeNotRequiredDataFromAnEntry = entry =>
     .delete('ownedByUserId')
     .delete('ownedByUser')
     .delete('maintainedByUsers')
-    .delete('maintainedByUserIds');
+    .delete('maintainedByUserIds')
+    .delete('tableState')
+    .delete('tableStateId')
+    .delete('lastOrderCorrelationId')
+    .delete('notes')
+    .delete('notesLowerCase');
 
 const removeNotRequiredDataAndSort = list =>
   list
