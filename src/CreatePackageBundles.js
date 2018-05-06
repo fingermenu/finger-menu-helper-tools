@@ -77,8 +77,8 @@ const start = async () => {
             const tables = await Common.loadAllTables(user);
             const packageBundle = await Common.loadRestaurantPackageBundle(restaurant.get('id'));
             const packageFile = Map({
-              languages,
-              tableStates,
+              languages: removeNotRequiredDataAndSort(languages),
+              tableStates: removeNotRequiredDataAndSort(tableStates),
               tags: removeNotRequiredDataAndSort(tags),
               servingTimes: removeNotRequiredDataAndSort(servingTimes),
               dietaryOptions: removeNotRequiredDataAndSort(dietaryOptions),
