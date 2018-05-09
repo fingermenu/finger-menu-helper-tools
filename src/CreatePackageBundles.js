@@ -34,7 +34,7 @@ const removeNotRequiredDataFromAnEntry = entry =>
     .delete('lastOrderCorrelationId')
     .delete('notes');
 
-const mapDates = entry => entry.merge(Map({ createdAt: entry.get('createdAt').toISOString(), updatedAt: entry.get('updatedAt').toISOString() }));
+const mapDates = entry => entry.merge(Map({ createdAt: entry.get('createdAt').toISOString() }));
 
 const removeNotRequiredDataAndSort = list =>
   list
