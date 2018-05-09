@@ -24,6 +24,7 @@ const options = commandLineArgs(optionDefinitions);
 
 const removeNotRequiredDataFromAnEntry = entry =>
   entry
+    .delete('updatedAt')
     .delete('ownedByUserId')
     .delete('ownedByUser')
     .delete('maintainedByUsers')
