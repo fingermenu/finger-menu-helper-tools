@@ -24,17 +24,26 @@ const options = commandLineArgs(optionDefinitions);
 
 const removeNotRequiredDataFromAnEntry = entry =>
   entry
+    .delete('createdAt')
     .delete('updatedAt')
+    .delete('addedByUserId')
+    .delete('addedByUser')
+    .delete('removedByUserId')
+    .delete('removedByUser')
     .delete('ownedByUserId')
     .delete('ownedByUser')
-    .delete('maintainedByUsers')
     .delete('maintainedByUserIds')
+    .delete('maintainedByUsers')
     .delete('tableState')
     .delete('tableStateId')
     .delete('lastOrderCorrelationId')
-    .delete('notes');
-
-const mapDates = entry => entry.merge(Map({ createdAt: entry.get('createdAt').toISOString() }));
+    .delete('notes')
+    .delete('tag')
+    .delete('tags')
+    .delete('menuItemPrices')
+    .delete('choiceItemPrices')
+    .delete('defaultChoiceItemPrices')
+    .delete('toBeServedWithMenuItemPrices');
 
 const removeNotRequiredDataAndSort = list =>
   list
@@ -52,8 +61,7 @@ const removeNotRequiredDataAndSort = list =>
 
       return 0;
     })
-    .map(removeNotRequiredDataFromAnEntry)
-    .map(mapDates);
+    .map(removeNotRequiredDataFromAnEntry);
 
 const start = async () => {
   try {
