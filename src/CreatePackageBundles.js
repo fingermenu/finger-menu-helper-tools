@@ -50,7 +50,8 @@ const removeNotRequiredDataFromAnEntry = entry =>
     .delete('defaultChoiceItemPrices')
     .delete('toBeServedWithMenuItemPrices')
     .delete('restaurant')
-    .delete('customers');
+    .delete('customers')
+    .delete('menus');
 
 const mapDates = entry => entry.merge(Map({ createdAt: entry.get('createdAt').toISOString() }));
 
