@@ -4,7 +4,7 @@ import { ImmutableEx } from '@microbusiness/common-javascript';
 import { ParseWrapperService } from '@microbusiness/parse-server-common';
 import { PackageBundleService } from '@fingermenu/parse-server-common';
 import commandLineArgs from 'command-line-args';
-import { Map } from 'immutable';
+import { List, Map } from 'immutable';
 import BluebirdPromise from 'bluebird';
 import fs from 'fs';
 import fse from 'fs-extra';
@@ -112,7 +112,7 @@ const start = async () => {
               menuItemPrices: removeNotRequiredDataAndSort(menuItemPrices),
               menus: removeNotRequiredDataAndSort(menus),
               tables: removeNotRequiredDataAndSort(tables),
-              restaurant: removeNotRequiredDataFromAnEntry(restaurant),
+              restaurants: removeNotRequiredDataAndSort(List.of(restaurant)),
             });
             const tempDirectory = uniqueFilename(os.tmpdir());
             const jsonFilename = tempDirectory + '/data.json';
