@@ -71,7 +71,14 @@ const start = async () => {
 
                 await tableService.create(info, acl, null, true);
               } else if (tables.count() === 1) {
-                await tableService.update(tables.first().merge(info), null, true);
+                await tableService.update(
+                  tables
+                    .first()
+                    .merge(info)
+                    .merge(Map({ lastOrderCorrelationId: null, notes: null, customers: null })),
+                  null,
+                  true,
+                );
               } else {
                 console.error(`Multiple tables found with username ${values.get('username')} and table name: ${values.get('en_NZ_name')}`);
               }
