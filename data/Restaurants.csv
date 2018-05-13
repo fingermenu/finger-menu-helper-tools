@@ -49,3 +49,44 @@ info@43degreescafe.co.nz,43degrees,,,,1111,Drinks|Weekly Menu|Business Lunch Spe
 {OrderList}
 {CR}{LF}
 ",2,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/cb65751e817915c9c34fe3c56d31aee5_cafe_logo.png,15
+,,,,,,,,,,,,,,,,
+maxine@fingermenu.co.nz,Maxine's Palace,,,,1111,"Snacks|Soups
+|Roasted Meat
+|Chicken
+|Pork
+|Beef
+|Seafood
+|Lamb
+|Eggs
+|Hotpot
+|Tofu
+|Eggplant
+|Beans
+|Vegetable
+|Rice
+|Noodle
+|Dessert",,,http://43degreescafe.co.nz/assets/images/cafe_logo.png,,192.168.1.15:9100,"{CR}{LF}
+{CR}{LF}
+                   Maxine's Palace              {CR}{LF}
+                Chinese Restaurant           {CR}{LF}
+{CR}{LF}
+{CR}{LF}
+  {OrderDateTime}                 Table # {TableName}   {CR}{LF}
+
+{CR}{LF}
+{CR}{LF}
+{OrderList}
+{CR}{LF}
+","{CR}{LF}
+{CR}{LF}
+                   Maxine's Palace              {CR}{LF}
+                Chinese Restaurant           {CR}{LF}
+{CR}{LF}
+{CR}{LF}
+  {PaidAtDateTime}                 Table # {TableName}   {CR}{LF}
+
+{CR}{LF}
+{CR}{LF}
+{OrderList}
+{CR}{LF}
+",2,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/cb65751e817915c9c34fe3c56d31aee5_cafe_logo.png,15

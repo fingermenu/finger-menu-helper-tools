@@ -173,23 +173,48 @@ info@43degreescafe.co.nz,Milk Shake - Vanilla,,5.5,Cold Drinks,,,,,
 info@43degreescafe.co.nz,Milk Shake - Lime,,5.5,Cold Drinks,,,,,
 info@43degreescafe.co.nz,Sparkling Water,,6,Cold Drinks,,,,,
 info@43degreescafe.co.nz,Beer Bottle,,8,Beer,,,,,
-info@43degreescafe.co.nz,Brancott Estate MERLOT,,10,Red Wine,,,,,
-info@43degreescafe.co.nz,Wild Grace (2017) PINOT NOIR,,12,Red Wine,,,,,
-info@43degreescafe.co.nz,Rockburn (2016) PINOT NOIR,,,Red Wine,,,,,
-info@43degreescafe.co.nz,Brancott Estate BRUT CUVEE,,12,Bubbles,,,,,
-info@43degreescafe.co.nz,Veuve Clicquot CHAMPAGNE Brut NV,,,Bubbles,,,,,
-info@43degreescafe.co.nz,Marc Bredif  (2016) VOUVRAY,,14,Other,,,,,
-info@43degreescafe.co.nz,Villa Maria (2016) ROSIE,,10,Other,,,,,
-info@43degreescafe.co.nz,Villa Maria SAUVIGNON,,9,White Wine,,,,,
-info@43degreescafe.co.nz,Wither Hill SAUVIGNON BLANC,,10,White Wine,,,,,
-info@43degreescafe.co.nz,Cloudy Bay SAUVIGNON BLANC,,,White Wine,,,,,
-info@43degreescafe.co.nz,Villa Maria CHARDONNAY,,9,White Wine,,,,,
-info@43degreescafe.co.nz,Wither Hill CHARDONNAY,,10,White Wine,,,,,
-info@43degreescafe.co.nz,Cloudy Bay CHARDONNAY,,,White Wine,,,,,
-info@43degreescafe.co.nz,Allan Scott RIESLING dry,,10,White Wine,,,,,
-info@43degreescafe.co.nz,Main Divide RIESLING sweet,,12,White Wine,,,,,
+info@43degreescafe.co.nz,Brancott Estate MERLOT (glass),,10,Red Wine,,,,,
+info@43degreescafe.co.nz,Wild Grace (2017) PINOT NOIR,Wild Grace PN (glass)|Wild Grace PN (bottle),0,Red Wine,Wild Grace PN (glass),T,F,0,0
+info@43degreescafe.co.nz,Rockburn (2016) PINOT NOIR (bottle),,46,Red Wine,,,,,
+info@43degreescafe.co.nz,Brancott Estate BRUT CUVEE (glass),,12,Bubbles,,,,,
+info@43degreescafe.co.nz,Veuve Clicquot CHAMPAGNE Brut NV (bottle),,120,Bubbles,,,,,
+info@43degreescafe.co.nz,Marc Bredif  (2016) VOUVRAY,"Marc Bredif V 2016 (glass)|Marc Bredif V 2016 (bottle)
+",0,Other,Marc Bredif V 2016 (glass),T,F,0,0
+info@43degreescafe.co.nz,Villa Maria (2016) ROSIE,Villa Maria Rosie 2016 (glass)|Villa Maria Rosie 2016 (bottle),0,Other,Villa Maria Rosie 2016 (glass),T,F,0,0
+info@43degreescafe.co.nz,Villa Maria SAUVIGNON,"Villa Maria Sauvgingon (glass)|Villa Maria Sauvgingon (bottle)
+",0,White Wine,Villa Maria Sauvgingon (glass),T,F,0,0
+info@43degreescafe.co.nz,Wither Hill SAUVIGNON BLANC,"Wither Hill Sauvignon Blanc (glass)|Wither Hill Sauvignon Blanc (bottle)
+",0,White Wine,Wither Hill Sauvignon Blanc (glass),T,F,0,0
+info@43degreescafe.co.nz,Cloudy Bay SAUVIGNON BLANC (bottle),,89,White Wine,,,,,
+info@43degreescafe.co.nz,Villa Maria CHARDONNAY,"Villa Maria Chardonnay (glass)|Villa Maria Chardonnay (bottle)
+",0,White Wine,Villa Maria Chardonnay (glass),T,F,0,0
+info@43degreescafe.co.nz,Wither Hill CHARDONNAY,"Wither Hill Chardonnay (glass)|Wither Hill Chardonnay (bottle)
+",0,White Wine,Wither Hill Chardonnay (glass),T,F,0,0
+info@43degreescafe.co.nz,Cloudy Bay CHARDONNAY (bottle),,96,White Wine,,,,,
+info@43degreescafe.co.nz,Allan Scott RIESLING dry,"Allan Scott Riesling dry (glass)|Allan Scott Riesling dry (bottle)
+",0,White Wine,Allan Scott Riesling dry (glass),T,F,0,0
+info@43degreescafe.co.nz,Main Divide RIESLING sweet,Allan Scott Riesling sweet (glass)|Allan Scott Riesling sweet (bottle),0,White Wine,Allan Scott Riesling sweet (glass),T,F,0,0
 ,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
-,,,,,,,,,
+maxine@fingermenu.co.nz,Pan Fried Dumplings ( 6pcs ),,8,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Chicken Wings ( 4pcs ) [ GF ],,8,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Wontons ( 5pcs ),,8,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Spring Rolls ( 4pcs ),,8,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Vege Spring Rolls ( 10pcs ) [ V ],,8,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Green Beans [ V ],,8,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Squid,,8,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Prawn Twisters ( 5pcs ),,8,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Scallops ( 5pcs ),,12,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Mushroom Balls ( 5pcs ) [ V ],,6,,,,,,
+maxine@fingermenu.co.nz,Crispy Chicken Bites,,8,,,,,,
+maxine@fingermenu.co.nz,"Assorted Deep Fried Chicken Wing, Wonton & Spring Roll",,8,,,,,,
+maxine@fingermenu.co.nz,Deep Fried Prawn Chips,,6,,,,,,
+maxine@fingermenu.co.nz,Drunken Chicken Cold Dish,,10,,,,,,
+maxine@fingermenu.co.nz,Pickled Jelly Fish [ GF ] Cold Dish,,9,,,,,,
+maxine@fingermenu.co.nz,Seaweed Salad [ GF ] Cold Dish,,8,,,,,,
+maxine@fingermenu.co.nz,Braised Duck Wings & Feet Cold Dish,,9,,,,,,
+maxine@fingermenu.co.nz,Hot & Sour Soup [*],Hot & Sour Soup [*] S|Hot & Sour Soup [*] M|Hot & Sour Soup [*] L,0,Soups,Hot & Sour Soup [*] S,T,F,0,0
+maxine@fingermenu.co.nz,Wonton Soup,Wonton Soup S|Wonton Soup M|Wonton Soup L,0,Soups,Wonton Soup S,T,F,0,0
+maxine@fingermenu.co.nz,Chicken & Cream Corn Soup [*] [GF],Chicken & Cream Corn Soup [*] [GF] S|Chicken & Cream Corn Soup [*] [GF] M|Chicken & Cream Corn Soup [*] [GF] L,0,Soups,Chicken & Cream Corn Soup [*] [GF] S,T,F,0,0
+maxine@fingermenu.co.nz,Chicken & Fish Maw Soup [GF],Chicken & Fish Maw Soup [GF] S|Chicken & Fish Maw Soup [GF] M|Chicken & Fish Maw Soup [GF] L,0,Soups,Chicken & Fish Maw Soup [GF] S,T,F,0,0
+maxine@fingermenu.co.nz,"Chicken, Crab Meat & Tofu Soup [GF]","Chicken, Crab Meat & Tofu Soup [GF] S|Chicken, Crab Meat & Tofu Soup [GF] M|Chicken, Crab Meat & Tofu Soup [GF] L",0,Soups,"Chicken, Crab Meat & Tofu Soup [GF] S",T,F,0,0
+maxine@fingermenu.co.nz,"Seafood, Spinach Juice & Tofu Soup [*] [GF]","Seafood, Spinach Juice & Tofu Soup [*] [GF] S|Seafood, Spinach Juice & Tofu Soup [*] [GF] M|Seafood, Spinach Juice & Tofu Soup [*] [GF] L",0,Soups,"Seafood, Spinach Juice & Tofu Soup [*] [GF] S",T,F,0,0
