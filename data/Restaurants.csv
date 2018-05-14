@@ -1,5 +1,5 @@
-Username,Name en_NZ,Name zh,Name jp,Website URL,Pin,Menu Names,Primary LandingPageBackgroundImageUrl,Secondary LandingPageBackgroundImageUrl,Primary TopBannerImageUrl,Secondary TopBannerImageUrl,Printer Address,Kitchen Order Template,Customer Receipt Template,Number of Print Copies for Kitchen,Logo Image Url,GST Percentage
-takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Drinks|SIDE|TAKUMI SPECIAL|DINNER|LUNCH|Bento Boxes,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Fcover.jpg?alt=media&token=0a3f9bc2-1d2d-48c4-9f32-8b2207c1c76b,,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Ftop.jpg?alt=media&token=1df03e7d-16f0-44a7-998a-9be610d2fd0d,,192.168.1.21:9100,"{CR}{LF}
+Username,Name en_NZ,Name zh,Name jp,Website URL,Pin,Menu Names,Primary LandingPageBackgroundImageUrl,Secondary LandingPageBackgroundImageUrl,Primary TopBannerImageUrl,Secondary TopBannerImageUrl,Printer Address,Kitchen Order Template,Customer Receipt Template,Number of Print Copies for Kitchen,Logo Image Url,GST Percentage,Default Language For Display,Language To Print on Customer Receipt,Language To Print on Kitchen Receipt
+takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Drinks|SIDE|TAKUMI SPECIAL|DINNER|LUNCH|Bento Boxes,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Fcover.jpg?alt=media&token=0a3f9bc2-1d2d-48c4-9f32-8b2207c1c76b,,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Ftop.jpg?alt=media&token=1df03e7d-16f0-44a7-998a-9be610d2fd0d,,192.168.1.15:9100,"{CR}{LF}
 {CR}{LF}
                    T A K U M I                   {CR}{LF}
              Japanese Restaurant & Bar           {CR}{LF}
@@ -23,8 +23,8 @@ takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Drinks|SIDE|TAKUMI SPECIAL
 {CR}{LF}
 {OrderList}
 {CR}{LF}
-",2,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Flogo.png?alt=media&token=8276c172-5f83-43b1-9a3f-f734138325f9,15
-info@43degreescafe.co.nz,43degrees,,,,1111,Drinks|Weekly Menu|Business Lunch Special,,,http://43degreescafe.co.nz/assets/images/cafe_logo.png,,192.168.1.21:9100,"{CR}{LF}
+",2,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Flogo.png?alt=media&token=8276c172-5f83-43b1-9a3f-f734138325f9,15,en_NZ,en_NZ,en_NZ
+info@43degreescafe.co.nz,43degrees,,,,1111,Drinks|Weekly Menu|Business Lunch Special,,,http://43degreescafe.co.nz/assets/images/cafe_logo.png,,192.168.1.15:9100,"{CR}{LF}
 {CR}{LF}
                    43 degrees                   {CR}{LF}
                 Cafee & Restaurant           {CR}{LF}
@@ -48,8 +48,7 @@ info@43degreescafe.co.nz,43degrees,,,,1111,Drinks|Weekly Menu|Business Lunch Spe
 {CR}{LF}
 {OrderList}
 {CR}{LF}
-",2,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/cb65751e817915c9c34fe3c56d31aee5_cafe_logo.png,15
-,,,,,,,,,,,,,,,,
+",2,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/cb65751e817915c9c34fe3c56d31aee5_cafe_logo.png,15,en_NZ,en_NZ,en_NZ
 maxine@fingermenu.co.nz,Maxine's Palace,,,,1111,"Snacks|Soups
 |Roasted Meat
 |Chicken
@@ -65,7 +64,7 @@ maxine@fingermenu.co.nz,Maxine's Palace,,,,1111,"Snacks|Soups
 |Vegetable
 |Rice
 |Noodle
-|Dessert",,,http://43degreescafe.co.nz/assets/images/cafe_logo.png,,192.168.1.15:9100,"{CR}{LF}
+|Dessert",,,https://scontent.fakl4-1.fna.fbcdn.net/v/t1.0-1/p200x200/12038094_848567675261329_2989187746708568863_n.jpg?_nc_cat=0&oh=03d33f96f17f34904660c987d29f84f2&oe=5B85186F,,192.168.1.15:9100,"{CR}{LF}
 {CR}{LF}
                    Maxine's Palace              {CR}{LF}
                 Chinese Restaurant           {CR}{LF}
@@ -89,4 +88,4 @@ maxine@fingermenu.co.nz,Maxine's Palace,,,,1111,"Snacks|Soups
 {CR}{LF}
 {OrderList}
 {CR}{LF}
-",2,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/cb65751e817915c9c34fe3c56d31aee5_cafe_logo.png,15
+",2,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/cb65751e817915c9c34fe3c56d31aee5_cafe_logo.png,15,en_NZ,en_NZ,en_NZ

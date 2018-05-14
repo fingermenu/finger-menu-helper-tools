@@ -56,6 +56,9 @@ const start = async () => {
           'numberOfPrintCopiesForKitchen',
           'logoImageUrl',
           'gstPercentage',
+          'defaultLanguageForDisplay',
+          'languageToPrintOnCustomerReceipt',
+          'languageToPrintOnKitchenReceipt',
         );
         const oneOffData = await Common.loadOneOffData(dataWithoutHeader, columns, async user => {
           const tags = await Common.loadAllTags(user);
@@ -110,6 +113,13 @@ const start = async () => {
                   primaryTopBannerImageUrl: values.get('primaryTopBannerImageUrl') ? values.get('primaryTopBannerImageUrl') : undefined,
                   secondaryTopBannerImageUrl: values.get('secondaryTopBannerImageUrl') ? values.get('secondaryTopBannerImageUrl') : undefined,
                   logoImageUrl: values.get('logoImageUrl') ? values.get('logoImageUrl') : undefined,
+                }),
+              );
+              const languages = ImmutableEx.removeUndefinedProps(
+                Map({
+                  defaultDisplay: values.get('defaultLanguageForDisplay') ? values.get('defaultLanguageForDisplay') : undefined,
+                  printOnCustomerReceipt: values.get('languageToPrintOnCustomerReceipt') ? values.get('languageToPrintOnCustomerReceipt') : undefined,
+                  printOnKitchenReceipt: values.get('languageToPrintOnKitchenReceipt') ? values.get('languageToPrintOnKitchenReceipt') : undefined,
                 }),
               );
 
@@ -168,7 +178,7 @@ const start = async () => {
                 acl.setRoleWriteAccess('administrators', true);
 
                 await restaurantService.create(
-                  info.set('configurations', Map({ images, printers, documentTemplates, numberOfPrintCopiesForKitchen, gstPercentage })),
+                  info.set('configurations', Map({ images, languages, printers, documentTemplates, numberOfPrintCopiesForKitchen, gstPercentage })),
                   acl,
                   null,
                   true,
@@ -179,6 +189,7 @@ const start = async () => {
                     .first()
                     .merge(info)
                     .setIn(['configurations', 'images'], images)
+                    .setIn(['configurations', 'languages'], languages)
                     .setIn(['configurations', 'printers'], printers)
                     .setIn(['configurations', 'documentTemplates'], documentTemplates)
                     .setIn(['configurations', 'numberOfPrintCopiesForKitchen'], numberOfPrintCopiesForKitchen)
