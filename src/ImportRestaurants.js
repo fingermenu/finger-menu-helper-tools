@@ -50,7 +50,7 @@ const start = async () => {
           'secondaryLandingPageBackgroundImageUrl',
           'primaryTopBannerImageUrl',
           'secondaryTopBannerImageUrl',
-          'printerAddress',
+          'printerConfig',
           'kitchenOrderTemplate',
           'customerReceiptTemplate',
           'numberOfPrintCopiesForKitchen',
@@ -129,17 +129,24 @@ const start = async () => {
               const gstPercentage = values.get('gstPercentage') ? parseFloat(values.get('gstPercentage')) : null;
 
               const printers = ImmutableEx.removeUndefinedProps(
-                values.get('printerAddress')
+                values.get('printerConfig')
                   ? List.of(
                     Map({
                       hostname: values
-                        .get('printerAddress')
+                        .get('printerConfig')
                         .split(':')[0]
                         .trim(),
                       port: parseInt(
                         values
-                          .get('printerAddress')
+                          .get('printerConfig')
                           .split(':')[1]
+                          .trim(),
+                        10,
+                      ),
+                      maxLineWidth: parseInt(
+                        values
+                          .get('printerConfig')
+                          .split(':')[2]
                           .trim(),
                         10,
                       ),
