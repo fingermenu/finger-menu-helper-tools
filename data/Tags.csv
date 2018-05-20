@@ -1,4 +1,4 @@
-Username,Name en_NZ,Name zh,Name jp,Description en_NZ,Description zh,Description  jp
+Username,Name en_NZ,Name zh,Name ja,Description en_NZ,Description zh,Description  ja
 takumi@fingermenu.co.nz,Entrees,,,Entrees,,
 takumi@fingermenu.co.nz,Mains,,,Mains,,
 takumi@fingermenu.co.nz,Drinks,,,Drinks,,
@@ -38,3 +38,10 @@ takumi@fingermenu.co.nz,Tea,,,Tea,,
 maxine@fingermenu.co.nz,Small,,,Small,,
 maxine@fingermenu.co.nz,Medium,,,Medium,,
 maxine@fingermenu.co.nz,Large,,,Large,,
+maxine@fingermenu.co.nz,1 Course,,,1 Course,,
+maxine@fingermenu.co.nz,2 Courses,,,2 Courses,,
+maxine@fingermenu.co.nz,3 Courses,,,3 Courses,,
+maxine@fingermenu.co.nz,Half,,,Half,,
+maxine@fingermenu.co.nz,Whole,,,Whole,,
+maxine@fingermenu.co.nz,Half size,,,Half size,,
+maxine@fingermenu.co.nz,Regular,,,Regular,,

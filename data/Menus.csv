@@ -1,4 +1,4 @@
-Username,Name en_NZ,Name zh,Name jp,Description en_NZ,Description zh,Description  jp,menu pageUrl,imageUrl,Tags,Menu Item Names
+Username,Name en_NZ,Name zh,Name ja,Description en_NZ,Description zh,Description  ja,menu pageUrl,imageUrl,Tags,Menu Item Names
 takumi@fingermenu.co.nz,SIDE,配菜,前菜,Sides,小菜、配菜,前菜,,,Mains,4 Chicken Wings|6 Chicken Wings| Edamame Spring Roll|Cheese Balls|Agedashi Tofu (Vegan)|Edamame Beans|Caesar Salad |Takoyaki Balls|Prawn Spring Rolls|Sweet-Chili-Salmon-Egg-Roll|Tempura-Sushi-Salmon|Tempura-Sushi-Vegetarian|Tempura-Sushi-White Fish|Takumi Style Salad|Salmon Salad|Boiled Dumplings [6pcs]|Seaweed Salad|Tofu Salad|Fried Rice 
 takumi@fingermenu.co.nz,TAKUMI SPECIAL,本店特色,スペシャル,Takumi Special,Takumi的特色菜品,スペシャル,,,Mains,Main Sashimi [24pcs]|Entrée Sashimi [12pcs]|White Fish Assortment|Salmon Sashimi [10pcs]|Beef Tataki|Yuzu Chicken|Chicken Tempura| Entrée-Vegetable Tempura|Main-Vegetable Tempura|Sushi Sashimi Combo|Salmon Roll|California Roll|Teriyaki Chicken Roll|Salmon & Prawn Tempura Roll|Salmon Nigiri Lover|Seafood Nigiri Combo|Salmon Nigiri|Broiled Salmon Nigiri|Egg Nigiri|White Fish Nigiri|Prawn Nigiri|Beef Tataki Nigiri
 takumi@fingermenu.co.nz,DINNER,晚餐,ディナー,Dinner Menu,晚餐,ディナー,,,Mains,Venison Tataki|Tuna & Scallop Meunière|Burger Steak|5 Spice Prawn|Soft Shell Crab [4pcs]|Soft Shell Crab [6pcs]|Pan Fried Salmon|Beef Cano|Entrée-Prawn Tempura [3pcs]|Entrée-Prawn Tempura [5pcs]|Pork Spare Rib|Teriyaki Chicken (pan grilled)|Slow Cooked Pork Belly|Yakitori Assortment
@@ -12,18 +12,157 @@ takumi@fingermenu.co.nz,Drinks,,,Drinks,,,,,Drinks,Asahi|Sapporo|Kubota Senjyu -
 ,,,,,,,,,,
 maxine@fingermenu.co.nz,Snacks,,,Snacks,,,,,Snacks,"Pan Fried Dumplings ( 6pcs )|Deep Fried Chicken Wings ( 4pcs ) [ GF ]|Deep Fried Wontons ( 5pcs )|Deep Fried Spring Rolls ( 4pcs )|Deep Fried Vege Spring Rolls ( 10pcs ) [ V ]|Deep Fried Green Beans [ V ]|Deep Fried Squid|Deep Fried Prawn Twisters ( 5pcs )|Deep Fried Scallops ( 5pcs )|Deep Fried Mushroom Balls ( 5pcs ) [ V ]|Crispy Chicken Bites|Assorted Deep Fried Chicken Wing, Wonton & Spring Roll|Deep Fried Prawn Chips|Drunken Chicken Cold Dish|Pickled Jelly Fish [ GF ] Cold Dish|Seaweed Salad [ GF ] Cold Dish|Braised Duck Wings & Feet Cold Dish"
 maxine@fingermenu.co.nz,Soups,,,Soups,,,,,Soups,"Hot & Sour Soup [*]|Wonton Soup|Chicken & Cream Corn Soup [*] [GF]|Chicken & Fish Maw Soup [GF]|Chicken, Crab Meat & Tofu Soup [GF]|Seafood, Spinach Juice & Tofu Soup [*] [GF]"
-maxine@fingermenu.co.nz,Roasted Meat,,,Roasted Meat,,,,,Roasted Meat,
-maxine@fingermenu.co.nz,Chicken,,,Chicken,,,,,Chicken,
-maxine@fingermenu.co.nz,Pork,,,Pork,,,,,Pork,
-maxine@fingermenu.co.nz,Beef,,,Beef,,,,,Beef,
-maxine@fingermenu.co.nz,Seafood,,,Seafood,,,,,Seafood,
-maxine@fingermenu.co.nz,Lamb,,,Lamb,,,,,Lamb,
-maxine@fingermenu.co.nz,Eggs,,,Eggs,,,,,Eggs,
-maxine@fingermenu.co.nz,Hotpot,,,Hotpot,,,,,Hotpot,
-maxine@fingermenu.co.nz,Tofu,,,Tofu,,,,,Tofu,
-maxine@fingermenu.co.nz,Eggplant,,,Eggplant,,,,,Eggplant,
-maxine@fingermenu.co.nz,Beans,,,Beans,,,,,Beans,
-maxine@fingermenu.co.nz,Vegetable,,,Vegetable,,,,,Vegetable,
-maxine@fingermenu.co.nz,Rice,,,Rice,,,,,Rice,
-maxine@fingermenu.co.nz,Noodle,,,Noodle,,,,,Noodle,
-maxine@fingermenu.co.nz,Dessert,,,Dessert,,,,,Dessert,
+maxine@fingermenu.co.nz,Roasted Meat,,,Roasted Meat,,,,,Roasted Meat,"Peking Duck|Roasted Duck|Crispy Roasted Pork [ GF ]|BBQ Pork
+Double Roasted Mix|Salted Chicken|Salt & Pepper Duck Jaws|
+Maggi Duck Jaws"
+maxine@fingermenu.co.nz,Chicken,,,Chicken,,,,,Chicken,"Chicken with Cashew Nuts [ GF ]|
+Honey Chicken|
+Lemon Chicken|
+Curry Chicken [ GF ]|
+Satay Chicken [ GF ]|
+Chicken with Pineapple [ GF ]|
+Sweet & Sour Chicken|
+Chicken in Black Bean Sauce|
+Chicken with Vegetables [ GF ]|
+Kung Po Chicken |
+Chicken with Dried Chilli|
+Crispy Chicken Bites|
+Steamed Chicken and Shiitake Mushrooms|
+Crispy Skin Chicken [ GF ]|
+Free Range Chicken Preorder [ GF ]"
+maxine@fingermenu.co.nz,Pork,,,Pork,,,,,Pork,"Sweet & Sour Pork|
+Garlic Pork Ribs|
+Salt & Pepper Pork Ribs|
+Sweet & Sour Pork Ribs|
+Orange Pork Ribs|
+Satay Pork [ GF ]|
+Pork in Black Bean Sauce|
+Curry Pork [ GF ]|
+Stir Fried Pork in Teriyaki Sauce|
+Braised Pork with Fried Buns|
+Stir Fried Pork with Bean Sprouts|
+Spicy Pork Mince with Glass Noodle [ GF ]"
+maxine@fingermenu.co.nz,Beef,,,Beef,,,,,Beef,"Beef in Black Bean Sauce|
+Beef with Ginger & Spring Onion|
+Curry Beef [ GF ]|
+Satay Beef [ GF ]|
+Beef with Ginger & Pineapple [ GF ]|
+Beef with Mushrooms|
+Si-Chuan Spicy Beef [ GF ]|
+Beef with Ginger & Spring Onion on a Hot plate [ GF ]|
+Beef in Black Pepper Sauce on a Hot plate|
+Beef in Chinese Sauce on a Hot plate [ GF ]|
+Deep Fried Orange Beef [ GF ]"
+maxine@fingermenu.co.nz,Seafood,,,Seafood,,,,,Seafood,"Palace’s Mayo Prawns with Pineapple|
+Salt & Pepper Prawns [*]|
+Deep Fried Garlic Prawns|
+Prawns with Cashew Nuts [ GF ]|
+Satay Prawns [ GF ]|
+Prawns in Special Soy Sauce [*]|
+Crispy Prawns with Spicy Crumbs [*]|
+Steamed Prawns with Garlic [ GF ]|
+Scallops with Ginger & Spring Onion [ GF ]|
+Scallops in XO Sauce|
+Scallops with Tofu [ GF ]|
+Steamed Bluecod Whole|
+Sweet & Sour Blue Cod Whole & Boneless[ GF ] |
+Fish with Tofu in Taiwanese Spicy Sauce Whole|
+Si-Chuan Spicy Fish [ GF ]|
+Fish with Ginger & Spring Onion [ GF ]|
+Deep Fried Salt & Pepper Fish|
+Sweet & Sour Fish Nuggets|
+Deep Fried Salt & Pepper Squid|
+Squid with Vegetables [ GF ]|
+Squid in Black Bean Sauce|
+Mixed Seafood Curry [ GF ]|
+Seafood with Rice Crisps [ GF ]|
+Salt & Pepper Soft Shell Crabs|
+Steamed Oysters with Garlic|
+Albalone with Shiitake Mushrooms & Vegetable|
+New Zealand Crayfish|
+King Crab"
+maxine@fingermenu.co.nz,Lamb,,,Lamb,,,,,Lamb,"Lamb with Ginger & Spring Onion|
+Stir Fried Lamb in Special Sauce|
+Lamb in XO Sauce|
+Lamb Ribs on a Hot Plate|
+Stir Fried Lamb in Special Sauce on a Hot plate"
+maxine@fingermenu.co.nz,Eggs,,,Eggs,,,,,Eggs,"Vegetable Omelette [ GF ] [ V ]|
+BBQ Pork Omelette [ GF ]|
+Chicken Omelette [ GF ]|
+Beef Omelette [ GF ]|
+Prawns Omelette [ GF ]|
+Combination Meat Omelette [ GF ]|
+Scrambled Egg with Prawns [ GF ]|
+Steamed Egg with Mushroom & Dried Scallops "
+maxine@fingermenu.co.nz,Hotpot,,,Hotpot,,,,,Hotpot,"Mixed Seafood & Tofu Hotpot [ GF ]|
+Salted Fish, Chicken and Eggplant Hotpot|
+Salted Fish, Chicken and Tofu Hotpot|
+Roast Pork & Tofu Hotpot [ GF ]|
+Fish & Tofu Hotpot [ GF ]|
+Beef Brisket & Radish Hotpot|
+Beef, Mushrooms & Eggplant Hotpot|
+Taro with Pork Belly Hotpot|
+Mixed Mushroom Hotpot [ V ]|
+Mixed Vegetables in Fermented Tofu Sauce Hotpot [ GF ] [ V ]"
+maxine@fingermenu.co.nz,Tofu,,,Tofu,,,,,Tofu,"Stir Fried Tofu with Vegetable [ V ]|
+Tofu Pyramid [ V ]|
+Mapo Tofu|
+Tofu & Dried Scallops on a Hot Plate|
+Steamed Tofu with Prawns in Black Bean Sauce"
+maxine@fingermenu.co.nz,Eggplant,,,Eggplant,,,,,Eggplant,"Stir Fried Eggplant with Pork Mince|
+Lovebirds’ Stuffed Eggplant|
+Beef & Eggplant on a Hot Plate|
+Stir Fried Eggplant with Pork Mince in Fermented Tofu Sauce|
+Stir Fried Eggplant with Pork Mince in Special Sauce on a Hotplate|"
+maxine@fingermenu.co.nz,Beans,,,Beans,,,,,Beans,"Stir Fried Green Beans with Garlic  [ GF ] [ V ]|
+Stir Fried Green Beans [ GF ] [ V ]|
+Stir Fried Green Beans & Pork Mince with Dried Chilli [ GF ]|
+Stir Fried Green Beans & Beef in XO Sauce|
+Green Beans with Teriyaki Pork on a Hot plate|
+Stir Fried Green Beans with Chinese Sausage|
+Stir Fried Green Beans in Black Pepper with Chicken and Squid "
+maxine@fingermenu.co.nz,Vegetable,,,Vegetable,,,,,Vegetable,"Seasonal Vegetables with Garlic  [ GF ] [ V ]|
+Seasonal Vegetables in Oyster Sauce [ V ]|
+Seasonal Vegetables in Spicy Preserved Tofu Sauce [ V ]|
+Vegetarian Delight [ GF ] [ V ]|
+Shiitake Mushrooms with Seasonal Vegetables [ GF ] [ V ]|
+Vegetable in Soup with Preserved Egg & Chicken "
+maxine@fingermenu.co.nz,Rice,,,Rice,,,,,Rice,"Steamed White Rice [ GF ] [ V ]|
+Egg Fried Rice [ V ]|
+Young Chow Fried Rice|
+BBQ Pork Egg Fried Rice|
+Chicken Egg Fried Rice|
+Beef Egg Fried Rice|
+Seafood Egg Fried Rice|
+Shrimp Egg Fried Rice|
+Nasi Goreng [ GF ]|
+Combination Egg Fried Rice|
+Salted Fish & Chicken Fried Rice [ GF ]|
+Palace’s Special Fried Rice|
+Roasted Duck on Rice|
+BBQ Pork on Rice|
+Roasted Pork on Rice|
+Double Mix Pork on Rice Roasted Pork & BBQ Pork"
+maxine@fingermenu.co.nz,Noodle,,,Noodle,,,,,Noodle,"Vegetable Fried Noodle [ V ]|
+Chicken / Pork / Beef Fried Noodle|
+Combination Fried Noodle|
+Seafood Fried Noodle|
+Black Pepper Beef Fried Noodle|
+Beef Hofun|
+Singapore Fried Vermicelli [ GF ]|
+Vegetable & Pork Fried Vermicelli|
+Bami Goreng|
+Beef Brisket Noodle Soup|
+Wonton Noodle Soup|
+Roast Duck Noodle Soup"
+maxine@fingermenu.co.nz,Dessert,,,Dessert,,,,,Dessert,"Banana Boat [ GF ] [ V ]|
+Ice Cream with Lychee [ GF ] [ V ]|
+Sticky Rice Ice Cream Balls [ GF ] [ V ]|
+Cherry Sundae [ GF ] [ V ]|
+Deep Fried Sesame Balls [ GF ] [ V ]|
+Steamed Custard Buns [ V ]|
+Steamed Red Bean Buns [ V ]|
+Steamed Buns with Milk Dipping [ V ]|
+Deep Fried Taro Balls [ GF ] [ V ]|
+Deep Fried Custard Carrot [ GF ] [ V ]|
+Chinese Coconut Pudding [ GF ] "
