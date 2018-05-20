@@ -24,7 +24,7 @@ takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Drinks|SIDE|TAKUMI SPECIAL
 {OrderList}
 {CR}{LF}
 ",2,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Flogo.png?alt=media&token=8276c172-5f83-43b1-9a3f-f734138325f9,15,en_NZ,en_NZ,en_NZ
-43degreescafe@fingermenu.co.nz,43degrees,,,,1111,Drinks|Weekly Menu|Business Lunch Special,,,http://43degreescafe.co.nz/assets/images/cafe_logo.png,,192.168.1.228:9100:40,"{CR}{LF}
+43degreescafe@fingermenu.co.nz,43degrees,,,,1111,Drinks|Weekly Menu|Business Lunch Special,,,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/f0c49779733c4399f1a1090b4909cac4_43DegreesCafe.png,,192.168.1.228:9100:40,"{CR}{LF}
 {CR}{LF}
               43 degrees                  {CR}{LF}
            Cafe & Restaurant              {CR}{LF}
@@ -70,7 +70,7 @@ maxine@fingermenu.co.nz,Maxine's Palace,,,,1111,"Snacks|Soups
 |Vegetable
 |Rice
 |Noodle
-|Dessert",,,https://scontent.fakl4-1.fna.fbcdn.net/v/t1.0-1/p200x200/12038094_848567675261329_2989187746708568863_n.jpg?_nc_cat=0&oh=03d33f96f17f34904660c987d29f84f2&oe=5B85186F,,192.168.1.15:9100:48,"{CR}{LF}
+|Dessert",,,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/fe95521e1650eeb5846c681b9b4618de_Maxine.png,,192.168.1.15:9100:48,"{CR}{LF}
 {CR}{LF}
                    Maxine's Palace              {CR}{LF}
                 Chinese Restaurant           {CR}{LF}
