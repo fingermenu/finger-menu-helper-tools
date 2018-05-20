@@ -346,13 +346,13 @@ export default class Common {
   static getMultiLanguagesFieldValue = (fieldName, values) => {
     const en_NZ_Value = values.get(`en_NZ_${fieldName}`);
     const zh_Value = values.get(`zh_${fieldName}`);
-    const jp_Value = values.get(`jp_${fieldName}`);
+    const ja_Value = values.get(`ja_${fieldName}`);
 
     return ImmutableEx.removeNullAndUndefinedProps(
       Map({
         en_NZ: en_NZ_Value ? en_NZ_Value : undefined,
         zh: zh_Value ? zh_Value : undefined,
-        jp: jp_Value ? jp_Value : undefined,
+        ja: ja_Value ? ja_Value : undefined,
       }),
     );
   };

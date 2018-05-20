@@ -39,7 +39,7 @@ const start = async () => {
 
         const dataWithoutHeader = Immutable.fromJS(data).skip(1);
         const splittedRows = ImmutableEx.splitIntoChunks(dataWithoutHeader, 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'restaurantName', 'en_NZ_name', 'zh_name', 'jp_name', 'tableState', 'sortOrderIndex');
+        const columns = OrderedSet.of('username', 'restaurantName', 'en_NZ_name', 'zh_name', 'ja_name', 'tableState', 'sortOrderIndex');
         const oneOffData = await Common.loadOneOffData(dataWithoutHeader, columns);
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>

@@ -38,7 +38,7 @@ const start = async () => {
 
         const dataWithoutHeader = Immutable.fromJS(data).skip(1);
         const splittedRows = ImmutableEx.splitIntoChunks(dataWithoutHeader, 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'en_NZ_name', 'zh_name', 'jp_name', 'en_NZ_description', 'zh_description', 'jp_description');
+        const columns = OrderedSet.of('username', 'en_NZ_name', 'zh_name', 'ja_name', 'en_NZ_description', 'zh_description', 'ja_description');
         const usernames = dataWithoutHeader
           .filterNot(rawRow => rawRow.every(row => row.trim().length === 0))
           .map(rawRow => Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow)).get('username'))

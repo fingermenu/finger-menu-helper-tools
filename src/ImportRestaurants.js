@@ -42,7 +42,7 @@ const start = async () => {
           'username',
           'en_NZ_name',
           'zh_name',
-          'jp_name',
+          'ja_name',
           'websiteUrl',
           'pin',
           'menuNames',

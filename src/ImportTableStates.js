@@ -37,7 +37,7 @@ const start = async () => {
         }
 
         const splittedRows = ImmutableEx.splitIntoChunks(Immutable.fromJS(data).skip(1), 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('key', 'en_NZ_name', 'zh_name', 'jp_name');
+        const columns = OrderedSet.of('key', 'en_NZ_name', 'zh_name', 'ja_name');
 
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
