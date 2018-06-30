@@ -38,7 +38,17 @@ const start = async () => {
 
         const dataWithoutHeader = Immutable.fromJS(data).skip(1);
         const splittedRows = ImmutableEx.splitIntoChunks(dataWithoutHeader, 10); // Skipping the first item as it is the CSV header
-        const columns = OrderedSet.of('username', 'key', 'en_NZ_name', 'zh_name', 'ja_name', 'en_NZ_description', 'zh_description', 'ja_description');
+        const columns = OrderedSet.of(
+          'username',
+          'key',
+          'en_NZ_name',
+          'zh_name',
+          'ja_name',
+          'en_NZ_description',
+          'zh_description',
+          'ja_description',
+          'parentTagName',
+        );
         const usernames = dataWithoutHeader
           .filterNot(rawRow => rawRow.every(row => row.trim().length === 0))
           .map(rawRow => Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow)).get('username'))
@@ -54,6 +64,7 @@ const start = async () => {
         );
         const oneOffData = results.reduce((reduction, result) => reduction.set(result.get('username'), result.delete('username')), Map());
 
+        // Importing level one tags
         await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
           Promise.all(
             rowChunck.map(async rawRow => {
@@ -62,6 +73,11 @@ const start = async () => {
               }
 
               const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+
+              if (values.get('parentTagName')) {
+                return;
+              }
+
               const user = oneOffData.getIn([values.get('username'), 'user']);
               const tags = await Common.loadAllTags(user, { name: values.get('en_NZ_name') });
               const info = Map({
@@ -70,6 +86,61 @@ const start = async () => {
                 key: values.get('key'),
                 name: Common.getMultiLanguagesFieldValue('name', values),
                 description: Common.getMultiLanguagesFieldValue('description', values),
+              });
+
+              if (tags.isEmpty()) {
+                const acl = ParseWrapperService.createACL(user);
+
+                acl.setPublicReadAccess(true);
+                acl.setRoleReadAccess('administrators', true);
+                acl.setRoleWriteAccess('administrators', true);
+
+                await tagService.create(info, acl, null, true);
+              } else if (tags.count() === 1) {
+                await tagService.update(tags.first().merge(info), null, true);
+              } else {
+                console.error(`Multiple tags found with username ${values.get('username')} and tag name: ${values.get('en_NZ_name')}`);
+              }
+            }),
+          ),
+        );
+
+        // Importing level two tags
+        await BluebirdPromise.each(splittedRows.toArray(), rowChunck =>
+          Promise.all(
+            rowChunck.map(async rawRow => {
+              if (!rawRow || rawRow.isEmpty() || rawRow.every(row => row.trim().length === 0)) {
+                return;
+              }
+
+              const values = Common.extractColumnsValuesFromRow(columns, Immutable.fromJS(rawRow));
+              const parentTagName = values.get('parentTagName');
+
+              if (!parentTagName) {
+                return;
+              }
+
+              const user = oneOffData.getIn([values.get('username'), 'user']);
+              const parentTags = await Common.loadAllTags(user, { name: parentTagName });
+
+              if (parentTags.isEmpty()) {
+                console.error(`Failed to find parent tag with username ${values.get('username')} and parent tag name: ${parentTagName}`);
+
+                return;
+              } else if (parentTags.count() > 1) {
+                console.error(`Multiple parent tags found with username ${values.get('username')} and parent tag name: ${parentTagName}`);
+
+                return;
+              }
+
+              const tags = await Common.loadAllTags(user, { name: values.get('en_NZ_name') });
+              const info = Map({
+                ownedByUser: user,
+                maintainedByUsers: List.of(user),
+                key: values.get('key'),
+                name: Common.getMultiLanguagesFieldValue('name', values),
+                description: Common.getMultiLanguagesFieldValue('description', values),
+                parentTagId: parentTags.first().get('id'),
               });
 
               if (tags.isEmpty()) {
