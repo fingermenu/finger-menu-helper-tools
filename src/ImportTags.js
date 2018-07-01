@@ -86,6 +86,7 @@ const start = async () => {
                 key: values.get('key'),
                 name: Common.getMultiLanguagesFieldValue('name', values),
                 description: Common.getMultiLanguagesFieldValue('description', values),
+                level: 1,
               });
 
               if (tags.isEmpty()) {
@@ -141,6 +142,7 @@ const start = async () => {
                 name: Common.getMultiLanguagesFieldValue('name', values),
                 description: Common.getMultiLanguagesFieldValue('description', values),
                 parentTagId: parentTags.first().get('id'),
+                level: 2,
               });
 
               if (tags.isEmpty()) {

@@ -22,6 +22,7 @@
     "import-menu-item-prices": "babel-node src/ImportMenuItemPrices.js",
     "import-menus": "babel-node src/ImportMenus.js",
     "import-dish-types": "babel-node src/ImportDishTypes.js",
+    "import-department-categories": "babel-node src/ImportDepartmentCategories.js",
     "create-package-bundles": "babel-node src/CreatePackageBundles.js",
     "lint": "eslint --ext .jsx --ext .js src",
     "fixlint": "eslint --fix --ext .jsx --ext .js src",

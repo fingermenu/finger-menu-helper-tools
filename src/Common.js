@@ -5,6 +5,7 @@ import { ParseWrapperService, UserService } from '@microbusiness/parse-server-co
 import {
   ChoiceItemService,
   ChoiceItemPriceService,
+  DepartmentCategoryService,
   DietaryOptionService,
   DishTypeService,
   MenuItemService,
@@ -188,6 +189,23 @@ export default class Common {
     }
 
     return sizes;
+  };
+
+  static loadAllDepartmentCategories = async (user = {}, { tagId } = {}) => {
+    let departmentCategories = List();
+    const result = await new DepartmentCategoryService().searchAll(Map({ conditions: Map({ ownedByUser: user, tagId }) }), null, true);
+
+    try {
+      result.event.subscribe(info => {
+        departmentCategories = departmentCategories.push(info);
+      });
+
+      await result.promise;
+    } finally {
+      result.event.unsubscribeAll();
+    }
+
+    return departmentCategories;
   };
 
   static loadAllServingTimes = async (user = {}, { tagId } = {}) => {
