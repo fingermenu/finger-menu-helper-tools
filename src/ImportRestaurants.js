@@ -53,6 +53,7 @@ const start = async () => {
           'printerConfig',
           'kitchenOrderTemplate',
           'customerReceiptTemplate',
+          'departmentCategoryDailyReport',
           'numberOfPrintCopiesForKitchen',
           'logoImageUrl',
           'gstPercentage',
@@ -173,6 +174,15 @@ const start = async () => {
                   Map({
                     name: 'CustomerReceipt',
                     template: values.get('customerReceiptTemplate').replace(/\r?\n|\r/g, ''),
+                  }),
+                );
+              }
+
+              if (values.get('departmentCategoryDailyReport')) {
+                documentTemplates = documentTemplates.push(
+                  Map({
+                    name: 'DepartmentCategoryDailyReport',
+                    template: values.get('departmentCategoryDailyReport').replace(/\r?\n|\r/g, ''),
                   }),
                 );
               }
