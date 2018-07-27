@@ -25,12 +25,12 @@ takumi@fingermenu.co.nz,,Tea,,,Tea,,,
 43degreescafe@fingermenu.co.nz,,Vegan,,,Vegan,,,
 43degreescafe@fingermenu.co.nz,,Vegetarian,,,Vegetarian,,,
 43degreescafe@fingermenu.co.nz,,Gluten Free,,,Gluten Free,,,
-43degreescafe@fingermenu.co.nz,,Cold Drinks,,,Cold Drinks,,,
-43degreescafe@fingermenu.co.nz,,Red Wine,,,Red Wine,,,
-43degreescafe@fingermenu.co.nz,,White Wine,,,White Wine,,,
-43degreescafe@fingermenu.co.nz,,Bubbles,,,Bubbles,,,
-43degreescafe@fingermenu.co.nz,,Other,,,Other,,,
-43degreescafe@fingermenu.co.nz,,Beer,,,Beer,,,
+43degreescafe@fingermenu.co.nz,,Cold Drinks,,,Cold Drinks,,,Beverage
+43degreescafe@fingermenu.co.nz,,Red Wine,,,Red Wine,,,Beverage
+43degreescafe@fingermenu.co.nz,,White Wine,,,White Wine,,,Beverage
+43degreescafe@fingermenu.co.nz,,Bubbles,,,Bubbles,,,Beverage
+43degreescafe@fingermenu.co.nz,,Other,,,Other,,,Beverage
+43degreescafe@fingermenu.co.nz,,Beer,,,Beer,,,Beverage
 43degreescafe@fingermenu.co.nz,,Glass,,,Glass,,,
 43degreescafe@fingermenu.co.nz,,Bottle,,,Bottle,,,
 43degreescafe@fingermenu.co.nz,,Food,,,Food,,,
@@ -42,6 +42,8 @@ takumi@fingermenu.co.nz,,Tea,,,Tea,,,
 43degreescafe@fingermenu.co.nz,1,Hot Drinks,,,Hot Drinks,,,Beverage
 43degreescafe@fingermenu.co.nz,2,Hot Drinks Mods,,,Hot Drinks Mods,,,Beverage
 43degreescafe@fingermenu.co.nz,3,Hot Drinks Tea,,,Hot Drinks Tea,,,Beverage
+43degreescafe@fingermenu.co.nz,4,Cold Drinks Juices,,,Cold Drinks Juices,,,Beverage
+43degreescafe@fingermenu.co.nz,5,Cold Drinks,,,Cold Drinks,,,Beverage
 ,,,,,,,,
 maxine@fingermenu.co.nz,,Small,,,Small,,,
 maxine@fingermenu.co.nz,,Medium,,,Medium,,,
@@ -53,3 +55,5 @@ maxine@fingermenu.co.nz,,Half,,,Half,,,
 maxine@fingermenu.co.nz,,Whole,,,Whole,,,
 maxine@fingermenu.co.nz,,Half size,,,Half size,,,
 maxine@fingermenu.co.nz,,Regular,,,Regular,,,
+maxine@fingermenu.co.nz,,Drinks,,,,,,
+maxine@fingermenu.co.nz,,Cakes,,,,,,
