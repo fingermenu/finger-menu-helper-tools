@@ -52,8 +52,11 @@ const start = async () => {
           'secondaryTopBannerImageUrl',
           'printerConfig',
           'kitchenOrderTemplate',
+          'kitchenOrderTemplateMaximumLineWidthDivisionFactor',
           'customerReceiptTemplate',
-          'departmentCategoryDailyReport',
+          'customerReceiptTemplateMaximumLineWidthDivisionFactor',
+          'departmentCategoryDailyReportTemplate',
+          'departmentCategoryDailyReportTemplateMaximumLineWidthDivisionFactor',
           'numberOfPrintCopiesForKitchen',
           'logoImageUrl',
           'gstPercentage',
@@ -165,6 +168,7 @@ const start = async () => {
                   Map({
                     name: 'KitchenOrder',
                     template: values.get('kitchenOrderTemplate').replace(/\r?\n|\r/g, ''),
+                    maxLineWidthDivisionFactor: parseFloat(values.get('kitchenOrderTemplateMaximumLineWidthDivisionFactor')),
                   }),
                 );
               }
@@ -174,15 +178,17 @@ const start = async () => {
                   Map({
                     name: 'CustomerReceipt',
                     template: values.get('customerReceiptTemplate').replace(/\r?\n|\r/g, ''),
+                    maxLineWidthDivisionFactor: parseFloat(values.get('customerReceiptTemplateMaximumLineWidthDivisionFactor')),
                   }),
                 );
               }
 
-              if (values.get('departmentCategoryDailyReport')) {
+              if (values.get('departmentCategoryDailyReportTemplate')) {
                 documentTemplates = documentTemplates.push(
                   Map({
                     name: 'DepartmentCategoryDailyReport',
-                    template: values.get('departmentCategoryDailyReport').replace(/\r?\n|\r/g, ''),
+                    template: values.get('departmentCategoryDailyReportTemplate').replace(/\r?\n|\r/g, ''),
+                    maxLineWidthDivisionFactor: parseFloat(values.get('departmentCategoryDailyReportTemplateMaximumLineWidthDivisionFactor')),
                   }),
                 );
               }
