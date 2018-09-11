@@ -49,6 +49,7 @@ const start = async () => {
           'menuItemPageUrl',
           'imageUrl',
           'tags',
+          'linkedPrinters',
         );
         const oneOffData = await Common.loadOneOffData(dataWithoutHeader, columns, async user => {
           const tags = await Common.loadAllTags(user);
@@ -78,6 +79,7 @@ const start = async () => {
                 menuItemPageUrl: values.get('menuItemPageUrl'),
                 imageUrl: values.get('imageUrl'),
                 tagIds: tags.filter(tag => tagsToFind.find(_ => _.localeCompare(tag.getIn(['name', 'en_NZ'])) === 0)).map(tag => tag.get('id')),
+                linkedPrinters: values.get('linkedPrinters') ? Immutable.fromJS(JSON.parse(values.get('linkedPrinters'))) : List(),
               });
 
               if (menuItems.isEmpty()) {

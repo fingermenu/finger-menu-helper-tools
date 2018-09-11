@@ -53,10 +53,13 @@ const start = async () => {
           'printerConfig',
           'kitchenOrderTemplate',
           'kitchenOrderTemplateMaximumLineWidthDivisionFactor',
+          'kitchenOrderTemplateLinkedPrinters',
           'customerReceiptTemplate',
           'customerReceiptTemplateMaximumLineWidthDivisionFactor',
+          'customerReceiptTemplateLinkedPrinters',
           'departmentCategoryDailyReportTemplate',
           'departmentCategoryDailyReportTemplateMaximumLineWidthDivisionFactor',
+          'departmentCategoryDailyReportTemplateLinkedPrinters',
           'numberOfPrintCopiesForKitchen',
           'logoImageUrl',
           'gstPercentage',
@@ -169,6 +172,9 @@ const start = async () => {
                     name: 'KitchenOrder',
                     template: values.get('kitchenOrderTemplate').replace(/\r?\n|\r/g, ''),
                     maxLineWidthDivisionFactor: parseFloat(values.get('kitchenOrderTemplateMaximumLineWidthDivisionFactor')),
+                    linkedPrinters: values.get('kitchenOrderTemplateLinkedPrinters')
+                      ? Immutable.fromJS(JSON.parse(values.get('kitchenOrderTemplateLinkedPrinters')))
+                      : List(),
                   }),
                 );
               }
@@ -179,6 +185,9 @@ const start = async () => {
                     name: 'CustomerReceipt',
                     template: values.get('customerReceiptTemplate').replace(/\r?\n|\r/g, ''),
                     maxLineWidthDivisionFactor: parseFloat(values.get('customerReceiptTemplateMaximumLineWidthDivisionFactor')),
+                    linkedPrinters: values.get('customerReceiptTemplateLinkedPrinters')
+                      ? Immutable.fromJS(JSON.parse(values.get('customerReceiptTemplateLinkedPrinters')))
+                      : List(),
                   }),
                 );
               }
@@ -189,6 +198,9 @@ const start = async () => {
                     name: 'DepartmentCategoryDailyReport',
                     template: values.get('departmentCategoryDailyReportTemplate').replace(/\r?\n|\r/g, ''),
                     maxLineWidthDivisionFactor: parseFloat(values.get('departmentCategoryDailyReportTemplateMaximumLineWidthDivisionFactor')),
+                    linkedPrinters: values.get('departmentCategoryDailyReportTemplateLinkedPrinters')
+                      ? Immutable.fromJS(JSON.parse(values.get('departmentCategoryDailyReportTemplateLinkedPrinters')))
+                      : List(),
                   }),
                 );
               }
