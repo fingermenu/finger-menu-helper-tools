@@ -50,7 +50,7 @@ const start = async () => {
           'secondaryLandingPageBackgroundImageUrl',
           'primaryTopBannerImageUrl',
           'secondaryTopBannerImageUrl',
-          'printerConfig',
+          'printers',
           'kitchenOrderTemplate',
           'kitchenOrderTemplateMaximumLineWidthDivisionFactor',
           'kitchenOrderTemplateLinkedPrinters',
@@ -134,35 +134,7 @@ const start = async () => {
                 ? parseInt(values.get('numberOfPrintCopiesForKitchen'), 10)
                 : 1;
               const gstPercentage = values.get('gstPercentage') ? parseFloat(values.get('gstPercentage')) : null;
-
-              const printers = ImmutableEx.removeUndefinedProps(
-                values.get('printerConfig')
-                  ? List.of(
-                    Map({
-                      hostname: values
-                        .get('printerConfig')
-                        .split(':')[0]
-                        .trim(),
-                      port: parseInt(
-                        values
-                          .get('printerConfig')
-                          .split(':')[1]
-                          .trim(),
-                        10,
-                      ),
-                      maxLineWidth: parseInt(
-                        values
-                          .get('printerConfig')
-                          .split(':')[2]
-                          .trim(),
-                        10,
-                      ),
-                      type: 'Receipt',
-                      name: 'Receipt Printer',
-                    }),
-                  )
-                  : List(),
-              );
+              const printers = values.get('printers') ? Immutable.fromJS(JSON.parse(values.get('printers'))) : List();
 
               let documentTemplates = List();
 

@@ -1,5 +1,13 @@
-Username,Name en_NZ,Name zh,Name ja,Website URL,Pin,Menu Names,Primary LandingPageBackgroundImageUrl,Secondary LandingPageBackgroundImageUrl,Primary TopBannerImageUrl,Secondary TopBannerImageUrl,Printer Address,Kitchen Order Template,Kitchen Order Template Maximum Line Width Division Factor,Kitchen Order Template Linked Printers,Customer Receipt Template,Customer Receipt Template Maximum Line Width Division Factor,Customer Receipt Template Linked Printers,Department Category Template Daily Report,Department Category Daily Report Template Maximum Line Width Division Factor,Department Category Daily Report Template Linked Printers,Number of Print Copies for Kitchen,Logo Image Url,GST Percentage,Default Language For Display,Language To Print on Customer Receipt,Language To Print on Kitchen Receipt
-takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Drinks|SIDE|TAKUMI SPECIAL|DINNER|LUNCH|Bento Boxes,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Fcover.jpg?alt=media&token=0a3f9bc2-1d2d-48c4-9f32-8b2207c1c76b,,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Ftop.jpg?alt=media&token=1df03e7d-16f0-44a7-998a-9be610d2fd0d,,192.168.1.201:9100:48,"{CR}{LF}
+Username,Name en_NZ,Name zh,Name ja,Website URL,Pin,Menu Names,Primary LandingPageBackgroundImageUrl,Secondary LandingPageBackgroundImageUrl,Primary TopBannerImageUrl,Secondary TopBannerImageUrl,Printers,Kitchen Order Template,Kitchen Order Template Maximum Line Width Division Factor,Kitchen Order Template Linked Printers,Customer Receipt Template,Customer Receipt Template Maximum Line Width Division Factor,Customer Receipt Template Linked Printers,Department Category Template Daily Report,Department Category Daily Report Template Maximum Line Width Division Factor,Department Category Daily Report Template Linked Printers,Number of Print Copies for Kitchen,Logo Image Url,GST Percentage,Default Language For Display,Language To Print on Customer Receipt,Language To Print on Kitchen Receipt
+takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Drinks|SIDE|TAKUMI SPECIAL|DINNER|LUNCH|Bento Boxes,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Fcover.jpg?alt=media&token=0a3f9bc2-1d2d-48c4-9f32-8b2207c1c76b,,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Ftop.jpg?alt=media&token=1df03e7d-16f0-44a7-998a-9be610d2fd0d,,"[
+    {
+      ""hostname"": ""192.168.1.201"",
+      ""port"": 9100,
+      ""maxLineWidth"": 48,
+      ""type"": ""Receipt"",
+      ""name"": ""Receipt Printer""
+    }
+  ]","{CR}{LF}
 {CR}{LF}
                    T A K U M I                   {CR}{LF}
              Japanese Restaurant & Bar           {CR}{LF}
@@ -70,7 +78,15 @@ takumi@fingermenu.co.nz,Takumi,大师,タクミ,,1111,Drinks|SIDE|TAKUMI SPECIAL
     ""numberOfPrints"": 2
   }
 ]",2,https://firebasestorage.googleapis.com/v0/b/firstproject-b2fb1.appspot.com/o/restaurants%2Ftakumi%2Flogo.png?alt=media&token=8276c172-5f83-43b1-9a3f-f734138325f9,15,en_NZ,en_NZ,en_NZ
-43degreescafe@fingermenu.co.nz,43degrees,,,,1111,Drinks|Weekly Menu|Business Lunch Special,,,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/f0c49779733c4399f1a1090b4909cac4_43DegreesCafe.png,,192.168.1.228:9100:40,"{CR}{LF}
+43degreescafe@fingermenu.co.nz,43degrees,,,,1111,Drinks|Weekly Menu|Business Lunch Special,,,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/f0c49779733c4399f1a1090b4909cac4_43DegreesCafe.png,,"[
+    {
+      ""hostname"": ""192.168.1.228"",
+      ""port"": 9100,
+      ""maxLineWidth"": 40,
+      ""type"": ""Receipt"",
+      ""name"": ""Receipt Printer""
+    }
+  ]","{CR}{LF}
 {CR}{LF}
               43 degrees                  {CR}{LF}
            Cafe & Restaurant              {CR}{LF}
@@ -162,7 +178,15 @@ maxine@fingermenu.co.nz,Maxine's Palace,,,,1111,"Snacks|Soups
 |Vegetable
 |Rice
 |Noodle
-|Dessert",,,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/fe95521e1650eeb5846c681b9b4618de_Maxine.png,,192.168.1.201:9100:48,"{CR}{LF}
+|Dessert",,,https://api.parse.buddy.com/files/38066dde-ac12-4e7d-ac2b-ab03f3b6e56d/fe95521e1650eeb5846c681b9b4618de_Maxine.png,,"[
+    {
+      ""hostname"": ""192.168.1.201"",
+      ""port"": 9100,
+      ""maxLineWidth"": 48,
+      ""type"": ""Receipt"",
+      ""name"": ""Receipt Printer""
+    }
+  ]","{CR}{LF}
 {CR}{LF}
                    Maxine's Palace              {CR}{LF}
                 Chinese Restaurant           {CR}{LF}
